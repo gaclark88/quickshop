@@ -46,6 +46,7 @@ class Account extends Model {
 		
 		$account = new Account($fields);
 		$account->id = $fields["id"];
+		$account->fields["password"] = $fields["password"];
 		return $account;
 	}	
 	
@@ -57,6 +58,7 @@ class Account extends Model {
 		while ($row = mysql_fetch_assoc($rows)) {
 			$account = new Account($row);
 			$account->id = $row["id"];
+			$account->fields["password"] = $row["password"];
 			
 			array_push($accounts, $account);
 		}
