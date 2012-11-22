@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <title>Front Page</title>
 
+    
     <!--Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -67,15 +68,7 @@
                 <!--Logo Here-->
                 <a class="brand" href="index.html"> <img src="assets/img/logo.png"></a>
             </div>
-        
-
-            <?php
-             $con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-             $rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
-             $query = "";
-             $row = array();
-            
-            ?>
+       
             <!--Start of Sidebar-->
             <div class="row-fluid">
                 <div class="span3">
@@ -94,15 +87,7 @@
                         <div id="featured" class="carousel slide">  
                             <!-- Carousel items -->  
                             <div class="carousel-inner">  
-                                <div class="active item"><img src="assets/timg/t1.jpg" alt="" width="400" height="100" >&rsaquo;
-                                <div class="carousel-caption">
-                                    <p>Featured 1</p></div></div>  
-                                <div class="item"><img src="assets/timg/t2.jpg" alt="" width="400" height="100" >&rsaquo;
-                                <div class="carousel-caption">
-                                    <p>Featured 2</p></div></div>    
-                                <div class="item"><img src="assets/timg/t3.jpg" alt="" width="400" height="100" >&rsaquo;
-                                <div class="carousel-caption">
-                                    <p>Featured 3</p></div></div>       
+                                <?php include "featured.php";?>   
                             </div>  
                             <!-- Carousel nav -->  
                             <a class="carousel-control left" href="#featured" data-slide="prev">&lsaquo;</a>  
