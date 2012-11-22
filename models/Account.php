@@ -39,8 +39,8 @@ class Account extends Model {
 //	function checkPassword($input, $email, $dbLink) {
 //	}
 
-	function dbGet($email, $dbLink) {
-		$fields = parent::dbGet($email, "email", "accounts", $dbLink);
+	function dbGet($id, $dbLink) {
+		$fields = parent::dbGet($id, "accounts", $dbLink);
 
 		if (!$fields) {return $fields;}
 		
@@ -64,13 +64,26 @@ class Account extends Model {
 		}
 		
 		return $accounts;
-	}		
+	}	
+
+	function dbGetByEmail($emai, $dbLink) {
+		$rows = parent::dbGetBy("email", $email, "accounts", $dbLink);
+
+		$fields = mysql_fetch_assoc($rows);
+		$account = new Account($fields);
+		$account->id = $fields["id"];
+		$account->fields["password"] = $row["password"];
+	
+		return $account;
+	}
+			
+			
 
 }
 /*
 $fields = array ( "first_name" => "Greg",
 		"last_name" => "Clark",
-		"email" => "greg@yahoo.com",
+		"email" => "greg2@yahoo.com",
 		"password" => "1098765",
 		"phone" => 5554443333,
 		"shipping_address" => "1224 first street",
@@ -87,14 +100,11 @@ $a = new Account($fields);
 
 $db = new DatabaseLink();
 $a->dbSave($db);
-
-$db = new DatabaseLink();
-$a = Account::dbGet("peter@host.com", $db);
-$a->fields["phone"] = 5554443333;
-$a->dbSave($db);
-$a = Account::dbGet("peter1@host.com", $db);
-$a->fields["phone"] = 5556667777;
-$a->dbSave($db);
 */
+$db = new DatabaseLink();
+$a = Account::dbGetByEmail("peter@host.com", $db);
+$a->toString();
+$a = Account::dbGetByEmail("peter1@host.com", $db);
+$a->toString();
 ?>
 
