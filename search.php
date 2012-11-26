@@ -1,77 +1,3 @@
-﻿<?php
-$search = $_POST['fsearch'];
-$searchTerms = explode(" ", strtolower($search));
-$hitId = array();
-$hitCount = 0;
-
-$query = ("SELECT id, name, description FROM `products`");
-$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-$row = mysql_fetch_array($result);
-
-$hit = false;
-$nameTerms = explode(" ", strtolower($row[1]));
-$descTerms = explode(" ", strtolower($row[2]));
-while($hit == false)
-{
-    for($i = 0; $i < count($nameTerms); $i++)
-    {
-        for($k = 0; $k < count($searchTerms); $k++)
-        {
-            if($searchTerms[$k] == $nameTerms[$i])
-            {
-                $hitId[$hitCount] = $row[0];
-                $hitCount++;
-                $hit = true;
-            }
-        }  
-    }
-    for($i = 0; $i < count($descTerms); $i++)
-    {
-        for($k = 0; $k < count($searchTerms); $k++)
-        {
-            if($searchTerms[$k] == $descTerms[$i])
-            {
-                $hitId[$hitCount] = $row[0];
-                $hitCount++;
-                $hit = true;
-            }
-        }  
-    }
-}
-
-while($row = mysql_fetch_array($result)){
-	if($row[0] != NULL){
-        while($hit == false)
-        {
-            for($i = 0; $i < count($nameTerms); $i++)
-            {
-                for($k = 0; $k < count($searchTerms); $k++)
-                {
-                    if($searchTerms[$k] == $nameTerms[$i])
-                    {
-                        $hitId[$hitCount] = $row[0];
-                        $hitCount++;
-                        $hit = true;
-                    }
-                }  
-            }
-            for($i = 0; $i < count($descTerms); $i++)
-            {
-                for($k = 0; $k < count($searchTerms); $k++)
-                {
-                    if($searchTerms[$k] == $descTerms[$i])
-                    {
-                        $hitId[$hitCount] = $row[0];
-                        $hitCount++;
-                        $hit = true;
-                    }
-                }  
-            }
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,7 +65,7 @@ while($row = mysql_fetch_array($result)){
         <div class="container-center">
             <div class="row-fluid">
                 <!--Logo Here-->
-                <a class="brand" href="index.html"> <img src="assets/img/logo.png"></a>
+                <a class="brand" href="index.php"> <img src="assets/img/logo.png"></a>
             </div>
         
             <!--Start of Sidebar-->
@@ -158,34 +84,69 @@ while($row = mysql_fetch_array($result)){
                     <div class="container-main">
 
                         <?php
-                        for($i = 0; $i < $hitCount; $i++)
-                        {
-                            $query = ("SELECT file_data FROM `images` WHERE product_id =" . $hitId[$i]);
-                            $result = mysql_query($query, $con) or die("Could not execute query '$query'");
-                            $row = mysql_fetch_array($result);
-        
-                            echo ("<img src=\"data:image/jpeg;base64," . base64_encode( $row[0] ) . "\" width=\"160\" height=\"160\" ><br>");
-                            
-                            $query = ("SELECT id, name, price, inventory FROM `products` WHERE id =" . $hitId[$i]);
-                            $result = mysql_query($query, $con) or die("Could not execute query '$query'");
-                            $row = mysql_fetch_array($result);
-                            
-                            echo("<b> $row[1] </b><br>");
-                            echo("<b><font color=\"darkred\"> $ $row[2]  </font></b><br>");
-                            if($row[3] == -1)
-                            {
-                                echo("Back-Order");
-                            }
-                            elseif($row[3] == 0)
-                            {
-                                echo("<font color=\"red\">Out of Stock </font>");
-                            }
-                            else{
-                                echo("<font color=\"green\"> In Stock </font>");
-                            }
-                            echo("<hr>");
-
+                        $search = $_POST['fsearch'];
+                        $hitId = array();
+                        $hitCount = 0;
+                        
+                        $con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
+                        $rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+                        $query = "";
+                        $row = array();
+                                               
+                        $query = ("SELECT id  FROM `products` WHERE MATCH(name, description) against('" . $search . "' IN BOOLEAN MODE)");
+                        $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                        $row = mysql_fetch_array($result);
+                        if($row[0] != NULL){
+                            $hitId[$hitCount] = $row[0];
+                            $hitCount++;
                         }
+                        while($row = mysql_fetch_array($result)){
+                            if($row[0] != NULL){
+                                $hitId[$hitCount] = $row[0];
+                                $hitCount++;
+                            }
+                        }
+                        
+                        if($hitCount == 0)
+                        {
+                            echo("<u><h3>No matches found for: \"" . $search . "\"</h3></u>");
+                        }
+                        else
+                        {
+                            echo("<u><h3>\"" . $hitCount . "\" matches found for: \"" . $search . "\"</h3></u>");
+                            
+                            for($i = 0; $i < $hitCount; $i++)
+                            {
+                                
+                                $query = ("SELECT file_data FROM `images` WHERE product_id =" . $hitId[$i]);
+                                $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                                $row = mysql_fetch_array($result);
+                                
+                                echo ("<img src=\"data:image/jpeg;base64," . base64_encode( $row[0] ) . "\" width=\"160\" height=\"160\" ><br>");
+                                
+                                $query = ("SELECT id, name, price, inventory FROM `products` WHERE id =" . $hitId[$i]);
+                                $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                                $row = mysql_fetch_array($result);
+                                
+                                echo("<b> $row[1] </b><br>");
+                                echo("<b><font color=\"darkred\"> $ $row[2]  </font></b><br>");
+                                if($row[3] == -1)
+                                {
+                                    echo("Back-Order");
+                                }
+                                elseif($row[3] == 0)
+                                {
+                                    echo("<font color=\"red\">Out of Stock </font>");
+                                }
+                                else{
+                                    echo("<font color=\"green\"> In Stock </font>");
+                                }
+                           
+                                echo("<p style=\"text-align:right\"><button class=\"btn btn-large\" type=\"button\">View Product</button></p>");
+                                echo("<hr>");
+                            }
+                        }
+
                         ?>
 
                        

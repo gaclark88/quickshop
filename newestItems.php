@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* 
  * sidebar.php generates the category links for the sidebar. The number of links depends on the total number of product categories.
  * 

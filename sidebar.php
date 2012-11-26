@@ -5,12 +5,12 @@
  */ 
 
 $con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
 $query = "";
 $row = array();
 
 $query = ("SELECT name FROM `categories`");
-$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+$result = mysql_query($query, $con) or die("Could not execute query '$sql'");
 $row = mysql_fetch_array($result);
 
 echo("<li><a href=\"#\">$row[0]</a></li>");
