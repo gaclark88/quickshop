@@ -52,9 +52,9 @@
                         </p>
                     </div>
                     <!--Search Bar-->
-                    <form class="form-search">
+                    <form class="form-search" action="search.php" method="post" name="Search">
                         <div style="text-align:left">
-                            <input type="text" class="span6  input-large search-query">
+                            <input type="text" name="fsearch" class="span6  input-large search-query">
                             <button type="submit" class="btn">Search</button>
                         </div>
                     </form><!--End of Search Bar-->
@@ -66,7 +66,7 @@
         <div class="container-center">
             <div class="row-fluid">
                 <!--Logo Here-->
-                <a class="brand" href="index.html"> <img src="assets/img/logo.png"></a>
+                <a class="brand" href="index.php"> <img src="assets/img/logo.png"></a>
             </div>
        
             <!--Start of Sidebar-->
@@ -83,7 +83,7 @@
                 <!--Start of Featured Section-->
                 <div class="span9">
                     <div class="container-main">
-                        <h3>Featured Items</h3>
+                        <p><u><h3>Featured Items</h3></u></p>
                         <div id="featured" class="carousel slide">  
                             <!-- Carousel items -->  
                             <div class="carousel-inner">  
@@ -95,27 +95,13 @@
                         </div><!--End of Featured Section-->
                     </div><!--Span-->
                     <hr><!--Breakline between Featured Section and New Items Display-->
+                    <p><u><h3>Newest Items</h3></u></p>
                 </div><!--End of row containing sidebar and main section-->
 
                 <!--Start of New Items Display-->
                 <div class="row-fluid">
                     <!--Start of Newest Item Display-->
-                    <div class="offset3 span4">
-                        <h3>New Item #1</h3>
-                        <p>
-                            Item Details
-                        </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--End of Newest Item Display-->
-
-                    <!--Start of 2nd Newest Item Display-->
-                    <div class="offset1 span4">
-                        <h3>New Item #2</h3>
-                        <p>
-                            Item Details
-                        </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--Start of 2nd Newest Item Display-->
+                    <?php include "newestItems.php";?>
                 </div><!--End of New Items Display-->
 
       <hr><!--Breakline before Footer-->

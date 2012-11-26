@@ -14,7 +14,7 @@ $result = mysql_query($query, $con) or die("Could not execute query '$query'");
 $row = mysql_fetch_array($result);
 
 
-$query = ("SELECT product_id  FROM (SELECT * FROM `images` ORDER BY id  DESC LIMIT 2," . $row[0] . ") AS t ORDER BY rand() LIMIT 3");
+$query = ("SELECT product_id  FROM (SELECT * FROM `images` ORDER BY product_id  DESC LIMIT 2," . $row[0] . ") AS t ORDER BY rand() LIMIT 3");
 $result = mysql_query($query, $con) or die("Could not execute query '$query'");
 $row = mysql_fetch_array($result);
 $featuredId[0] = $row[0];

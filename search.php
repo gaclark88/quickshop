@@ -1,4 +1,77 @@
-﻿
+﻿<?php
+$search = $_POST['fsearch'];
+$searchTerms = explode(" ", strtolower($search));
+$hitId = array();
+$hitCount = 0;
+
+$query = ("SELECT id, name, description FROM `products`");
+$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+$row = mysql_fetch_array($result);
+
+$hit = false;
+$nameTerms = explode(" ", strtolower($row[1]));
+$descTerms = explode(" ", strtolower($row[2]));
+while($hit == false)
+{
+    for($i = 0; $i < count($nameTerms); $i++)
+    {
+        for($k = 0; $k < count($searchTerms); $k++)
+        {
+            if($searchTerms[$k] == $nameTerms[$i])
+            {
+                $hitId[$hitCount] = $row[0];
+                $hitCount++;
+                $hit = true;
+            }
+        }  
+    }
+    for($i = 0; $i < count($descTerms); $i++)
+    {
+        for($k = 0; $k < count($searchTerms); $k++)
+        {
+            if($searchTerms[$k] == $descTerms[$i])
+            {
+                $hitId[$hitCount] = $row[0];
+                $hitCount++;
+                $hit = true;
+            }
+        }  
+    }
+}
+
+while($row = mysql_fetch_array($result)){
+	if($row[0] != NULL){
+        while($hit == false)
+        {
+            for($i = 0; $i < count($nameTerms); $i++)
+            {
+                for($k = 0; $k < count($searchTerms); $k++)
+                {
+                    if($searchTerms[$k] == $nameTerms[$i])
+                    {
+                        $hitId[$hitCount] = $row[0];
+                        $hitCount++;
+                        $hit = true;
+                    }
+                }  
+            }
+            for($i = 0; $i < count($descTerms); $i++)
+            {
+                for($k = 0; $k < count($searchTerms); $k++)
+                {
+                    if($searchTerms[$k] == $descTerms[$i])
+                    {
+                        $hitId[$hitCount] = $row[0];
+                        $hitCount++;
+                        $hit = true;
+                    }
+                }  
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +79,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <title>Front Page</title>
+    <title>Search</title>
 
     <!--Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -84,15 +157,38 @@
                 <div class="span9">
                     <div class="container-main">
 
+                        <?php
+                        for($i = 0; $i < $hitCount; $i++)
+                        {
+                            $query = ("SELECT file_data FROM `images` WHERE product_id =" . $hitId[$i]);
+                            $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                            $row = mysql_fetch_array($result);
+        
+                            echo ("<img src=\"data:image/jpeg;base64," . base64_encode( $row[0] ) . "\" width=\"160\" height=\"160\" ><br>");
+                            
+                            $query = ("SELECT id, name, price, inventory FROM `products` WHERE id =" . $hitId[$i]);
+                            $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                            $row = mysql_fetch_array($result);
+                            
+                            echo("<b> $row[1] </b><br>");
+                            echo("<b><font color=\"darkred\"> $ $row[2]  </font></b><br>");
+                            if($row[3] == -1)
+                            {
+                                echo("Back-Order");
+                            }
+                            elseif($row[3] == 0)
+                            {
+                                echo("<font color=\"red\">Out of Stock </font>");
+                            }
+                            else{
+                                echo("<font color=\"green\"> In Stock </font>");
+                            }
+                            echo("<hr>");
 
+                        }
+                        ?>
 
-                        <!--YOUR CODE HERE - YOU CAN ERASE THE FILLER BELOW -->
-                        HTML code, text and PHP Here<br >
-                        Spacing test<br ><br >
-                        <p>Paragraph test </p><br />
-                        Line wrap testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt<br >
-
-
+                       
                     </div><!--End of Main Section-->
                 </div><!--Span-->
             </div><!--End of row containing sidebar and main section-->
