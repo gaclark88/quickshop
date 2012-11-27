@@ -46,7 +46,7 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="#">Login/Create Account</a>
+                            <a class="brand" href="accounts.php">Login/Create Account</a>
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
@@ -66,7 +66,7 @@
         <div class="container-center">
             <div class="row-fluid">
                 <!--Logo Here-->
-                <a class="brand" href="index.html"> <img src="assets/img/logo.png"></a>
+                <a class="brand" href="index.php"> <img src="assets/img/logo.png"></a>
             </div>
         
             <!--Start of Sidebar-->
