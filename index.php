@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<!--Index.php is the front page for QuickShop-->
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -54,7 +56,7 @@
                     <!--Search Bar-->
                     <form class="form-search" action="search.php" method="post" name="Search">
                         <div style="text-align:left">
-                            <input type="text" name="fsearch" class="span6  input-large search-query">
+                            <input type="text" name="fsearch" maxlength="100" class="span6  input-large search-query">
                             <button type="submit" class="btn">Search</button>
                         </div>
                     </form><!--End of Search Bar-->
@@ -94,13 +96,13 @@
                             <a class="carousel-control right" href="#featured" data-slide="next">&rsaquo;</a>  
                         </div><!--End of Featured Section-->
                     </div><!--Span-->
+                    
                     <hr><!--Breakline between Featured Section and New Items Display-->
+                    
                     <p><u><h3>Newest Items</h3></u></p>
                 </div><!--End of row containing sidebar and main section-->
-
                 <!--Start of New Items Display-->
                 <div class="row-fluid">
-                    <!--Start of Newest Item Display-->
                     <?php include "newestItems.php";?>
                 </div><!--End of New Items Display-->
 
