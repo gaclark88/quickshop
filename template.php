@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +54,7 @@
                     <!--Search Bar-->
                     <form class="form-search" action="search.php" method="post" name="Search">
                         <div style="text-align:left">
-                            <input type="text" name="fsearch" class="span6  input-large search-query">
+                            <input type="text" name="fsearch" maxlength="100" class="span6  input-large search-query">
                             <button type="submit" class="btn">Search</button>
                         </div>
                     </form><!--End of Search Bar-->
