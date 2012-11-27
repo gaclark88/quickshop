@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* 
  * newestItems.php is a script that displays the 2 newest items added to the inventory on the front page. 
  *
@@ -14,21 +14,36 @@ $rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con dat
 $query = "";
 $row = array();
 
-/* Query for the images and corresponding product id of the 2 newest items */
-$query = ("SELECT file_data, product_id FROM `images` ORDER BY product_id DESC LIMIT 2");
+/* Query for the product id of the 2 newest items */
+$query = ("SELECT id FROM `products` ORDER BY id DESC LIMIT 2");
 $result = mysql_query($query, $con) or die("Could not execute query '$query'");
 $row = mysql_fetch_array($result);
-$newestImage[0] = $row[0];
-$newestId[0] = $row[1];
+$newestId[0] = $row[0];
 $count++;
 
 while($row = mysql_fetch_array($result)){
 	if($row[0] != NULL){
-		$newestImage[$count] = $row[0];
-        $newestId[$count] = $row[1];
+        $newestId[$count] = $row[0];
         $count++;
     }
 }
+
+/* fetch the images of the 2 newest items */
+for($i = 0; $i < $count; $i++)
+{
+    $query = ("SELECT file_data FROM `images` WHERE product_id =" . $newestId[$i] );
+    $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+    $row = mysql_fetch_array($result);
+    $newestImage[$i] = $row[0];
+
+    while($row = mysql_fetch_array($result)){
+        if($row[0] != NULL){
+            $newestImage[$i] = $row[0];
+        }
+    }
+
+}
+
 ?>
 
 <!--Start of Newest Item Display-->
@@ -45,7 +60,6 @@ while($row = mysql_fetch_array($result)){
     
     /* Display product name and link to product page */
     echo("<b><font size=\"3\"><a href=\"productPage.php?product_id=" . $row[0] . "\"> $row[1] </a></font></b><br>");
-    echo $row[0];
     /* Display price of product */
     echo("<b><font size=\"3\" color=\"darkred\"> $ $row[2]  </font></b><br>");
     /* Determine availability of product and display appropriate message */
