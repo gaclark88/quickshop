@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /* 
  * newestItems.php is a script that displays the 2 newest items added to the inventory on the front page. 
  *
@@ -32,11 +32,11 @@ while($row = mysql_fetch_array($result)){
 ?>
 
 <!--Start of Newest Item Display-->
-<div class="offset3 span4"><
+<div class="offset3 span4">
 
     <?php
     /* Display newest product image */
-    echo ("<img src=\"data:image/jpeg;base64," . base64_encode( $newestImage[0] ) . "\" width=\"160\" height=\"160\" ><br>");
+    echo ("<img src=\"data:image/jpeg;base64," . base64_encode( $newestImage[0] ) . "\" width=\"260\" height=\"260\" ><br>");
     
     /* Query for item details */
     $query = ("SELECT id, name, price, inventory FROM `products` WHERE id =" . $newestId[0]);
@@ -44,20 +44,21 @@ while($row = mysql_fetch_array($result)){
     $row = mysql_fetch_array($result);
     
     /* Display product name and link to product page */
-    echo("<b><a href=\"productPage.php?product_id=" . $row[0] . "\"> $row[1] </a></b><br>");
+    echo("<b><font size=\"3\"><a href=\"productPage.php?product_id=" . $row[0] . "\"> $row[1] </a></font></b><br>");
+    echo $row[0];
     /* Display price of product */
-    echo("<b><font color=\"darkred\"> $ $row[2]  </font></b><br>");
+    echo("<b><font size=\"3\" color=\"darkred\"> $ $row[2]  </font></b><br>");
     /* Determine availability of product and display appropriate message */
     if($row[3] == -1)
     {
-        echo("Back-Order");
+        echo("<font size=\"3\"> Back-Order </font>");
     }
     elseif($row[3] == 0)
     {
-        echo("<font color=\"red\">Out of Stock </font>");
+        echo("<font size=\"3\"color=\"red\">Out of Stock </font>");
     }
     else{
-        echo("<font color=\"green\"> In Stock </font>");
+        echo("<font size=\"3\" color=\"green\"> In Stock </font>");
     }
 
     ?>
@@ -68,7 +69,7 @@ while($row = mysql_fetch_array($result)){
     <?php
     
     /* Display 2nd newest product image */
-    echo ("<img src=\"data:image/jpeg;base64," . base64_encode( $newestImage[1] ) . "\" width=\"160\" height=\"160\" ><br>");
+    echo ("<img src=\"data:image/jpeg;base64," . base64_encode( $newestImage[1] ) . "\" width=\"260\" height=\"260\" ><br>");
     
     /* Query for item details */
     $query = ("SELECT id, name, price, inventory FROM `products` WHERE id =" . $newestId[1]);
@@ -76,20 +77,20 @@ while($row = mysql_fetch_array($result)){
     $row = mysql_fetch_array($result);
     
     /* Display product name and link to product page */
-    echo("<b><a href=\"productPage.php?product_id=" . $row[0] . "\"> $row[1] </a></b><br>");
+    echo("<b><font size=\"3\"><a href=\"productPage.php?product_id=" . $row[0] . "\"> $row[1] </a></font></b><br>");
     /* Display price of product */
-    echo("<b><font color=\"darkred\"> $ $row[2]  </font></b><br>");
+    echo("<b><font size=\"3\" color=\"darkred\"> $ $row[2]  </font></b><br>");
     /* Determine availability of product and display appropriate message */
     if($row[3] == -1)
     {
-        echo("Back-Order");
+        echo("<font size=\"3\"> Back-Order </font>");
     }
     elseif($row[3] == 0)
     {
-        echo("<font color=\"red\">Out of Stock </font>");
+        echo("<font size=\"3\"color=\"red\">Out of Stock </font>");
     }
     else{
-        echo("<font color=\"green\"> In Stock </font>");
+        echo("<font size=\"3\" color=\"green\"> In Stock </font>");
     }
 
     ?>

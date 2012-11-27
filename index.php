@@ -1,4 +1,4 @@
-<!--Index.php is the front page for QuickShop-->
+﻿<!--Index.php is the front page for QuickShop-->
 
 <!DOCTYPE html>
 <html lang="en">
