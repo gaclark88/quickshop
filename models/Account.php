@@ -1,6 +1,6 @@
 <?php
 
-include("Model.php");
+include_once("Model.php");
 
 class Account extends Model {
 	var $fieldnames = array( "first_name",
@@ -35,9 +35,12 @@ class Account extends Model {
 	function checkPwd($input) {
 		return crypt($input, $this->fields["password"]) == $this->fields["password"];
 	}
+	
+	function dbCheckPwd($email, $pwd, $db) {
+		$account = dbGetByEmail($email, $db);
 
-//	function checkPassword($input, $email, $dbLink) {
-//	}
+		return $account->checkPwd($pwd);
+	}
 
 	function dbGet($id, $dbLink) {
 		$fields = parent::dbGet($id, "accounts", $dbLink);
@@ -100,11 +103,11 @@ $a = new Account($fields);
 
 $db = new DatabaseLink();
 $a->dbSave($db);
-*/
 $db = new DatabaseLink();
 $a = Account::dbGetByEmail("peter@host.com", $db);
 $a->toString();
 $a = Account::dbGetByEmail("peter1@host.com", $db);
 $a->toString();
+*/
 ?>
 
