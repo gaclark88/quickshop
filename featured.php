@@ -20,7 +20,7 @@ $result = mysql_query($query, $con) or die("Could not execute query '$query'");
 $row = mysql_fetch_array($result);
 
 /* Select 3 random products that are NOT the 2 newest items and store for the product id of each in an array */
-$query = ("SELECT id  FROM (SELECT * FROM `products` ORDER BY id  DESC LIMIT 2," . $row[0] . ") AS t ORDER BY rand() LIMIT 3");
+$query = ("SELECT id  FROM (SELECT * FROM `products` WHERE inventory > 0 ORDER BY id  DESC LIMIT 2," . $row[0] . ") AS t ORDER BY rand() LIMIT 3");
 $result = mysql_query($query, $con) or die("Could not execute query '$query'");
 $row = mysql_fetch_array($result);
 $featuredId[0] = $row[0];

@@ -1,4 +1,5 @@
-﻿<!--Index.php is the an auto generated page for a any particular product. The product id passed to the page determines which product's page is generated-->
+﻿<?php include "session.php"; ?>
+<!--Index.php is the an auto generated page for a any particular product. The product id passed to the page determines which product's page is generated-->
 
 <!DOCTYPE html>
 <html lang="en">

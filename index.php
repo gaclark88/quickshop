@@ -1,9 +1,13 @@
-﻿<!--Index.php is the front page for QuickShop-->
+﻿<?php include "session.php"; ?>
+<!--Index.php is the front page for QuickShop-->
+
+    
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -29,10 +33,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+    
   </head>
 
 
   <body>
+  
     <!--Start of Center Section-->
     <div id="center-section">
 

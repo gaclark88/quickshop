@@ -1,4 +1,5 @@
-﻿<!--Search.php is the page that lists the search results for products based on category or keywords-->
+﻿<?php include "session.php"; ?>
+<!--Search.php is the page that lists the search results for products based on category or keywords-->
 
 <!DOCTYPE html>
 <html lang="en">
