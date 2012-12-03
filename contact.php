@@ -1,19 +1,13 @@
 ﻿<?php include "session.php"; ?>
-<!--Index.php is the front page for QuickShop-->
-
-    
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Front Page</title>
 
-    
     <!--Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -33,12 +27,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
-    
   </head>
 
 
   <body>
-  
     <!--Start of Center Section-->
     <div id="center-section">
 
@@ -76,7 +68,7 @@
                 <!--Logo Here-->
                 <a class="brand" href="index.php"> <img src="assets/img/logo.png"></a>
             </div>
-       
+        
             <!--Start of Sidebar-->
             <div class="row-fluid">
                 <div class="span3">
@@ -88,29 +80,22 @@
                     </div><!--End of Sidebar-->
                 </div><!--Span-->
         
-                <!--Start of Featured Section-->
+                <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-                        <p><u><h3>Featured Items</h3></u></p>
-                        <div id="featured" class="carousel slide">  
-                            <!-- Carousel items -->  
-                            <div class="carousel-inner">  
-                                <?php include "featured.php";?>   
-                            </div>  
-                            <!-- Carousel nav -->  
-                            <a class="carousel-control left" href="#featured" data-slide="prev">&lsaquo;</a>  
-                            <a class="carousel-control right" href="#featured" data-slide="next">&rsaquo;</a>  
-                        </div><!--End of Featured Section-->
-                    </div><!--Span-->
-                    
-                    <hr><!--Breakline between Featured Section and New Items Display-->
-                    
-                    <p><u><h3>Newest Items</h3></u></p>
-                </div><!--End of row containing sidebar and main section-->
-                <!--Start of New Items Display-->
-                <div class="row-fluid">
-                    <?php include "newestItems.php";?>
-                </div><!--End of New Items Display-->
+
+                        <h3>Contact Us</h3><br>
+                       
+                        <?php
+                        /* Reads from contact.txt and displays the contents of the file */
+                        $infoFile = fopen("contact.txt", "r");
+                        $content = fread($infoFile, 3000);
+                        echo(nl2br($content));
+                        ?>
+                  
+                    </div><!--End of Main Section-->
+                </div><!--Span-->
+            </div><!--End of row containing sidebar and main section-->
 
       <hr><!--Breakline before Footer-->
       <!--Footer-->

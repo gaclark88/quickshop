@@ -100,7 +100,7 @@
       <hr><!--Breakline before Footer-->
       <!--Footer-->
       <footer>
-        <p><a href="#">Contact Us</a></p>
+        <p><a href="contact.php">Contact Us</a></p>
       </footer>
 
         </div><!--End of the Center Section below the Navigation Bar-->

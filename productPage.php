@@ -33,6 +33,7 @@
 
 
   <body>
+  
     <!--Start of Center Section-->
     <div id="center-section">
 
@@ -86,6 +87,8 @@
                 <div class="span9">
                     <div class="container-main">
                         <?php 
+                        $_SESSION['accountId'] = 2;
+                        
                         /* Takes in product id */
                         if(isset($_GET['product_id']))
                         {
@@ -160,8 +163,98 @@
                             
                             ?>
                             <!--Breakline after product description-->
-                            <hr><br>
+                            <hr>
                         </div><!--End of section containing product description-->
+                        
+                        <!--Start of reviews section-->
+                        <div class="row-fluid">
+                            <h4>Customer Reviews</h4>
+                            <?php
+                            
+                            /* only give registered users the option to submit and delete reviews */
+                            if($_SESSION['accountId'] != session_id())
+                            {
+                                echo("<a href=\"createReview.php?product_id=" . $productId . "\">(Write a review for this product)</a><br>");
+                                
+                                $query = ("SELECT * FROM `product_reviews` WHERE account_id =" . $_SESSION['accountId'] . " AND product_id=" . $productId);
+                                $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                                $row = mysql_fetch_array($result);
+                                if($row[0] != null){
+                                    echo("<a href=\"reviewProcessing.php?delete=1&productId=" . $productId  . "\">(Delete your Review)</a><br><br>");
+                                }
+                            }
+                            
+                            /* Fetch all reviews for the product */
+                            $query = ("SELECT * FROM `product_reviews` WHERE product_id=" . $productId);
+                            $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                            $row = mysql_fetch_array($result);
+                            
+                            /* If none exist, print an appropriate message */
+                            if($row[0] == null)
+                            {
+                                echo("<br><b>No reviews have been written for this product</b>");
+                            
+                            }
+                            /* If reviews for the product do exist, determine the average rating for the product and list all of the reviews */
+                            else
+                            {
+                                /* Query for the total number of ratings given to the product */
+                                $count = array();
+                                $queryCount = ("SELECT COUNT(*) FROM `product_reviews` WHERE product_id=" . $productId);
+                                $resultCount = mysql_query($queryCount, $con) or die("Could not execute query '$queryCount'");
+                                $count = mysql_fetch_array($resultCount);
+                                $totalRatings = $count[0];
+                                
+                                /* Fetch all ratings */
+                                $rating = array();
+                                $queryRating = ("SELECT rating FROM `product_reviews` WHERE product_id=" . $productId);
+                                $resultRating = mysql_query($queryRating, $con) or die("Could not execute query '$queryRating'");
+                                $rating = mysql_fetch_array($resultRating);
+                                $sumRatings = $rating[0];
+                                
+                                /* Sum up all the ratings */
+                                while($rating = mysql_fetch_array($resultRating)){
+                                    if($rating[0] != NULL){
+                                        $sumRatings = $sumRatings + $rating[0];
+                                        
+                                    }
+                                }
+                                
+                                /* Determine and print the average rating for the product */
+                                $avgRating = ($sumRatings / $totalRatings);
+                                echo("<h5>Average rating of this product: " . round($avgRating, 1) . " out of 5</h5><br>");
+                                
+                                /* Start listing the reviews */
+                                /* Determine the first and last name of the reviewer */
+                                $name = array();
+                                $queryName = ("SELECT first_name, last_name FROM `accounts` WHERE id=" . $row[2]);
+                                $resultName = mysql_query($queryName, $con) or die("Could not execute query '$queryName'");
+                                $name = mysql_fetch_array($resultName);
+                                
+                                /* Display the review as well as the name of the reviewer and the rating */
+                                echo("<i><b>Review by: " . $name[0] . " " . $name[1] . "</b></i><br>");
+                                echo("<i><b>Rating:" . $row[3] . " out of 5</b></i><br>");
+                                echo("$row[4]<br><br>");
+                                
+                                /* Repeat for every review  */
+                                while($row = mysql_fetch_array($result)){
+                                    if($row[0] != NULL){
+                                        
+                                        $queryName = ("SELECT first_name, last_name FROM `accounts` WHERE id=" . $row[2]);
+                                        $resultName = mysql_query($queryName, $con) or die("Could not execute query '$queryName'");
+                                        $name = mysql_fetch_array($resultName);
+                                        
+                                        echo("<i><b>Review by: " . $name[0] . " " . $name[1] . "</b></i><br>");
+                                        echo("<i><b>Rating:" . $row[3] . " out of 5</b></i><br>");
+                                        echo("$row[4]<br><br>");    
+                                    }
+                                }                            
+                            }
+                            ?>
+                            
+                            <!--Breakline after product description-->
+                            <hr><br>
+                        </div><!--End of reviews section-->
                     </div><!--End of Main Section-->
                 </div><!--Span-->
             </div><!--End of row containing sidebar and main section-->
@@ -169,7 +262,7 @@
       <hr><!--Breakline before Footer-->
       <!--Footer-->
       <footer>
-        <p><a href="#">Contact Us</a></p>
+        <p><a href="contact.php">Contact Us</a></p>
       </footer>
 
         </div><!--End of the Center Section below the Navigation Bar-->
