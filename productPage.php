@@ -87,8 +87,7 @@
                 <div class="span9">
                     <div class="container-main">
                         <?php 
-                        $_SESSION['accountId'] = 2;
-                        
+         
                         /* Takes in product id */
                         if(isset($_GET['product_id']))
                         {
