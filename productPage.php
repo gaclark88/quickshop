@@ -1,4 +1,5 @@
-﻿<?php include "session.php"; ?>
+<?php include "session.php"; ?>
+
 <!--Index.php is the an auto generated page for a any particular product. The product id passed to the page determines which product's page is generated-->
 
 <!DOCTYPE html>
@@ -143,11 +144,12 @@
                                 else{
                                     echo("<font size=\"4\" color=\"green\"> In Stock </font><br>");
                                     /* Add 1 instance of the product to the current user's cart */
-                                    echo("<p style=\"margin-top:20px\"><a href=\"productPage.php?product_id=" . $row[0] . "\"><button class=\"btn btn-large\" type=\"button\">Add to Cart</button></a></p>");
+                                    echo("<p style=\"margin-top:20px\"><a href=\"addToCart.php?id=" . $row[0] . "\"><button class=\"btn btn-large\" type=\"button\">Add to Cart</button></a></p>");
                                 }
                                 
                                 ?>
                             </div><!--End of section containing product details-->
+
                         </div><!--End of section containing product image and details-->
                         
                         <!--Start of section containing product description-->

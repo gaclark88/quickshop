@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 /* Starts a new session and stores the session id in a cookie */
 session_start();
 

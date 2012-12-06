@@ -1,7 +1,7 @@
 <?php include "session.php"; ?>
 <?php
 
-//header("location: mycart.php");
+header("location: mycart.php");
 $pId = $_GET['id'];
 
 /* Connect to database */
