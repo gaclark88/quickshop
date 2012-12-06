@@ -22,10 +22,6 @@ class Account extends Model {
 		parent::Model($this->fieldnames, $fields, "accounts");
 		
 		$this->fields["password"] = $this->hashPassword($this->fields["password"]);
-	
-		foreach ($this->fields as $field => $value) {
-			echo $field . " => " . $value . "<br />";
-		}
 	}
 
 	function hashPassword($pwd) {
@@ -34,10 +30,11 @@ class Account extends Model {
 
 	function checkPwd($input) {
 		return crypt($input, $this->fields["password"]) == $this->fields["password"];
+		
 	}
 	
 	function dbCheckPwd($email, $pwd, $db) {
-		$account = dbGetByEmail($email, $db);
+		$account = Account::dbGetByEmail($email, $db);
 
 		return $account->checkPwd($pwd);
 	}
@@ -69,13 +66,13 @@ class Account extends Model {
 		return $accounts;
 	}	
 
-	function dbGetByEmail($emai, $dbLink) {
+	function dbGetByEmail($email, $dbLink) {
 		$rows = parent::dbGetBy("email", $email, "accounts", $dbLink);
 
 		$fields = mysql_fetch_assoc($rows);
 		$account = new Account($fields);
 		$account->id = $fields["id"];
-		$account->fields["password"] = $row["password"];
+		$account->fields["password"] = $fields["password"];
 	
 		return $account;
 	}
@@ -106,8 +103,25 @@ $a->dbSave($db);
 $db = new DatabaseLink();
 $a = Account::dbGetByEmail("peter@host.com", $db);
 $a->toString();
+$a->fields["password"] . "<br />";
+$a->fields["password"] = Account::hashPassword("12345");
+$a->dbSave($db);
+/*
+$a->toString();
 $a = Account::dbGetByEmail("peter1@host.com", $db);
 $a->toString();
+*/
+
+/*
+$db = new DatabaseLink();
+$a = Account::dbGetByEmail("peter@host.com", $db);
+//$correctPwd = $a->checkPwd("12345");
+$correctPwd = Account::dbCheckPwd("peter@host.com", "12345", $db);
+if ($correctPwd) {
+	echo "correct";
+} else {
+	echo "false";
+}
 */
 ?>
 
