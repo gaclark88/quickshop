@@ -87,28 +87,55 @@
 
 
                         <!--YOUR CODE HERE - YOU CAN ERASE THE FILLER BELOW -->
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="accounts.php" method="post" name="Login">
 			    <div class="control-group">
 			        <label class="control-label" for="inputEmail">Email</label>
 				<div class="controls">
-				    <input type="text" id="inputEmail" placeholder="Email">
+				    <input type="text" name="inputEmail" placeholder="Email">
 				</div>
 			    </div>
 			<div class="control-group">
 			    <label class="control-label" for="inputPassword">Password</label>
 			    <div class="controls">
-				<input type="password" id="inputPassword" placeholder="Password">
+				<input type="password" name="inputPassword" placeholder="Password">
 			    </div>
 			</div>
 			<div class="control-group">
 			    <div class="controls">
-				<label class="checkbox">
-				    <input type="checkbox"> Remember me
-				</label>
 				<button type="submit" class="btn">Sign in</button>
 			    </div>
 			</div>
 		    </form>
+
+		    <?php include './models/Account.php';
+			$email = $_POST['inputEmail'];
+			$pass  = $_POST['inputPassword'];	
+
+			/* Connect to database */
+			$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
+			$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+			$query = "";
+			$row = array();
+
+			/* get accounts from accounts table */
+			$query = ("SELECT email FROM accounts");
+			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+			$row = mysql_fetch_array($result);
+
+			/* check to see if account exists with given email */
+			$inTable = false;
+			do {
+				if ($email == $row[0])
+					$inTable = true;
+			} while($row = mysql_fetch_array($result));
+
+			/* check to see if password matches */
+			$db = new DatabaseLink();
+			$correctPwd = Account::dbCheckPwd($email, $password, $db);
+
+			echo("<p>$correctPwd</p>");
+		    ?>
+
 
                     </div><!--End of Main Section-->
                 </div><!--Span-->
