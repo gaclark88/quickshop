@@ -84,13 +84,7 @@
                 <div class="span9">
                     <div class="container-main">
 
-
-
                         <!--YOUR CODE HERE - YOU CAN ERASE THE FILLER BELOW -->
-                        HTML code, text and PHP Here<br >
-                        Spacing test<br ><br >
-                        <p>Paragraph test </p><br />
-                        Line wrap testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt<br >
 
 
                     </div><!--End of Main Section-->
