@@ -63,6 +63,16 @@ class Image extends Model {
 		}
 		
 		return $images;
+	}
+	
+	
+	function dbGetByProductId($product_id, $dbLink) {
+		$rows = parent::dbGetBy("product_id", $product_id, "images", $dbLink);
+		$row = mysql_fetch_assoc($rows);
+		$image = new Image($row);
+		$image->id = $row["id"];
+		
+		return $image;
 	}		
 
 }

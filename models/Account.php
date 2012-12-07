@@ -55,13 +55,19 @@ class Account extends Model {
 	}	
 	
 	function dbGetBy($field, $key, $dbLink) {
-		$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);
+
+		
+		if($field == null && $key == null){
+			$rows = parent::dbGetAll("accounts", $dbLink);
+		}
+		else{
+			$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);		
+		}
 		
 		if (count($row) < 1) {
 			return null;
 		}
 			
-
 		$accounts = array();
 		
 		while ($row = mysql_fetch_assoc($rows)) {
@@ -118,18 +124,6 @@ $a = new Account($fields);
 
 $db = new DatabaseLink();
 $a->dbSave($db);
-$db = new DatabaseLink();
-$a = Account::dbGetByEmail("peter@host.com", $db);
-$a->toString();
-$a->fields["password"] . "<br />";
-$a->fields["password"] = Account::hashPassword("12345");
-$a->dbSave($db);
-/*
-$a->toString();
-$a = Account::dbGetByEmail("peter1@host.com", $db);
-$a->toString();
-*/
-
 
 //$db = new DatabaseLink();
 //$a = Account::dbGetByEmail("peter@hst.com", $db);

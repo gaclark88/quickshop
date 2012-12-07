@@ -15,9 +15,13 @@ class DatabaseLink {
 		
 		$this->connection = $connection;
 	}
-
+	
 	function queryDB($queryString, $filename) {
 		return mysql_query($queryString, $this->connection);
+	}
+	
+	function disconnect(){
+		mysql_close($this->connection);
 	}
 }
 ?>
