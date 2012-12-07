@@ -13,15 +13,15 @@
 	$result = mysql_query($query, $con) or die("Could not execute query '$query'");
 	$row = mysql_fetch_array($result);
 
-	/* check to see if account exists with given email */
-	$inTable = false;
-	do {
-		if ($email == $row[0])
-			$inTable = true;
-	} while($row = mysql_fetch_array($result));
-
 	$db = new DatabaseLink();
 	$correctPwd = Account::dbCheckPwd($email, $pass, $db);
 
-	echo("<p>$inTable<br>$correctPwd</p>");
+	echo $correctPwd;
+
+	if ($correctPwd === null)
+		echo("<script>location.href=\"login.php?noemail=1\"</script>");
+	else if (!$correctPwd)
+		echo("<script>location.href=\"login.php?error=1\"</script>");
+	else
+		echo("<script>location.href=\"accountmgr.php\"</script>");
 ?>
