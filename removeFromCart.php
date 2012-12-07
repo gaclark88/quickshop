@@ -41,27 +41,24 @@ if($row[0] != NULL)
 			$query = ("SELECT amount FROM `cart_items` WHERE account_id = '$curU' AND product_id=" . $pId );
 			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
 			$row = mysql_fetch_array($result);
-			$a = $row[0] + 1;
+			$a = $row[0] - 1;
 
-			$query = ("UPDATE `cart_items` SET amount = $a WHERE account_id=   '$curU' AND product_id=" . $pId  );
-			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-
-			$worked = 1;
+			if($a > 0)
+			{
+				$query = ("UPDATE `cart_items` SET amount = $a WHERE account_id=   '$curU' AND product_id=" . $pId  );
+				$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+			}
+			else
+			{
+				$query = ("DELETE FROM `cart_items` WHERE account_id=   '$curU' AND product_id=" . $pId  );
+				$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+			}
 		}
 	}
 
-	if($worked == 0)
-	{
-		$query = ("INSERT INTO `cart_items` VALUES ($pId, '$curU', 1)");
-		$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-	}
 	
 }	
-else
-{
-	$query = ("INSERT INTO `cart_items` VALUES ($pId, '$curU', 1)");
-	$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-}
+
 
 
 
