@@ -64,7 +64,7 @@ class Account extends Model {
 			$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);		
 		}
 		
-		if (count($row) < 1) {
+		if (count($rows) < 1) {
 			return null;
 		}
 			
