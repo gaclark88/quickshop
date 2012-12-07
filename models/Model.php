@@ -7,6 +7,7 @@ class Model {
 	var $table;
 	var $fieldnames = array();
 	var $id = NULL;
+	
 
 	function Model($fieldnames, $fields, $tablename) {
 		foreach ($fields as $field => $value) {
@@ -48,7 +49,7 @@ class Model {
 
 		$query = $query . " WHERE id='" . $this->id . "';";
 
-		echo $query;
+		//echo $query;
 
 		$dbLink->queryDB($query, $_SERVER["SCRIPT_NAME"]);
 		
@@ -79,7 +80,7 @@ class Model {
 				)
 			) . "'); ";
 
-		echo $queryString;
+		//echo $queryString;
 
 		$result =  $dbLink->queryDB($queryString, $_SERVER["SCRIPT_NAME"]);
 		if (!$result) { return $result; }
@@ -92,9 +93,35 @@ class Model {
 	 */
 	function dbGetBy($field, $key, $table, $dbLink) {
 		$query = "SELECT * FROM ". $table . " WHERE " .
-			$field . "='" .
-			$key . "';";
+			$field . " IN('" .
+			$key . "');";
 
+		//echo $query;
+
+		return $dbLink->queryDB($query, $_SERVER["SCRIPT_NAME"]);
+		
+	}
+	
+	/*
+	* select all fields from a table
+	*/
+	function dbGetAll($table, $dbLink) {
+		$query = "SELECT * FROM ". $table . " ORDER BY 1;";
+
+		//echo $query;
+
+		return $dbLink->queryDB($query, $_SERVER["SCRIPT_NAME"]);
+		
+	}
+	
+	/*
+	* select all fields from a table in list
+	*/
+	function dbGetAllInList($table, $field, $keys, $dbLink) {
+		$query = "SELECT * FROM ". $table . " WHERE ".
+			$field . " IN (".
+			"'".implode("', '", $keys)."')";
+		
 		//echo $query;
 
 		return $dbLink->queryDB($query, $_SERVER["SCRIPT_NAME"]);

@@ -9,7 +9,7 @@
 
 <?php>
 
-include '/models/Account.php';
+include 'models/Account.php';
 	
 $conn = new DatabaseLink();
 

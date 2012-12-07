@@ -8,7 +8,7 @@
 
 $order_id = $_GET['order_id'];
 
-include '/models/Model.php';
+include 'models/Model.php';
 
 $conn = new DatabaseLink();
 

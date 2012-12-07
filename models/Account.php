@@ -23,9 +23,9 @@ class Account extends Model {
 		
 		$this->fields["password"] = $this->hashPassword($this->fields["password"]);
 	
-		foreach ($this->fields as $field => $value) {
-			echo $field . " => " . $value . "<br />";
-		}
+		// foreach ($this->fields as $field => $value) {
+			// echo $field . " => " . $value . "<br />";
+		// }
 	}
 
 	function hashPassword($pwd) {
@@ -51,8 +51,14 @@ class Account extends Model {
 	}	
 	
 	function dbGetBy($field, $key, $dbLink) {
-		$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);		
-
+		
+		if($field == null && $key == null){
+			$rows = parent::dbGetAll("accounts", $dbLink);
+		}
+		else{
+			$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);		
+		}
+		
 		$accounts = array();
 		
 		while ($row = mysql_fetch_assoc($rows)) {
@@ -100,11 +106,12 @@ $a = new Account($fields);
 
 $db = new DatabaseLink();
 $a->dbSave($db);
-*/
+
 $db = new DatabaseLink();
 $a = Account::dbGetByEmail("peter@host.com", $db);
 $a->toString();
 $a = Account::dbGetByEmail("peter1@host.com", $db);
 $a->toString();
+*/
 ?>
 

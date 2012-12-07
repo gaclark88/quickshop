@@ -10,8 +10,9 @@ class Product extends Model {
 			"inventory",
 			"image_id",
 			"thumbnail_id",
-			"category_id"
+			"category_id",
 			);
+	var	$misc = NULL;
 
 	function Product($fields) {
 		parent::Model($this->fieldnames, $fields, "products");
@@ -40,14 +41,30 @@ class Product extends Model {
 		}
 		
 		return $products;
-	}		
+	}
+
+	function dbGetAll($table, $dbLink) {
+		$rows = parent::dbGetAll($table, $dbLink);		
+
+		$products = array();
+		
+		while ($row = mysql_fetch_assoc($rows)) {
+			$product = new Product($row);
+			$product->id = $row["id"];
+			$product->misc = $row["category"];
+			
+			array_push($products, $product);
+		}
+		
+		return $products;
+	}	
 	
 	function dbGetImage($dbLink) {
 		if ($this->id == NULL) {
 			return NULL;
 		}
 		
-		return Image::dbGet($this->fields["image_id"], $dbLink);
+		return Image::dbGetByProductId($this->id, $dbLink);
 	}
 	
 	function toString() {
@@ -56,15 +73,15 @@ class Product extends Model {
 }
 
 
-$db = new DatabaseLink();
-$test = Product::dbGet(45, $db);
-$a = Product::dbGetBy("category_id", 3, $db);
+// $db = new DatabaseLink();
+// $test = Product::dbGet(45, $db);
+// $a = Product::dbGetBy("category_id", 3, $db);
 
-echo count($a) . "<br />";
+// echo count($a) . "<br />";
 
-foreach ($a as $p) {
-	$p->toString();
-}
+// foreach ($a as $p) {
+	// $p->toString();
+// }
 
 //$test->toString();
 //$im = $test->dbGetImage($db);

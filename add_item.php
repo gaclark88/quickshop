@@ -11,7 +11,7 @@
 	<tr><td>Product Name</td> <td><input type = 'text' size = '30' maxLength = '252' name = 'name'></td></tr>
 	
 	<?php
-	include '/models/Category.php';
+	include 'models/Category.php';
 	
 	$conn = new DatabaseLink();
 	//find all categories 

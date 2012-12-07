@@ -12,7 +12,7 @@ class Category extends Model {
 	}
 
 	function dbGet($id, $dbLink) {
-		$fields = parent::dbGet($id, "id", "categories", $dbLink);
+		$fields = parent::dbGet($id, "categories", $dbLink);
 
 		if (!$fields) {return $fields;}
 		
@@ -30,6 +30,22 @@ class Category extends Model {
 			
 		return $category;
 	}
+	
+	function dbGetAll($dbLink) {
+		
+		$rows = parent::dbGetAll("categories", $dbLink);		
+
+		$categories = array();
+	
+		while ($row = mysql_fetch_assoc($rows)) {
+		$category = new Category($row);
+		$category->id = $row["id"];
+
+		array_push($categories, $category);
+		}
+	
+	return $categories;
+}	
 }
 /*
 $db = new DatabaseLink();

@@ -7,7 +7,7 @@
 
 <?php>
 
-include '/models/Category.php';
+include 'models/Category.php';
 
 $conn = new DatabaseLink();
 

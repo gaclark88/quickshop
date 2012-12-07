@@ -13,8 +13,8 @@
 
 $product_id = $_GET['product'];
 
-include '/models/Product.php';
-include '/models/Category.php';
+include 'models/Product.php';
+include 'models/Category.php';
 
 $conn = new DatabaseLink();
 

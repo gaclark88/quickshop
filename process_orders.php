@@ -3,7 +3,7 @@
 <body>
 <?php
 
-include '/models/Model.php';
+include 'models/Model.php';
 
 $conn = new DatabaseLink();
 

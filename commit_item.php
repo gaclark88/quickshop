@@ -1,6 +1,6 @@
 <?php
 
-include '/models/Product.php';
+include 'models/Product.php';
 
 $conn = new DatabaseLink();
 
