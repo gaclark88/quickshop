@@ -36,6 +36,10 @@ class Account extends Model {
 	function dbCheckPwd($email, $pwd, $db) {
 		$account = Account::dbGetByEmail($email, $db);
 
+		if ($account === null) {
+			return null;
+		}
+
 		return $account->checkPwd($pwd);
 	}
 
@@ -51,7 +55,12 @@ class Account extends Model {
 	}	
 	
 	function dbGetBy($field, $key, $dbLink) {
-		$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);		
+		$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);
+		
+		if (count($row) < 1) {
+			return null;
+		}
+			
 
 		$accounts = array();
 		
@@ -69,7 +78,16 @@ class Account extends Model {
 	function dbGetByEmail($email, $dbLink) {
 		$rows = parent::dbGetBy("email", $email, "accounts", $dbLink);
 
+		if (count($rows) < 1) {
+			return null;
+		}
+
 		$fields = mysql_fetch_assoc($rows);
+
+		if (!$fields) {
+			return null;
+		}		
+
 		$account = new Account($fields);
 		$account->id = $fields["id"];
 		$account->fields["password"] = $fields["password"];
@@ -112,16 +130,19 @@ $a = Account::dbGetByEmail("peter1@host.com", $db);
 $a->toString();
 */
 
-/*
-$db = new DatabaseLink();
-$a = Account::dbGetByEmail("peter@host.com", $db);
-//$correctPwd = $a->checkPwd("12345");
-$correctPwd = Account::dbCheckPwd("peter@host.com", "12345", $db);
-if ($correctPwd) {
-	echo "correct";
-} else {
-	echo "false";
-}
-*/
-?>
 
+$db = new DatabaseLink();
+//$a = Account::dbGetByEmail("peter@hst.com", $db);
+//if ($a === null ) {
+//	echo "Its null";
+//}
+//$correctPwd = $a->checkPwd("12345");
+$correctPwd = Account::dbCheckPwd("peter@host.co", "2345", $db);
+if ($correctPwd === null ) {
+	echo "Its null";
+} else if ($correctPwd) {
+	echo "true <br />";
+} else {
+	echo "false <br />";
+}
+?>
