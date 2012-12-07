@@ -131,13 +131,14 @@ $a->toString();
 */
 
 
-$db = new DatabaseLink();
+//$db = new DatabaseLink();
 //$a = Account::dbGetByEmail("peter@hst.com", $db);
 //if ($a === null ) {
 //	echo "Its null";
 //}
 //$correctPwd = $a->checkPwd("12345");
-$correctPwd = Account::dbCheckPwd("peter@host.co", "2345", $db);
+//$correctPwd = Account::dbCheckPwd("peter@host.co", "2345", $db);
+/*
 if ($correctPwd === null ) {
 	echo "Its null";
 } else if ($correctPwd) {
@@ -145,4 +146,5 @@ if ($correctPwd === null ) {
 } else {
 	echo "false <br />";
 }
+*/
 ?>
