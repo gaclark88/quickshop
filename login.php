@@ -84,7 +84,10 @@
                 <div class="span9">
                     <div class="container-main">
 
-                        <!--YOUR CODE HERE - YOU CAN ERASE THE FILLER BELOW -->
+			<?php 
+			if( isset($_GET['error']) ) 
+				echo("<p style=\"color:red\">Invalid password</p>");
+			?>
 
 			<form class="form-horizontal" action="accounts.php" method="post" name="login">
 				<div class="control-group">
@@ -104,6 +107,11 @@
 					        <input type="submit" class="btn"/>
 					</div>
 			        </div>
+				<div class="control-group">
+					<div class="controls">
+						<a href="register.html">Don't have an account? Register here</a>
+					</div>
+				<div>
 			</form>
 
 
