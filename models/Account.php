@@ -130,9 +130,12 @@ $a->dbSave($db);
 //if ($a === null ) {
 //	echo "Its null";
 //}
-//$correctPwd = $a->checkPwd("12345");
-//$correctPwd = Account::dbCheckPwd("peter@host.co", "2345", $db);
+*/
+
 /*
+$db = new DatabaseLink();
+$correctPwd = Account::dbCheckPwd("peter@host.com", "12345", $db);
+
 if ($correctPwd === null ) {
 	echo "Its null";
 } else if ($correctPwd) {
