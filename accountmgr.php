@@ -46,7 +46,7 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="accounts.html">Login/Create Account</a>
+                            <a class="brand" href="login.php">Login/Create Account</a>
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
@@ -84,38 +84,10 @@
                 <div class="span9">
                     <div class="container-main">
 
-			<?php 
-			if( isset($_GET['error']) ) 
-				echo("<p style=\"color:red\">Invalid password</p>");
-			else if ( isset($_GET['noemail']) )
-				echo("<p style=\"color:red\">Email not found in database</p>");
+			<?php
+				session_start();
 			?>
-
-			<form class="form-horizontal" action="accounts.php" method="post" name="login">
-				<div class="control-group">
-			      		<label class="control-label" for="inputEmail">Email</label>
-						<div class="controls">
-							<input type="text" name="inputEmail" placeholder="Email">
-						</div>
-			        </div>
-				<div class="control-group">
-			        	<label class="control-label" for="inputPassword">Password</label>
-						<div class="controls">
-						      <input type="password" name="inputPassword" placeholder="Password">
-					        </div>
-			        </div>
-			        <div class="control-group">
-					<div class="controls">
-					        <input type="submit" class="btn"/>
-					</div>
-			        </div>
-				<div class="control-group">
-					<div class="controls">
-						<a href="registerform.php">Don't have an account? Register here</a>
-					</div>
-				<div>
-			</form>
-
+			<h3>Welcome to the account manager!</h3>
 
                     </div><!--End of Main Section-->
                 </div><!--Span-->

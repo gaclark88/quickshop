@@ -84,14 +84,25 @@
                 <div class="span9">
                     <div class="container-main">
 
-			<?php 
-			if( isset($_GET['error']) ) 
-				echo("<p style=\"color:red\">Invalid password</p>");
-			else if ( isset($_GET['noemail']) )
-				echo("<p style=\"color:red\">Email not found in database</p>");
+			<?php
+			if ( isset($_GET['passerr']) )
+				echo("<p style=\"color:red\">Passwords must match</p>");
+			else if ( isset($_GET['emailerr']) )
+				echo("<p style=\"color:red\">Email already exists</p>");
 			?>
-
-			<form class="form-horizontal" action="accounts.php" method="post" name="login">
+			<form class="form-horizontal" action="register.php" method="post" name="register">
+				<div class="control-group">
+			      		<label class="control-label" for="fname">First Name</label>
+						<div class="controls">
+							<input type="text" name="fname" placeholder="First Name">
+						</div>
+			        </div>
+				<div class="control-group">
+			      		<label class="control-label" for="lname">Last Name</label>
+						<div class="controls">
+							<input type="text" name="lname" placeholder="Last Name">
+						</div>
+			        </div>
 				<div class="control-group">
 			      		<label class="control-label" for="inputEmail">Email</label>
 						<div class="controls">
@@ -104,16 +115,17 @@
 						      <input type="password" name="inputPassword" placeholder="Password">
 					        </div>
 			        </div>
+				<div class="control-group">
+			        	<label class="control-label" for="confirmPassword">Confirm Password</label>
+						<div class="controls">
+						      <input type="password" name="confirmPassword" placeholder="Confirm Password">
+					        </div>
+			        </div>
 			        <div class="control-group">
 					<div class="controls">
 					        <input type="submit" class="btn"/>
 					</div>
 			        </div>
-				<div class="control-group">
-					<div class="controls">
-						<a href="registerform.php">Don't have an account? Register here</a>
-					</div>
-				<div>
 			</form>
 
 
