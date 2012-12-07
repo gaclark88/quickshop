@@ -24,9 +24,9 @@ class Order extends Model {
 	function Order($fields) {
 		parent::Model($this->fieldnames, $fields, "orders");
 
-		foreach ($this->fields as $field => $value) {
-			echo $field . " => " . $value . "<br />";
-		}
+		// foreach ($this->fields as $field => $value) {
+			// echo $field . " => " . $value . "<br />";
+		// }
 	}
 
 	function dbGet($id, $dbLink) {
