@@ -54,7 +54,7 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="accounts.php">Login/Create Account</a>
+                            <a class="brand" href="accounts.html">Login/Create Account</a>
                             <a class="brand" href="mycart.php">My Cart</a>
                         </ul>
                         </p>
