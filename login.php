@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<?php include "session.php"; ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,15 +46,15 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="#">Login/Create Account</a>
+                            <a class="brand" href="accounts.html">Login/Create Account</a>
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
                     </div>
                     <!--Search Bar-->
-                    <form class="form-search">
+                    <form class="form-search" action="search.php" method="post" name="Search">
                         <div style="text-align:left">
-                            <input type="text" class="span6  input-large search-query">
+                            <input type="text" name="fsearch" maxlength="100" class="span6  input-large search-query">
                             <button type="submit" class="btn">Search</button>
                         </div>
                     </form><!--End of Search Bar-->
@@ -65,7 +66,7 @@
         <div class="container-center">
             <div class="row-fluid">
                 <!--Logo Here-->
-                <a class="brand" href="index.html"> <img src="assets/img/logo.png"></a>
+                <a class="brand" href="index.php"> <img src="assets/img/logo.png"></a>
             </div>
         
             <!--Start of Sidebar-->
@@ -74,11 +75,7 @@
                     <div class="well sidebar-nav">
                         <ul class="nav nav-list">
                             <li class="nav-header">Product Categories</li>
-                            <li><a href="#">Category 1</a></li>
-                            <li><a href="#">Category 2</a></li>
-                            <li><a href="#">Category 3</a></li>
-                            <li><a href="#">Category 4</a></li>
-                            <li><a href="#">Category 5</a></li>
+                            <?php include 'sidebar.php';?>
                         </ul>
                     </div><!--End of Sidebar-->
                 </div><!--Span-->
@@ -87,11 +84,35 @@
                 <div class="span9">
                     <div class="container-main">
 
-                        <!--YOUR CODE HERE - YOU CAN ERASE THE FILLER BELOW -->
-                        HTML code, text and PHP Here<br >
-                        Spacing test<br ><br >
-                        <p>Paragraph test </p><br />
-                        Line wrap testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt<br >
+			<?php 
+			if( isset($_GET['error']) ) 
+				echo("<p style=\"color:red\">Invalid password</p>");
+			?>
+
+			<form class="form-horizontal" action="accounts.php" method="post" name="login">
+				<div class="control-group">
+			      		<label class="control-label" for="inputEmail">Email</label>
+						<div class="controls">
+							<input type="text" name="inputEmail" placeholder="Email">
+						</div>
+			        </div>
+				<div class="control-group">
+			        	<label class="control-label" for="inputPassword">Password</label>
+						<div class="controls">
+						      <input type="password" name="inputPassword" placeholder="Password">
+					        </div>
+			        </div>
+			        <div class="control-group">
+					<div class="controls">
+					        <input type="submit" class="btn"/>
+					</div>
+			        </div>
+				<div class="control-group">
+					<div class="controls">
+						<a href="register.html">Don't have an account? Register here</a>
+					</div>
+				<div>
+			</form>
 
 
                     </div><!--End of Main Section-->
@@ -101,7 +122,7 @@
       <hr><!--Breakline before Footer-->
       <!--Footer-->
       <footer>
-        <p><a href="#">Contact Us</a></p>
+        <p><a href="contact.php">Contact Us</a></p>
       </footer>
 
         </div><!--End of the Center Section below the Navigation Bar-->

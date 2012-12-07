@@ -1,4 +1,6 @@
 ﻿<?php include "session.php"; ?>
+<!--createReview.php allows a customer to submit a review for a product. The review consists of the a rating from 1-5 and a written opinion. -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +48,7 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="accounts.html">Login/Create Account</a>
+                            <a class="brand" href="accounts.php">Login/Create Account</a>
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
@@ -83,8 +85,51 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
+                        <form action="reviewProcessing.php" method="post" name="Processing">
+                        
+                            <?php
+                            if(isset($_GET['product_id']))
+                            {
+                                /* Posts the customer's account id for processing */
+                                echo("<input type=\"hidden\" name=\"accountId\" value=\"" . $_SESSION['accountId'] . "\"><br>");
+                             
+                                /* Connect to database */
+                                $con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
+                                $rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+                                $query = "";
+                                $row = array();
+                                
+                                /* Query for the name of the product being reviewed */
+                                $query = ("SELECT name FROM `products` WHERE id =" . $_GET['product_id']);
+                                $result = mysql_query($query, $con) or die("Could not execute query '$query'");
+                                $row = mysql_fetch_array($result);
+                                
+                                echo("<h3>Write your review</h3><br>");
+                                
+                                /* Print the name of the product being reviewed and post the product's id for processing */
+                                echo("<b>Product:</b> " . $row[0] . "<br>");
+                                echo("<input type=\"hidden\" name=\"productId\" value=\"" . $_GET['product_id'] . "\"><br>");
+                                
+                                /* Generates a dropdown box of ratings from 1 to 5 */
+                                echo("<b>How would you rate this product: </b>");
+                                echo("<select style=\"width:60px;\" name=rating>");
+                                for($i = 1; $i <= 5; $i++)
+                                {
+                                    echo("<option value=\"" . $i . "\">" . $i ."</option>");
+                                
+                                }
+                                echo("</select> out of 5 <br><br>");
+                                
+                                /* Generates a text box for the customer to type their opinion about the product */
+                                echo("<b>What do you think of this product?</b><br>");
+                                echo("<textarea style=\"width:750px; height: 200px;\" name=\"review\" maxlength=\"3000\"></textarea><br>");
+                                
+                                /* generates a submit button to submit the review for processing */
+                                echo("<input type=\"submit\" value=\"Submit Review\">");
+                            }      
+                            ?>
 
-                        <!--YOUR CODE HERE - YOU CAN ERASE THE FILLER BELOW -->
+                        </form>
 
 
                     </div><!--End of Main Section-->
@@ -94,7 +139,7 @@
       <hr><!--Breakline before Footer-->
       <!--Footer-->
       <footer>
-        <p><a href="contact.php">Contact Us</a></p>
+        <p><a href="#">Contact Us</a></p>
       </footer>
 
         </div><!--End of the Center Section below the Navigation Bar-->

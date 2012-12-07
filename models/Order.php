@@ -1,56 +1,71 @@
 <?php
 
 include_once("Model.php");
+include_once("OrderProduct.php");
 
 class Order extends Model {
-	var $fieldnames = array("status"
+	var $fieldnames = array( "account_id",
+			"phone",
+			"shipping_address",
+			"shipping_city",
+			"shipping_state",
+			"shipping_zip",
+			"billing_address",
+			"billing_city",
+			"billing_state",
+			"billing_zip",
+			"status",
+			"credit_4",
+			"subtotal",
+			"shipping_price",
+			"total_amount"
 			);
 
 	function Order($fields) {
 		parent::Model($this->fieldnames, $fields, "orders");
+
+		foreach ($this->fields as $field => $value) {
+			echo $field . " => " . $value . "<br />";
+		}
 	}
 
-	// function dbGet($id, $dbLink) {
-		// $fields = parent::dbGet($id, "id", "categories", $dbLink);
+	function dbGet($id, $dbLink) {
+		$fields = parent::dbGet($id, "orders", $dbLink);
 
-		// if (!$fields) {return $fields;}
+		if (!$fields) {return $fields;}
 		
-		// $category = new Category($fields);
-		// $category->id = $fields["id"];
-		// return $category;
-	// }
+		$order = new Order($fields);
+		$order->id = $fields["id"];
+		return $order;
+	}	
 	
-	// function dbGetByName($name, $dbLink) {
-		// $rows = parent::dbGetby("name", $name, "categories", $dbLink);
+	function dbGetBy($field, $key, $dbLink) {
+		$rows = parent::dbGetBy($field, $key, "orders", $dbLink);		
+
+		$orders = array();
 		
-		// $row = mysql_fetch_assoc($rows);
-			// $category = new Category($row);
-			// $category->id = $row["id"];
+		while ($row = mysql_fetch_assoc($rows)) {
+			$order = new Order($row);
+			$order->id = $row["id"];
 			
-		// return $category;
-	// }
-	
-	// function dbGetAll($dbLink) {
+			array_push($orders, $order);
+		}
 		
-		// $rows = parent::dbGetAll("categories", $dbLink);		
+		return $orders;
+	}	
 
-		// $categories = array();
-	
-		// while ($row = mysql_fetch_assoc($rows)) {
-		// $category = new Category($row);
-		// $category->id = $row["id"];
-
-		// array_push($categories, $category);
-		// }
-	
-	// return $categories;
-// }	
+	/*
+	 * add or update amount of item on an order
+	 */
+	function updateProduct($product_id, $amount, $dbLink) {
+		$orderProduct = OrderProduct::dbGetByOrderIdProductId(
+			$this->fields["order_id"],
+			$product_id);
+		
+		$orderProduct->fields["amount"] = $amount;
+		$orderProduct->dbSave($dbLink);
+	}
 }
-/*
-$db = new DatabaseLink();
 
-$c = Category::dbGetByName("Books", $db);
-$c->toString();
-*/
 ?>
 

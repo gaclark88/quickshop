@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<?php include "session.php"; ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,15 +46,15 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="#">Login/Create Account</a>
+                            <a class="brand" href="accounts.php">Login/Create Account</a>
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
                     </div>
                     <!--Search Bar-->
-                    <form class="form-search">
+                    <form class="form-search" action="search.php" method="post" name="Search">
                         <div style="text-align:left">
-                            <input type="text" class="span6  input-large search-query">
+                            <input type="text" name="fsearch" maxlength="100" class="span6  input-large search-query">
                             <button type="submit" class="btn">Search</button>
                         </div>
                     </form><!--End of Search Bar-->
@@ -65,7 +66,7 @@
         <div class="container-center">
             <div class="row-fluid">
                 <!--Logo Here-->
-                <a class="brand" href="index.html"> <img src="assets/img/logo.png"></a>
+                <a class="brand" href="index.php"> <img src="assets/img/logo.png"></a>
             </div>
         
             <!--Start of Sidebar-->
@@ -74,65 +75,32 @@
                     <div class="well sidebar-nav">
                         <ul class="nav nav-list">
                             <li class="nav-header">Product Categories</li>
-                            <li><a href="#">Category 1</a></li>
-                            <li><a href="#">Category 2</a></li>
-                            <li><a href="#">Category 3</a></li>
-                            <li><a href="#">Category 4</a></li>
-                            <li><a href="#">Category 5</a></li>
+                            <?php include 'sidebar.php';?>
                         </ul>
                     </div><!--End of Sidebar-->
                 </div><!--Span-->
         
-                <!--Start of Featured Section-->
+                <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-                        <h3>Featured Items</h3>
-                        <div id="featured" class="carousel slide">  
-                            <!-- Carousel items -->  
-                            <div class="carousel-inner">  
-                                <div class="active item"><img src="assets/timg/t1.jpg" alt="" width="400" height="100" >&rsaquo;
-                                <div class="carousel-caption">
-                                    <p>Featured 1</p></div></div>  
-                                <div class="item"><img src="assets/timg/t2.jpg" alt="" width="400" height="100" >&rsaquo;
-                                <div class="carousel-caption">
-                                    <p>Featured 2</p></div></div>    
-                                <div class="item"><img src="assets/timg/t3.jpg" alt="" width="400" height="100" >&rsaquo;
-                                <div class="carousel-caption">
-                                    <p>Featured 3</p></div></div>       
-                            </div>  
-                            <!-- Carousel nav -->  
-                            <a class="carousel-control left" href="#featured" data-slide="prev">&lsaquo;</a>  
-                            <a class="carousel-control right" href="#featured" data-slide="next">&rsaquo;</a>  
-                        </div><!--End of Featured Section-->
-                    </div><!--Span-->
-                    <hr><!--Breakline between Featured Section and New Items Display-->
-                </div><!--End of row containing sidebar and main section-->
 
-                <!--Start of New Items Display-->
-                <div class="row-fluid">
-                    <!--Start of Newest Item Display-->
-                    <div class="offset3 span4">
-                        <h3>New Item #1</h3>
-                        <p>
-                            Item Details
-                        </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--End of Newest Item Display-->
-
-                    <!--Start of 2nd Newest Item Display-->
-                    <div class="offset1 span4">
-                        <h3>New Item #2</h3>
-                        <p>
-                            Item Details
-                        </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--Start of 2nd Newest Item Display-->
-                </div><!--End of New Items Display-->
+                        <h3>Contact Us</h3><br>
+                       
+                        <?php
+                        /* Reads from contact.txt and displays the contents of the file */
+                        $infoFile = fopen("contact.txt", "r");
+                        $content = fread($infoFile, 3000);
+                        echo(nl2br($content));
+                        ?>
+                  
+                    </div><!--End of Main Section-->
+                </div><!--Span-->
+            </div><!--End of row containing sidebar and main section-->
 
       <hr><!--Breakline before Footer-->
       <!--Footer-->
       <footer>
-        <p><a href="#">Contact Us</a></p>
+        <p><a href="contact.php">Contact Us</a></p>
       </footer>
 
         </div><!--End of the Center Section below the Navigation Bar-->

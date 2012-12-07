@@ -73,18 +73,19 @@ class Product extends Model {
 }
 
 
-// $db = new DatabaseLink();
-// $test = Product::dbGet(45, $db);
-// $a = Product::dbGetBy("category_id", 3, $db);
 
-// echo count($a) . "<br />";
+#$db = new DatabaseLink();
+#$test = Product::dbGet(43, $db);
+//$a = Product::dbGetBy("category_id", 3, $db);
 
-// foreach ($a as $p) {
-	// $p->toString();
-// }
+//echo count($a) . "<br />";
+
+//foreach ($a as $p) {
+//	$p->toString();
+//}
 
 //$test->toString();
-//$im = $test->dbGetImage($db);
+#$im = $test->dbGetImage($db);
 
 //$h = array("name" => "Test Name", "id" => "33");
 

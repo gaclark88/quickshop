@@ -1,6 +1,6 @@
 <?php
 
-include("Model.php");
+include_once("Model.php");
 
 class Account extends Model {
 	var $fieldnames = array( "first_name",
@@ -22,10 +22,6 @@ class Account extends Model {
 		parent::Model($this->fieldnames, $fields, "accounts");
 		
 		$this->fields["password"] = $this->hashPassword($this->fields["password"]);
-	
-		// foreach ($this->fields as $field => $value) {
-			// echo $field . " => " . $value . "<br />";
-		// }
 	}
 
 	function hashPassword($pwd) {
@@ -34,10 +30,18 @@ class Account extends Model {
 
 	function checkPwd($input) {
 		return crypt($input, $this->fields["password"]) == $this->fields["password"];
+		
 	}
+	
+	function dbCheckPwd($email, $pwd, $db) {
+		$account = Account::dbGetByEmail($email, $db);
 
-//	function checkPassword($input, $email, $dbLink) {
-//	}
+		if ($account === null) {
+			return null;
+		}
+
+		return $account->checkPwd($pwd);
+	}
 
 	function dbGet($id, $dbLink) {
 		$fields = parent::dbGet($id, "accounts", $dbLink);
@@ -51,6 +55,7 @@ class Account extends Model {
 	}	
 	
 	function dbGetBy($field, $key, $dbLink) {
+
 		
 		if($field == null && $key == null){
 			$rows = parent::dbGetAll("accounts", $dbLink);
@@ -59,6 +64,10 @@ class Account extends Model {
 			$rows = parent::dbGetBy($field, $key, "accounts", $dbLink);		
 		}
 		
+		if (count($row) < 1) {
+			return null;
+		}
+			
 		$accounts = array();
 		
 		while ($row = mysql_fetch_assoc($rows)) {
@@ -72,13 +81,22 @@ class Account extends Model {
 		return $accounts;
 	}	
 
-	function dbGetByEmail($emai, $dbLink) {
+	function dbGetByEmail($email, $dbLink) {
 		$rows = parent::dbGetBy("email", $email, "accounts", $dbLink);
 
+		if (count($rows) < 1) {
+			return null;
+		}
+
 		$fields = mysql_fetch_assoc($rows);
+
+		if (!$fields) {
+			return null;
+		}		
+
 		$account = new Account($fields);
 		$account->id = $fields["id"];
-		$account->fields["password"] = $row["password"];
+		$account->fields["password"] = $fields["password"];
 	
 		return $account;
 	}
@@ -107,11 +125,20 @@ $a = new Account($fields);
 $db = new DatabaseLink();
 $a->dbSave($db);
 
-$db = new DatabaseLink();
-$a = Account::dbGetByEmail("peter@host.com", $db);
-$a->toString();
-$a = Account::dbGetByEmail("peter1@host.com", $db);
-$a->toString();
+//$db = new DatabaseLink();
+//$a = Account::dbGetByEmail("peter@hst.com", $db);
+//if ($a === null ) {
+//	echo "Its null";
+//}
+//$correctPwd = $a->checkPwd("12345");
+//$correctPwd = Account::dbCheckPwd("peter@host.co", "2345", $db);
+/*
+if ($correctPwd === null ) {
+	echo "Its null";
+} else if ($correctPwd) {
+	echo "true <br />";
+} else {
+	echo "false <br />";
+}
 */
 ?>
-
