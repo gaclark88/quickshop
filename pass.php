@@ -12,7 +12,7 @@
 		echo("<script>location.href=\"changepass.php?error=1\"</script>");
 	else {
 		if ($newpass != $confirmpass) {
-			echo("<script>location.href\"changepass.php?passerr=1\"</script>");
+			echo("<script>location.href=\"changepass.php?passerr=1\"</script>");
 		} else {
 			$a->fields["password"] = Account::hashPassword($newpass);
 
