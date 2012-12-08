@@ -38,18 +38,24 @@
 			"Phone", 
 			"Name on Card", 
 			"Number", 
-			"Date", 
-			"Code");
+			"Expiration Date", 
+			"Security Code");
 
-	$query = ("SELECT first_name, last_name, shipping_address, shipping_city, shipping_zip, phone, billing_address, billing_city, billing_zip, billing_state, shipping_state FROM `accounts` WHERE id =" . $curU );
-	$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-	$row = mysql_fetch_array($result);
+	$credit = array("name", "number", "date", "code");
+
+
+	if(is_numeric($curU))
+	{
+ 		$query = ("SELECT first_name, last_name, shipping_address, shipping_city, shipping_zip, phone, billing_address, billing_city, billing_zip, billing_state, shipping_state FROM `accounts` WHERE id =" . $curU );
+		$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+		$row = mysql_fetch_array($result);
+	}
 
 	
 
 
-	$placeholder = array("John Doe", "1000 Hilltop Circle", "Baltimore", "Maryland", "21250", "United States Of America", "1231231234", "John Doe", "1234567812345678", "June", "01", "123"
-			,"John Doe", "1234123412341234", "01/13", "123"
+	$placeholder = array("John Doe", "1000 Hilltop Circle", "Baltimore", "Maryland", "21250", "1231231234", 
+			"John Doe", "1234123412341234", "01/13", "123"
 			);
 
 	echo("<style type=\"text/css\">
@@ -80,7 +86,7 @@
 		
 		echo("Please fill in Shipping and Billing information, if Billing address is the same as Shipping address, click the checkbox above next.<br><br>");
 	
-		if($row[0] != "" and $row[3] != "")
+		if($row[0] != "")
 		{
 			echo("Stored Address: <br>");
 			
@@ -118,7 +124,7 @@
 	if($progress >= 0 and $progress < 24)
 	{
 
-		if($row[0] != "" and $row[3] != "")
+		if($row[0] != "")
 		{
 			echo("Stored Address: <br>");
 			
@@ -180,18 +186,18 @@
 	{
 		echo("Please fill in Payment information<br><br>");
 	
-		echo("	 <form method = \"post\" action =\"checkcheckout.php\">");
+		echo("	 <form method = \"post\" action =\"checkPayment.php\">");
 	
 		echo("<p class=\"container\"><label2>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<u><b>Payment Information</b></u> </label2>
      			
 			</p>");
 
 
-		for($i = 7; $i < 11; $i++)
+		for($i = 6; $i < 10; $i++)
 		{
 
 			echo("<p class=\"container\"><label for=\"name1\">$labels[$i]</label>
-				<input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+				<input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"".$credit[$i-6]."\" id=\"".$credit[$i-6]."\" /></label>
      				 
 				</p>");
 				
@@ -204,8 +210,49 @@
 
 	}
 
+	if($progress > 24 and $progress < 44 )
+	{
+		echo("Please fill in Payment information<br><br>");
+	
+		echo("	 <form method = \"post\" action =\"checkPayment.php\">");
+	
+		echo("<p class=\"container\"><label2>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<u><b>Payment Information</b></u> </label2>
+     			
+			</p>");
+
+
+		for($i = 6; $i < 10; $i++)
+		{
+			
+			echo("<p class=\"container\"><label for=\"name1\">$labels[$i]</label>");
+
+			if($_SESSION["credit".$credit[$i-6]] == "")
+			{
+				echo("			
+				<input type=\"text\" value=\"" . $_SESSION["credit".$credit[$i-6]] . "\" name=\"".$credit[$i-6]."\" id=\"".$credit[$i-6]."\" /></label>
+     				<span class=\"label label-important\">*</span></p>");
+			}
+			else
+			{
+				echo("			
+				<input type=\"text\" value=\"" . $_SESSION["credit".$credit[$i-6]] . "\" name=\"".$credit[$i-6]."\" id=\"".$credit[$i-6]."\" /></label>
+     				</p>");
+			}
+
+				
+
+
+		}
+
+
+		echo("<input type=\"submit\" value=\"Next\"></form>");
+
+	}
+
+
+
 	//review
-	if($progress == 75)
+	if($progress == 45 or $progress == 44)
 	{
 		echo("<font size = 5><u><b>Shipping and Payment Information</u/b><br><br></font>");
 

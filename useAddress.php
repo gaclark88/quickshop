@@ -30,7 +30,7 @@ $row = mysql_fetch_array($result);
 $_SESSION["shipping".$labels[0]] = $row[0] . " " . $row[1];
 $_SESSION["billing".$labels[0]] =  $row[0] . " " . $row[1];	
 
-for($i = 2; $i < 5; $i++)
+for($i = 2; $i < 6; $i++)
 {
 	
 	$_SESSION["shipping".$labels[$i - 1]] = $row[$i];

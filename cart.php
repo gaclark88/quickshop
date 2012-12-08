@@ -147,11 +147,11 @@
 			$_SESSION['billingPhone'] = "";
 			$_SESSION['shippingPhone'] = "";
 
-			$_SESSION['creditCard'] = 0;
-			$_SESSION['creditName'] = "";
-			$_session['creditCode'] = 000;
-			$_SESSION['creditMonth'] = 0;
-			$_SESSION['creditYear'] = 0;
+			$_SESSION['creditname'] = "";
+			$_SESSION['creditnumber'] = "";
+			$_session['creditdate'] = "";
+			$_SESSION['creditcode'] = "";
+
 
 
 			echo("<form method = \"post\" action =\"checkout.php\"><input type=\"submit\" value=\"Checkout\"></form>");

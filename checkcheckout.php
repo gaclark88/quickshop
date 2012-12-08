@@ -19,7 +19,7 @@ $labels = array(	"Name",
 
 $minimum = array(2, 10, 2, 2, 5, 2, 10); 
 	
-for($i = 0; $i < 5; $i++)
+for($i = 0; $i < 6; $i++)
 {
 	
 	if (isset($_POST["same"]))
