@@ -60,7 +60,7 @@ class Product extends Model {
 	}	
 	
 	function dbGetImage($dbLink) {
-		if ($this->id == NULL) {
+		if ($this->id == NULL || $this->image_id == NULL) {
 			return NULL;
 		}
 		

@@ -38,20 +38,25 @@ if($change_flag != 'true'){
 }
 
 else{
-
+	
 	$product = Product::dbGet($product_id, $conn);
+	
 	//query returns nothing if image is not there, and you try to edit item with new image
 	$image = $product->dbGetImage($conn);
 	
-	//if image is not there, create it; else edit its fields
-	if(!$image->id){
+	//if image is not there, create it
+	if(!$image->id && $img_fields['filename']){
 		$image = new Image($img_fields);
 		$image->fields['product_id'] = $product->id;
 		$image->dbInsert($conn);
+		
+		//update the new image id
+		$product->fields['image_id'] = $image->id;
 	}
+	//else edit its fields
 	else{
 		if($img_fields['filename']){
-			//echo "i get here";
+
 			foreach($img_fields as $field => $value){
 				$image->fields[$field] = $value;
 			}
@@ -62,11 +67,9 @@ else{
 		$product->fields[$field] = $value;
 	}
 
-
-	
 	$product->dbUpdate($conn);
 	
-	//TO-DO make sure that image exists
+	
 	$image->fields['product_id'] = $product->id;
 	$image->dbUpdate($conn);
 
