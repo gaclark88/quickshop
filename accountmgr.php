@@ -91,13 +91,13 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-			<h3><u>Account Manager</u></h3>
-			<a class="btn btn-link" href="shipping.php">Update shipping/billing address</a><br>
-			<a class="btn btn-link" href="vieworders.php">View orders</a><br>
-			<a class="btn btn-link" href="personal.php">Update personal information</a><br>
-			<a class="btn btn-link" href="changepass.php">Change password</a><br>
-			<a class="btn btn-link" href="logout.php">Log out</a><br>
-			<a class="btn btn-link" href="delete.php">Delete account</a>	
+			<h3><u>Account Manager</u></h3><br>
+			<h3><a class="btn btn-link" href="shipping.php">Update shipping/billing address</a></h3><br>
+			<h3><a class="btn btn-link" href="vieworders.php">View orders</a></h3><br>
+			<h3><a class="btn btn-link" href="personal.php">Update personal information</a></h3><br>
+			<h3><a class="btn btn-link" href="changepass.php">Change password</a></h3><br>
+			<h3><a class="btn btn-link" href="logout.php">Log out</a></h3><br>
+			<h3><a class="btn btn-link" href="delete.php">Delete account</a></h3>	
 
                     </div><!--End of Main Section-->
                 </div><!--Span-->
