@@ -91,13 +91,61 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-			<h3><u>Account Manager</u></h3>
-			<a class="btn btn-link" href="shipping.php">Update shipping/billing address</a><br>
-			<a class="btn btn-link" href="vieworders.php">View orders</a><br>
-			<a class="btn btn-link" href="personal.php">Update personal information</a><br>
-			<a class="btn btn-link" href="changepass.php">Change password</a><br>
-			<a class="btn btn-link" href="logout.php">Log out</a><br>
-			<a class="btn btn-link" href="delete.php">Delete account</a>	
+			<?php include_once './models/Model.php';
+				$db = new DatabaseLink();
+				$rows = Model::dbGetBy("account_id", $_SESSION['accountId'], 'orders', $db);
+
+				$account_orders = array();
+				while ($row = mysql_fetch_assoc($rows)) 
+					array_push($account_orders, $row['id']);
+
+				$orders_rows = Model::dbGetAllInList("client_orders", "id", $account_orders, $db);
+			?>
+			<h3>Order History</h3>
+			<p>Orders can be cancelled only if they haven't been processed yet</p>
+			<table border = 1>
+			<tr>
+			<th width = 75>Order #</th>
+			<th width = 100>Status</th>
+			<th width = 100>Product Name</th>
+			<th width = 75>Quantity</th>
+			<th width = 50>Customer Name</th>
+			<th width = 100>Shipping Address</th>
+			<th width = 100>Shipping City</th>
+			<th width = 100>Shipping State</th>
+			<th width = 100>Shipping Zip</th>
+			<th width = 50>Cancel</th>
+			</tr>
+			<form name="submit_cancel" action="cancel.php" method="POST">
+			
+			<?php
+
+			while($row = mysql_fetch_assoc($orders_rows)){
+					
+					
+				echo "<tr>";
+				echo "<td align = 'center'>".$row[id]."</a></td>";
+				echo "<td align = 'center'>".$row['status']."</td>";
+				echo "<td align = 'center'>".$row['product_name']."</td>";
+				echo "<td align = 'center'>".$row['quantity']."</td>";
+				echo "<td align = 'center'>".$row['first_name']." ".$row['last_name']."</td>";
+				echo "<td align = 'center'>".$row['shipping_address']."</td>";
+				echo "<td align = 'center'>".$row['shipping_city']."</td>";
+				echo "<td align = 'center'>".$row['shipping_state']."</td>";
+				echo "<td align = 'center'>".$row['shipping_zip']."</td>";
+				if ($row['status'] == "Submitted")
+					echo "<td align = 'center'><input type=\"checkbox\" name=\"orders\" value=" . $row['id'] . " /></td>";
+				else
+					echo "<td />";
+				echo "</tr>";
+			}
+			?>
+
+			</table>
+			<br><br>
+			<input type=submit value="Submit" />
+			</form>
+			
 
                     </div><!--End of Main Section-->
                 </div><!--Span-->
