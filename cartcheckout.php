@@ -24,7 +24,7 @@
 		<div class=\"bar\" style=\"width: ". $progress . "%;\"></div>
 		 </div>
 		");
-		echo("	 <form method = \"post\" action =\"checkcheckout.php\">");
+	
 	
 	//address and payment
 	
@@ -35,15 +35,22 @@
 			"City", 
 			"State", 
 			"Zip", 
-			"Country", 
 			"Phone", 
 			"Name on Card", 
 			"Number", 
 			"Date", 
 			"Code");
 
+	$query = ("SELECT first_name, last_name, shipping_address, shipping_city, shipping_zip, phone, billing_address, billing_city, billing_zip, billing_state, shipping_state FROM `accounts` WHERE id =" . $curU );
+	$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+	$row = mysql_fetch_array($result);
 
-	$placeholder = array("John Doe", "1000 Hilltop Circle", "Baltimore", "Maryland", "21250", "United States Of America", "1231231234", "John Doe", "1234567812345678", "June", "01", "123");
+	
+
+
+	$placeholder = array("John Doe", "1000 Hilltop Circle", "Baltimore", "Maryland", "21250", "United States Of America", "1231231234", "John Doe", "1234567812345678", "June", "01", "123"
+			,"John Doe", "1234123412341234", "01/13", "123"
+			);
 
 	echo("<style type=\"text/css\">
 		.container 
@@ -58,27 +65,44 @@
   			float: left;
 		}
 
-		.container h1
+		.container label2
 		{
-			width: 200px;
+  			width: 350px;
   			float: left;
 		}
 
+
 		</style>");
 
-	if($progress == 0)
+	if($progress < 0)
 	{
-		echo("<p class=\"container\"><h1>Name1: </h1>
-     			<h1>Name2: </h1>
+		
+		
+		echo("Please fill in Shipping and Billing information, if Billing address is the same as Shipping address, click the checkbox above next.<br><br>");
+	
+		if($row[0] != "" and $row[3] != "")
+		{
+			echo("Stored Address: <br>");
+			
+			echo("<b>" . $row[0] . " " . $row[1] . ", " . $row[2] . ", " . $row[3] . ", " . $row[10] . ", " . $row[4]. ", " . $row[5] . "<b><br>" );
+
+
+			echo("<form method = \"post\" action =\"useAddress.php\"><input type=\"submit\" value=\"Use this address\"></form><br><br>");
+		}
+
+		echo("	 <form method = \"post\" action =\"checkcheckout.php\">");
+	
+		echo("<p class=\"container\"><label2>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<u><b>Shipping Information</b></u> </label2>
+     			<label2>&nbsp&nbsp&nbsp<u><b>Billing Information</b></u> </label2>
 			</p>");
 
 
-		for($i = 0; $i < 7; $i++)
+		for($i = 0; $i < 6; $i++)
 		{
 
 			echo("<p class=\"container\"><label for=\"name1\">$labels[$i]</label>
-				<input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"" . $labels[$i] . " id=\"". $labels[$i] . "\" /></label>
-     				 <input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"" . $labels[$i] . " id=\"". $labels[$i] . "\" />
+				<input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 <input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
 				</p>");
 				
 
@@ -91,15 +115,60 @@
 
 	}
 
-	if($progress > 0 )
+	if($progress >= 0 and $progress < 24)
 	{
-		echo("<u><b>Shipping and Payment Information</u> &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <u>Billing Information</u/b><br><br>");
-		
-		
 
-		
-		echo("<input type=\"checkbox\" name=\"same\" value=\"No\"> Shipping Same as Billing<br>");
+		if($row[0] != "" and $row[3] != "")
+		{
+			echo("Stored Address: <br>");
+			
+			echo("<b>" . $row[0] . " " . $row[1] . ", " . $row[2] . ", " . $row[3] . ", " . $row[10] . ", " . $row[4]. ", " . $row[5] . "<b><br>" );
+
+
+			echo("<form method = \"post\" action =\"useAddress.php\"><input type=\"submit\" value=\"Use this address\"></form><br><br>");
+
+		}
+
+		echo("	 <form method = \"post\" action =\"checkcheckout.php\">");
+
+		echo("Please fill in Shipping and Billing information, if Billing address is the same as Shipping address, click the checkbox above next.<br><br>");
+
+		echo("<p class=\"container\"><label2>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<u><b>Shipping Information</b></u> </label2>
+     			<label2>&nbsp&nbsp&nbsp<u><b>Billing Information</b></u> </label2>
+			</p>");
+
+		for($i = 0; $i < 6; $i++)
+		{
+
+			
+			
+
+	
+			echo("<p class=\"container\"><label for=\"name1\">$labels[$i]</label>");
+			
+			
+				
+			if($_SESSION["shipping".$labels[$i]] == "" or $_SESSION["billing".$labels[$i]] == "")
+			{
+				echo("			
+				<input type=\"text\" value=\"" . $_SESSION["shipping".$labels[$i]] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 <input type=\"text\" value=\"". $_SESSION["billing".$labels[$i]] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
+				<span class=\"label label-important\">Please fill in Both Shipping and Billing Fields Correctly</span></p>");
+			}
+			else
+			{
+				echo("			
+				<input type=\"text\" value=\"" . $_SESSION["shipping".$labels[$i]] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 <input type=\"text\" value=\"". $_SESSION["billing".$labels[$i]] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
+				</p>");
+			}
+
+		}
+
+
+		echo("<input type=\"checkbox\" name=\"same\" value=\"Yes\"> Shipping Same as Billing<br>");
 		echo("<input type=\"submit\" value=\"Next\"></form>");
+
 
 		
 	}
@@ -107,11 +176,31 @@
 
 	
 	//shipping method
-	if($progress == 50)
+	if($progress == 24)
 	{
-		echo("<font size = 5><u><b>Shipping and Payment Information</u/b><br><br></font>");
+		echo("Please fill in Payment information<br><br>");
+	
+		echo("	 <form method = \"post\" action =\"checkcheckout.php\">");
+	
+		echo("<p class=\"container\"><label2>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<u><b>Payment Information</b></u> </label2>
+     			
+			</p>");
 
-		echo("<form method = \"post\" action =\"checkout.php\"><input type=\"submit\" value=\"Next\"></form>");
+
+		for($i = 7; $i < 11; $i++)
+		{
+
+			echo("<p class=\"container\"><label for=\"name1\">$labels[$i]</label>
+				<input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 
+				</p>");
+				
+
+
+		}
+
+
+		echo("<input type=\"submit\" value=\"Next\"></form>");
 
 	}
 
