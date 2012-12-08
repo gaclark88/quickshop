@@ -56,14 +56,11 @@
                         <ul class="nav pull-right">
 			    <?php include './models/Account.php';
 				$db = new DatabaseLink();
-				
-				if ( $_SESSION['accountId'] == session_id() )
+				$a = Account::dbGet($_SESSION['accountId'], $db);
+				if ($a == false) {
 					echo("<a class=\"brand\" href=\"login.php\">Login/Create Account</a>");
-				else {
-					$db = new DatabaseLink();
-					$a  = Account::dbGet($_SESSION['accountId'], $db);
-
-					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->first_name . "!</a>");
+				} else {
+					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->fields['first_name'] . "!</a>");
 				}
 			    ?>	
                             <a class="brand" href="mycart.php">My Cart</a>
