@@ -93,37 +93,37 @@
                 <div class="span9">
                     <div class="container-main">
 
-			<?php 
-			if( isset($_GET['error']) ) 
+			<?php
+			if ( isset($_GET['error']) )
 				echo("<p style=\"color:red\">Invalid password</p>");
-			else if ( isset($_GET['noemail']) )
-				echo("<p style=\"color:red\">Email not found in database</p>");
+			else if ( isset($_GET['passerr']) )
+				echo("<p style=\"color:red\">Passwords must match</p>");
 			?>
-
-			<h3>Log in</h3>
-			<form class="form-horizontal" action="accounts.php" method="post" name="login">
+			<h3>Change password</h3>
+			<form class="form-horizontal" action="pass.php" method="post" name="register">
 				<div class="control-group">
-			      		<label class="control-label" for="inputEmail">Email</label>
+			      		<label class="control-label" for="oldpass">Current password</label>
 						<div class="controls">
-							<input type="text" name="inputEmail" placeholder="Email">
+							<input type="password" name="oldpass" placeholder="Current password">
 						</div>
 			        </div>
 				<div class="control-group">
-			        	<label class="control-label" for="inputPassword">Password</label>
+			      		<label class="control-label" for="newpass">New password</label>
 						<div class="controls">
-						      <input type="password" name="inputPassword" placeholder="Password">
-					        </div>
+							<input type="password" name="newpass" placeholder="New password">
+						</div>
+			        </div>
+				<div class="control-group">
+			      		<label class="control-label" for="confirmpass">Confirm password</label>
+						<div class="controls">
+							<input type="password" name="confirmpass" placeholder="Confirm password">
+						</div>
 			        </div>
 			        <div class="control-group">
 					<div class="controls">
-					        <button type="submit" class="btn">Log in</button>
+					        <button type="submit" class="btn">Submit</button>
 					</div>
 			        </div>
-				<div class="control-group">
-					<div class="controls">
-						<a href="registerform.php">Don't have an account? Register here</a>
-					</div>
-				<div>
 			</form>
 
 

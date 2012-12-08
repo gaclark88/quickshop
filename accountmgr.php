@@ -46,7 +46,16 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="login.php">Login/Create Account</a>
+			    <?php include './models/Account.php';
+				if ( !isset($_SESSION['accountId']) )
+					echo("<a class=\"brand\" href=\"login.php\">Login/Create Account</a>");
+				else {
+					$db = new DatabaseLink();
+					$a  = Account::dbGet($_SESSION['accountId'], $db);
+
+					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->first_name . "!</a>");
+				}
+			    ?>	
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
@@ -83,11 +92,13 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-
-			<?php
-				session_start();
-			?>
-			<h3>Welcome to the account manager!</h3>
+			<h3><u>Account Manager</u></h3>
+			<a class="btn btn-link" href="shipping.php">Update shipping/billing address</a><br>
+			<a class="btn btn-link" href="#">View orders</a><br>
+			<a class="btn btn-link" href="personal.php">Update personal information</a><br>
+			<a class="btn btn-link" href="changepass.php">Change password</a><br>
+			<a class="btn btn-link" href="logout.php">Log out</a><br>
+			<a class="btn btn-link" href="delete.php">Delete account</a>	
 
                     </div><!--End of Main Section-->
                 </div><!--Span-->

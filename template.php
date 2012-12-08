@@ -46,7 +46,16 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="login.php">Login/Create Account</a>
+			    <?php include './models/Account.php';
+				if ( !isset($_SESSION['accountId']) )
+					echo("<a class=\"brand\" href=\"login.php\">Login/Create Account</a>");
+				else {
+					$db = new DatabaseLink();
+					$a  = Account::dbGet($_SESSION['accountId'], $db);
+
+					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->first_name . "!</a>");
+				}
+			    ?>	
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>

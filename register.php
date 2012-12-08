@@ -1,20 +1,11 @@
 <?php include './models/Account.php';
+      include 'session.php';
 	$fname = $_POST['fname'];
 	$lname = $_POST['lname'];
 	$email = $_POST['inputEmail'];
+	$phone = $_POST['phone'];
 	$pass  = $_POST['inputPassword'];
 	$cpass = $_POST['confirmPassword'];
-
-	/* Connect to database */
-	$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-	$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
-	$query = "";
-	$row = array();
-
-	/* get accounts from accounts table */
-	$query = ("SELECT email FROM accounts");
-	$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-	$row = mysql_fetch_array($result);
 
 	$db = new DatabaseLink();
 	$isemail = Account::dbCheckPwd($email, $pass, $db);
@@ -27,6 +18,7 @@
 		$fields = array ( "first_name" => $fname,
 				"last_name" => $lname,
 				"email" => $email,
+				"phone" => $phone,
 				"password" => $pass
 				);
 
@@ -34,6 +26,8 @@
 		$db = new DatabaseLink();
 		$a->fields["password"] = Account::hashPassword($pass);
 		$a->dbSave($db);
+
+		$_SESSION['accountId'] = $a->id;
 
 		echo("<script>location.href=\"accountmgr.php\"</script>");
 	}

@@ -92,38 +92,46 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-
-			<?php 
-			if( isset($_GET['error']) ) 
-				echo("<p style=\"color:red\">Invalid password</p>");
-			else if ( isset($_GET['noemail']) )
-				echo("<p style=\"color:red\">Email not found in database</p>");
-			?>
-
-			<h3>Log in</h3>
-			<form class="form-horizontal" action="accounts.php" method="post" name="login">
+			<h3>Update shipping/billing address</h3>
+			<form class="form-horizontal" action="address.php" method="post" name="register">
 				<div class="control-group">
-			      		<label class="control-label" for="inputEmail">Email</label>
-						<div class="controls">
-							<input type="text" name="inputEmail" placeholder="Email">
+			      		<label class="control-label" for="address">Shipping Address</label>
+						<div class="controls controls-row">
+							<input class="span6" type="text" name="shipaddress" placeholder="Address">
 						</div>
 			        </div>
 				<div class="control-group">
-			        	<label class="control-label" for="inputPassword">Password</label>
-						<div class="controls">
-						      <input type="password" name="inputPassword" placeholder="Password">
-					        </div>
-			        </div>
-			        <div class="control-group">
-					<div class="controls">
-					        <button type="submit" class="btn">Log in</button>
+					<div class="controls controls-row">
+						<input class="span3" type="text" name="shipcity" placeholder="City">
+						<input class="span1" type="text" name="shipstate" placeholder="State">
+						<input class="span2" type="text" name="shipzip" placeholder="Zip Code">
 					</div>
 			        </div>
 				<div class="control-group">
 					<div class="controls">
-						<a href="registerform.php">Don't have an account? Register here</a>
+						<label class="checkbox">
+							<input type="checkbox" name="same" value="true">Billing address is the same as shipping address
+						</label>
 					</div>
-				<div>
+				</div>
+				<div class="control-group">
+			      		<label class="control-label" for="address">Billing Address</label>
+						<div class="controls controls-row">
+							<input class="span6" type="text" name="billaddress" placeholder="Address">
+						</div>
+			        </div>
+				<div class="control-group">
+					<div class="controls controls-row">
+						<input class="span3" type="text" name="billcity" placeholder="City">
+						<input class="span1" type="text" name="billstate" placeholder="State">
+						<input class="span2" type="text" name="billzip" placeholder="Zip Code">
+					</div>
+			        </div>
+			        <div class="control-group">
+					<div class="controls">
+					        <button type="submit" class="btn">Submit</button>
+					</div>
+			        </div>
 			</form>
 
 

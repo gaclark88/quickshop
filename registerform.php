@@ -46,7 +46,16 @@
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                         <ul class="nav pull-right">
-                            <a class="brand" href="accounts.html">Login/Create Account</a>
+			    <?php include './models/Account.php';
+				if ( !isset($_SESSION['accountId']) )
+					echo("<a class=\"brand\" href=\"login.php\">Login/Create Account</a>");
+				else {
+					$db = new DatabaseLink();
+					$a  = Account::dbGet($_SESSION['accountId'], $db);
+
+					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->first_name . "!</a>");
+				}
+			    ?>	
                             <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
@@ -90,6 +99,7 @@
 			else if ( isset($_GET['emailerr']) )
 				echo("<p style=\"color:red\">Email already exists</p>");
 			?>
+			<h3>Register</h3>
 			<form class="form-horizontal" action="register.php" method="post" name="register">
 				<div class="control-group">
 			      		<label class="control-label" for="fname">First Name</label>
@@ -110,6 +120,12 @@
 						</div>
 			        </div>
 				<div class="control-group">
+			      		<label class="control-label" for="phone">Phone Number</label>
+						<div class="controls">
+							<input type="text" name="phone" placeholder="Phone Number">
+						</div>
+			        </div>
+				<div class="control-group">
 			        	<label class="control-label" for="inputPassword">Password</label>
 						<div class="controls">
 						      <input type="password" name="inputPassword" placeholder="Password">
@@ -123,7 +139,7 @@
 			        </div>
 			        <div class="control-group">
 					<div class="controls">
-					        <input type="submit" class="btn"/>
+					        <button type="submit" class="btn">Register</button>
 					</div>
 			        </div>
 			</form>
