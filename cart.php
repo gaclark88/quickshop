@@ -126,7 +126,7 @@
 		
 			echo("Subtotal: $" . $total);
 
-			$_SESSION['progress'] = 0;
+			$_SESSION['progress'] = -1;
 			$_SESSION['checkoutError'] = "";
 
 			$_SESSION['billingName'] = "";
@@ -143,9 +143,6 @@
 
 			$_SESSION['billingZip'] = "";
 			$_SESSION['shippingZip'] = "";
-
-			$_SESSION['billingCountry'] = "";
-			$_SESSION['shippingCountry'] = "";
 
 			$_SESSION['billingPhone'] = "";
 			$_SESSION['shippingPhone'] = "";
