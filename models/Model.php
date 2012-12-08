@@ -87,6 +87,18 @@ class Model {
 
 		$this->id = mysql_insert_id($dbLink->connection);
 	}
+	
+	/* delete from db based on some value */
+	/* USE WITH CAUTION */
+	function dbDelete($table, $field, $value, $dbLink) {
+		
+		$queryString = "DELETE FROM " . $table . 
+						" WHERE " . $field . " IN ('" . $value . "');";
+		//echo $queryString;
+		 
+		$status =  $dbLink->queryDB($queryString, $_SERVER["SCRIPT_NAME"]);
+		return $status;
+	}
 
 	/*
 	 * get model from db by a specific field

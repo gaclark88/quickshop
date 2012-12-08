@@ -11,7 +11,7 @@
 
 <?php
 
-$product_id = $_GET['product'];
+$product_id = $_POST['id'];
 
 include 'models/Product.php';
 include 'models/Category.php';
