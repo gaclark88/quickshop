@@ -91,13 +91,11 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-		
-			<!--
 			<?php
 
 			$order_id = $_GET['order_id'];
 
-			include_once 'models/Model.php';
+			include_once './models/Model.php';
 
 			$conn = new DatabaseLink();
 
@@ -106,35 +104,49 @@
 
 			?>
 
-			<table>
-			<tr>
-			<td>
-			<table>
+			<div class = 'row'><div class = 'span8'>
+			<h4>Invoice</h4>
+			<table class = 'table table-bordered'>
 			<?php
 				
-				echo "<tr><td width = 100>Order # :</td><td> $order[id] </td></tr>";
-				echo "<tr><td>Status  :</td><td> $order[status] </td></tr>";
-				echo "<tr><td>Product Name  :</td><td> $order[product_name] </td></tr>";
-				echo "<tr><td>Quantity  :</td><td> $order[quantity] </td></tr>";
-				echo "<tr><td>Subtotal  :</td><td>$ $order[subtotal] </td></tr>";
-				echo "<tr><td>Shipping Price  :</td><td>$ $order[shipping_price] </td></tr>";
-				echo "<tr><td>Total  :</td><td>$ $order[total_amount] </td></tr>";
+				echo "<tr><td><strong>Order # :</strong></td><td> $order[id] </td></tr>";
+				echo "<tr><td><strong>Status  :</strong></td><td> $order[status] </td></tr>";
+				echo "</table>";
+				$product_details = Model::dbGetAllInList("order_items_details", "order_id", array($order_id), $conn);
+				
+				while($row = mysql_fetch_assoc($product_details)){
+					echo "<table class = 'table table-bordered'>";
+					echo "<tr><td><strong>Product Name :</strong></td><td>$row[name]</td>";
+					echo "<tr><td><strong>Quantity :</strong></td><td>$row[quantity]</td></tr>";
+					echo "<tr><td><strong>Price Per Item :</strong></td><td>$row[price]</td></tr>";
+					echo "</table>";
+				} 
+				
+				echo "<table class = 'table table-bordered'>";
+				echo "<tr><td><strong>Quantity :</strong></td><td>$order[quantity]</td></tr>";
+				echo "<tr><td><strong>Subtotal  :</strong></td><td>$ $order[subtotal] </td></tr>";
+				echo "<tr><td><strong>Shipping Price  :</strong></td><td>$ $order[shipping_price] </td></tr>";
+				echo "<tr><td><strong>Total  :</strong></td><td>$ $order[total_amount] </td></tr>";
+				echo "<tr><td><strong>Ship To : </strong></td><td> $order[shipping_name]</td></tr>";
+				echo "<tr><td><strong>Tracking # :</strong> </td><td> $order[tracking_num] </td></tr>";
+				echo "<tr><td><strong>Shipping Address :</strong> </td><td> $order[shipping_address] </td></tr>";
+				echo "<tr><td><strong>Shipping City :</strong> </td><td> $order[shipping_city] </td></tr>";
+				echo "<tr><td><strong>Shipping State :</strong> </td><td> $order[shipping_state] </td></tr>";
+				echo "<tr><td><strong>Shipping Zip:</strong> </td><td> $order[shipping_zip] </td></tr>";
 				echo "</table></td></tr>";
-				echo "<tr><td><br></td></tr>";
-				echo "<tr><td><table>";
-				echo "<tr><td width = 200>Customer Name : </td><td> $order[first_name] $order[last_name] </td></tr>";
-				echo "<tr><td>Shipping Address : </td><td> $order[shipping_address] </td></tr>";
-				echo "<tr><td>Shipping City : </td><td> $order[shipping_city] </td></tr>";
-				echo "<tr><td>Shipping State : </td><td> $order[shipping_state] </td></tr>";
-				echo "<tr><td>Shipping Zip : </td><td> $order[shipping_zip] </td></tr>";
-				echo "<tr><td><a href='vieworders.php'>Back</a></td></tr>";	
-				echo "</table></td></tr><br>";
+				
 			?>
+
+			</div>
+			</div>
+
 			<?php
 			$conn->disconnect();
-			?> -->
+			?>
+		
+			<!--
 			<?php include_once './models/Model.php';
-			$row = Model::dbGetAllInList("orders", "id", array($order_id), $conn);
+			$row = Model::dbGetAllInList("orders", "id", array($id), $conn);
 			$order = mysql_fetch_assoc($row);
 
 			echo("<font size = 5><u><b>Invoice</u/b><br><br></font>");
@@ -219,7 +231,7 @@
 				echo("Total: " . $total . "<br><br>");
 		
 			}
-			?>
+			?> -->
                     </div><!--End of Main Section-->
                 </div><!--Span-->
             </div><!--End of row containing sidebar and main section-->

@@ -138,7 +138,7 @@ class Model {
 			$field . " IN (".
 			"'".implode("', '", $keys)."')";
 		
-		//echo $query;
+		// echo $query;
 
 		return $dbLink->queryDB($query, $_SERVER["SCRIPT_NAME"]);
 		
