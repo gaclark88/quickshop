@@ -135,8 +135,6 @@
 			?> -->
 			<?php
 			echo("<font size = 5><u><b>Invoice</u/b><br><br></font>");
-			
-			echo("<font size = 3><b>Shipping</b><br><br></font>");
 
 			echo("<label>Shipping Address: <br>");		
 			for($i = 0; $i < 5; $i++)
@@ -153,13 +151,6 @@
 			}
 			echo("USA, " . $_SESSION['billingPhone']);
 			echo("</label><br><br><br>");
-
-			echo("<font size = 3><b>Payment</b><br><br></font>");
-
-			echo("<label>Name on card:  " . $_SESSION['creditname'] . "</label>");
-			echo("<label>Credit Card Number:  " . $_SESSION['creditnumber'] . "</label>");
-			echo("<label>Expiration Date:  " . $_SESSION['creditdate'] . "</label>");
-			echo("<label>Security code:  " . $_SESSION['creditcode'] . "</label><br><br>");
 
 			echo("<font size = 3><b>Order</b><br><br></font>");
 
