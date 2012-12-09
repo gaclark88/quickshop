@@ -133,23 +133,26 @@
 			<?php
 			$conn->disconnect();
 			?> -->
-			<?php
+			<?php include_once './models/Model.php';
+			$row = Model::dbGetAllInList("orders", "id", array($order_id), $conn);
+			$order = mysql_fetch_assoc($row);
+
 			echo("<font size = 5><u><b>Invoice</u/b><br><br></font>");
 
 			echo("<label>Shipping Address: <br>");		
 			for($i = 0; $i < 5; $i++)
 			{
-				echo($_SESSION['shipping'.$labels[$i]] . ", ");
+				echo($order['shipping'.$labels[$i]] . ", ");
 			}
-			echo("USA, " . $_SESSION['shippingPhone']);
+			echo("USA, " . $order['shippingPhone']);
 			echo("</label><br>");
 
 			echo("<label>Billing Address: <br>");
 			for($i = 0; $i < 5; $i++)
 			{
-				echo($_SESSION['billing'.$labels[$i]] . ", ");
+				echo($order['billing'.$labels[$i]] . ", ");
 			}
-			echo("USA, " . $_SESSION['billingPhone']);
+			echo("USA, " . $order['billingPhone']);
 			echo("</label><br><br><br>");
 
 			echo("<font size = 3><b>Order</b><br><br></font>");
@@ -234,10 +237,10 @@
 				$tax = round($total * .06, 2);
 
 				echo("Subtotal: $" . $total ."<br>");
-				echo("Shipping and Handling: $" . $_SESSION['shipping'] . "<br>");
+				echo("Shipping and Handling: $" . $order['shipping'] . "<br>");
 
 				echo("Tax: $" .  $tax . "<br>");
-				$total = $total + $tax + $_SESSION['shipping'];
+				$total = $total + $tax + $order['shipping'];
 				echo("Total: " . $total . "<br><br>");
 		
 			}
