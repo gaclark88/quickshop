@@ -176,7 +176,7 @@
 			
 			
 				
-			if($_SESSION["shipping".$labels[$i]] == "" and $_SESSION["billing".$labels[$i]] == "")
+			if($_SESSION["shipping".$labels[$i]] == "" or $_SESSION["billing".$labels[$i]] == "")
 			{
 
 				echo("			
@@ -184,38 +184,13 @@
      				 <input type=\"text\" placeholder=\"". $placeholders[$i] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
 				<span class=\"label label-important\">Please fill in Both Shipping and Billing Fields Correctly</span></p>");
 			}
-			
-			if($_SESSION["shipping".$labels[$i]] == "" and $_SESSION["billing".$labels[$i]] != "")
+			else
 			{
-				
-				
-				echo("			
-				<input type=\"text\" value=\"" . $placeholders[$i] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
-     				 <input type=\"text\" value=\"". $_SESSION["billing".$labels[$i]] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
-				<span class=\"label label-important\">Please fill in Both Shipping and Billing Fields Correctly</span></p>");
-				
-			}
-
-			if($_SESSION["shipping".$labels[$i]] != "" and $_SESSION["billing".$labels[$i]] == "")
-			{
-				
-				
-				echo("			
-				<input type=\"text\" value=\"" . $_SESSION["shipping".$labels[$i]] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
-     				 <input type=\"text\" value=\"". $placeholders[$i] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
-				<span class=\"label label-important\">Please fill in Both Shipping and Billing Fields Correctly</span></p>");
-				
-			}
-
-			if($_SESSION["shipping".$labels[$i]] != "" and $_SESSION["billing".$labels[$i]] != "")
-			{
-				
-				
-				echo("			
-				<input type=\"text\" value=\"" . $_SESSION["shipping".$labels[$i]] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
-     				 <input type=\"text\" value=\"". $_SESSION["billing".$labels[$i]] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
+				echo("<p class=\"container\"><label for=\"name1\">$labels[$i]</label>
+				<input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 <input type=\"text\" placeholder=\"" . $placeholder[$i] . "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
 				</p>");
-				
+
 			}
 
 		}
