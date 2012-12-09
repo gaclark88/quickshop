@@ -13,7 +13,7 @@ $curU = $_GET['accountId']
 
 //check if item exists already in users cart, if not, increment.
 
-$query = ("SELECT product_id FROM `cart_items` WHERE account_id = '$curU' " );
+$query = ("SELECT product_id FROM `cart_items` WHERE account_id =". $curU );
 $result = mysql_query($query, $con) or die("Could not execute query '$query'");
 $row = mysql_fetch_array($result);
 

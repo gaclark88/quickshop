@@ -95,9 +95,6 @@
 
 			<?php include "cartcheckout.php" ?>
 
-
-
-
                     </div><!--End of Main Section-->
                 </div><!--Span-->
             </div><!--End of row containing sidebar and main section-->

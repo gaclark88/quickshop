@@ -1,4 +1,4 @@
-﻿<?php include "session.php"; ?>
+<?php include "session.php"; ?>
 <!--Search.php is the page that lists the search results for products based on category or keywords-->
 
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
 					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->fields['first_name'] . "!</a>");
 				}
 			    ?>	
-                            <a class="brand" href="#">My Cart</a>
+                            <a class="brand" href="mycart.php">My Cart</a>
                         </ul>
                         </p>
                     </div>

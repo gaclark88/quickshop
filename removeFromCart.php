@@ -1,18 +1,24 @@
 <?php include "session.php"; ?>
 <?php
+/*
+*RemoveFromCart.php
+*removes an item from the cart
+*
+*/
 
+//redirect
 header("location: mycart.php");
+
+//passed in variables
 $pId = $_GET['id'];
+$curU = $_SESSION['accountId'];
+
 
 /* Connect to database */
 $con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
 $rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
 $query = "";
 $row = array();
-
-$curU = $_SESSION['accountId'];
-
-//check if item exists already in users cart, if not, increment.
 
 $query = ("SELECT product_id FROM `cart_items` WHERE account_id = '$curU' " );
 $result = mysql_query($query, $con) or die("Could not execute query '$query'");
@@ -22,7 +28,13 @@ $cart = array();
 $size = 0;
 $worked = 0;
 
-
+/*
+If user has a card, get the size of the cart,
+if the item matches the item to be removed,
+decrement it by one,
+if the item amount = 0,
+remove it completely.
+*/
 if($row[0] != NULL)
 {
 	$cart[$size] = $row[0];
