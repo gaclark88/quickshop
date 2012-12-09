@@ -128,7 +128,7 @@
 				echo "<td align = 'center'>".$row['status']."</td>";
 				echo "<td align = 'center'>".$row['product_name']."</td>";
 				echo "<td align = 'center'>".$row['quantity']."</td>";
-				echo "<td align = 'center'>".$row['first_name']." ".$row['last_name']."</td>";
+				echo "<td align = 'center'>".$row['shipping_name']."</td>";
 				echo "<td align = 'center'>".$row['shipping_address']."</td>";
 				echo "<td align = 'center'>".$row['shipping_city']."</td>";
 				echo "<td align = 'center'>".$row['shipping_state']."</td>";
