@@ -43,7 +43,7 @@ while($row = mysql_fetch_assoc($rows)){
 		echo "<tr>";
 		echo "<td><label class = 'checkbox offset2'><input type='checkbox' name='order[]' value = ".$row['id']."></label></td>";
 		echo "<td><a href='view_order.php?order_id=$row[id]' class='btn btn-link'>$row[id]</a></td>";
-		echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
+		echo "<td>".$row['shipping_name']."</td>";
 		echo "<td>".$row['credit_4']."</td>";
 		echo "<td>".$row['quantity']."</td>";
 		echo "<td>$".$row['total_amount']."</td>";
