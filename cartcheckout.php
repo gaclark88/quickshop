@@ -146,7 +146,7 @@
 	if($progress >= 0 and $progress < 24)
 	{
 
-		if($row[0] != "")
+		if($row[0] != "" and $row[1] != "" and $row[2] != "" and $row[3] != "" and $row[10] != "" and $row[4] != "" and $row[5])
 		{
 			echo("Stored Address: <br>");
 			
@@ -176,19 +176,46 @@
 			
 			
 				
-			if($_SESSION["shipping".$labels[$i]] == "" or $_SESSION["billing".$labels[$i]] == "")
+			if($_SESSION["shipping".$labels[$i]] == "" and $_SESSION["billing".$labels[$i]] == "")
 			{
+
 				echo("			
-				<input type=\"text\" value=\"" . $_SESSION["shipping".$labels[$i]] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
-     				 <input type=\"text\" value=\"". $_SESSION["billing".$labels[$i]] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
+				<input type=\"text\" placeholder=\"" . $placeholders[$i] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 <input type=\"text\" placeholder=\"". $placeholders[$i] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
 				<span class=\"label label-important\">Please fill in Both Shipping and Billing Fields Correctly</span></p>");
 			}
-			else
+			
+			if($_SESSION["shipping".$labels[$i]] == "" and $_SESSION["billing".$labels[$i]] != "")
 			{
+				
+				
+				echo("			
+				<input type=\"text\" value=\"" . $placeholders[$i] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 <input type=\"text\" value=\"". $_SESSION["billing".$labels[$i]] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
+				<span class=\"label label-important\">Please fill in Both Shipping and Billing Fields Correctly</span></p>");
+				
+			}
+
+			if($_SESSION["shipping".$labels[$i]] != "" and $_SESSION["billing".$labels[$i]] == "")
+			{
+				
+				
+				echo("			
+				<input type=\"text\" value=\"" . $_SESSION["shipping".$labels[$i]] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
+     				 <input type=\"text\" value=\"". $placeholders[$i] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
+				<span class=\"label label-important\">Please fill in Both Shipping and Billing Fields Correctly</span></p>");
+				
+			}
+
+			if($_SESSION["shipping".$labels[$i]] != "" and $_SESSION["billing".$labels[$i]] != "")
+			{
+				
+				
 				echo("			
 				<input type=\"text\" value=\"" . $_SESSION["shipping".$labels[$i]] . "\" name=\"".$labels[$i]."\" id=\"".$labels[$i]."\" /></label>
      				 <input type=\"text\" value=\"". $_SESSION["billing".$labels[$i]] .  "\" name=\"b$labels[$i]\" id=\"b". $labels[$i] . "\" />
 				</p>");
+				
 			}
 
 		}
@@ -640,6 +667,33 @@
 	
 		}
 
+		$_SESSION['progress'] = -1;
+		$_SESSION['checkoutError'] = "";
+
+		$_SESSION['billingName'] = "";
+		$_SESSION['shippingName'] = "";
+
+		$_SESSION['billingAddress'] = "";
+		$_SESSION['shippingAddress'] = "";
+
+		$_SESSION['billingCity'] = "";
+		$_SESSION['shippingCity'] = "";
+
+		$_SESSION['billingState'] = "";
+		$_SESSION['shippingState'] = "";
+
+		$_SESSION['billingZip'] = "";
+		$_SESSION['shippingZip'] = "";
+
+		$_SESSION['billingPhone'] = "";
+		$_SESSION['shippingPhone'] = "";
+
+		$_SESSION['creditname'] = "";
+		$_SESSION['creditnumber'] = "";
+		$_session['creditdate'] = "";
+		$_SESSION['creditcode'] = "";
+
+		$_SESSION['shipping'] = "";
 	}
 
 	/*
@@ -699,6 +753,34 @@
 
 		echo("	</fieldset><hr><br>");
 			echo("<font color=\"red\">Order not proccessed.</font>");
+
+				$_SESSION['progress'] = -1;
+		$_SESSION['checkoutError'] = "";
+
+		$_SESSION['billingName'] = "";
+		$_SESSION['shippingName'] = "";
+
+		$_SESSION['billingAddress'] = "";
+		$_SESSION['shippingAddress'] = "";
+
+		$_SESSION['billingCity'] = "";
+		$_SESSION['shippingCity'] = "";
+
+		$_SESSION['billingState'] = "";
+		$_SESSION['shippingState'] = "";
+
+		$_SESSION['billingZip'] = "";
+		$_SESSION['shippingZip'] = "";
+
+		$_SESSION['billingPhone'] = "";
+		$_SESSION['shippingPhone'] = "";
+
+		$_SESSION['creditname'] = "";
+		$_SESSION['creditnumber'] = "";
+		$_session['creditdate'] = "";
+		$_SESSION['creditcode'] = "";
+
+		$_SESSION['shipping'] = "";
 
 	}
 
