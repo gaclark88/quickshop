@@ -91,7 +91,8 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-
+		
+			<!--
 			<?php
 
 			$order_id = $_GET['order_id'];
@@ -131,6 +132,124 @@
 			?>
 			<?php
 			$conn->disconnect();
+			?> -->
+			<?php
+			echo("<font size = 5><u><b>Invoice</u/b><br><br></font>");
+			
+			echo("<font size = 3><b>Shipping</b><br><br></font>");
+
+			echo("<label>Shipping Address: <br>");		
+			for($i = 0; $i < 5; $i++)
+			{
+				echo($_SESSION['shipping'.$labels[$i]] . ", ");
+			}
+			echo("USA, " . $_SESSION['shippingPhone']);
+			echo("</label><br>");
+
+			echo("<label>Billing Address: <br>");
+			for($i = 0; $i < 5; $i++)
+			{
+				echo($_SESSION['billing'.$labels[$i]] . ", ");
+			}
+			echo("USA, " . $_SESSION['billingPhone']);
+			echo("</label><br><br><br>");
+
+			echo("<font size = 3><b>Payment</b><br><br></font>");
+
+			echo("<label>Name on card:  " . $_SESSION['creditname'] . "</label>");
+			echo("<label>Credit Card Number:  " . $_SESSION['creditnumber'] . "</label>");
+			echo("<label>Expiration Date:  " . $_SESSION['creditdate'] . "</label>");
+			echo("<label>Security code:  " . $_SESSION['creditcode'] . "</label><br><br>");
+
+			echo("<font size = 3><b>Order</b><br><br></font>");
+
+			$cart = array();
+			$quanities = array();
+			$size = 0;
+			$total =0;
+
+			$query = ("SELECT id FROM `orders` WHERE account_id='$curU'");
+			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+			$row = mysql_fetch_array($result);
+						
+			while($row = mysql_fetch_array($result))
+			{
+				$order = $row[0];
+			}
+
+			$query = ("SELECT product_id FROM `order_products` WHERE order_id =  '$order'");
+			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+			
+			while($row = mysql_fetch_array($result))
+			{
+				$cart[$size] = $row[0];
+				$size++;
+			}
+			
+			echo("Your order number is : " . $order . "<br><br>");	
+
+			if($size == 0)
+			{
+				echo("Cart Is Empty");
+			}
+			else
+			{
+				for($i = 0; $i < $size; $i++)
+				{
+					$query = ("SELECT amount FROM `order_products` WHERE order_id = " . $order);
+					$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+					$row = mysql_fetch_array($result);
+
+					$quanity = $row[0];
+
+					$query = ("SELECT name, price, inventory FROM `products` WHERE id=" . $cart[$i] );
+					$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+					$row = mysql_fetch_array($result);
+					
+					$name = $row[0];
+					$price = $row[1];
+					$quanityLeft = $row[2];				
+
+					if($quanityLeft == 0 or $quanityLeft < $quanity)
+					{
+						echo("
+							<fieldset>
+						     
+							<label>$name<br>");
+							echo("<font color=\"red\">Quanity No longer available, excluded from checkout</font>");
+					}
+					else
+					{
+						if($quanity <= $quanityLeft)
+						{
+							echo("
+							<fieldset>
+						     
+							<label>$name<br>");
+
+							echo("Price: $" . $price . " <br>");
+
+							$quanities[$i] = "Quanity: " . $quanity;
+							echo($quanities[$i]);
+							$total = $total + $quanity * $price;
+						}
+					}
+					echo("</fieldset><hr><br>");
+				}
+			}
+
+			if($total > 0)
+			{
+				$tax = round($total * .06, 2);
+
+				echo("Subtotal: $" . $total ."<br>");
+				echo("Shipping and Handling: $" . $_SESSION['shipping'] . "<br>");
+
+				echo("Tax: $" .  $tax . "<br>");
+				$total = $total + $tax + $_SESSION['shipping'];
+				echo("Total: " . $total . "<br><br>");
+		
+			}
 			?>
                     </div><!--End of Main Section-->
                 </div><!--Span-->

@@ -107,7 +107,6 @@
 			<tr>
 			<th width = 75>Order #</th>
 			<th width = 100>Status</th>
-			<th width = 100>Product Name</th>
 			<th width = 75>Quantity</th>
 			<th width = 50>Customer Name</th>
 			<th width = 100>Shipping Address</th>
@@ -122,11 +121,9 @@
 
 			while($row = mysql_fetch_assoc($orders_rows)){
 					
-					
 				echo "<tr>";
 				echo "<td align = 'center'><a href=\"invoice.php?order_id=$row[id]\">".$row[id]."</a></td>";
 				echo "<td align = 'center'>".$row['status']."</td>";
-				echo "<td align = 'center'>".$row['product_name']."</td>";
 				echo "<td align = 'center'>".$row['quantity']."</td>";
 				echo "<td align = 'center'>".$row['shipping_name']."</td>";
 				echo "<td align = 'center'>".$row['shipping_address']."</td>";
@@ -134,7 +131,7 @@
 				echo "<td align = 'center'>".$row['shipping_state']."</td>";
 				echo "<td align = 'center'>".$row['shipping_zip']."</td>";
 				if ($row['status'] == "Submitted")
-					echo "<td align = 'center'><input type=\"checkbox\" name=\"orders\" value=" . $row['id'] . " /></td>";
+					echo "<td align = 'center'><input type=\"checkbox\" name=\"orders[]\" value=\"" . $row['id'] . "\" /></td>";
 				else
 					echo "<td />";
 				echo "</tr>";
