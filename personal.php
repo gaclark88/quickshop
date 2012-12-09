@@ -63,7 +63,7 @@
                     <form class="form-search" action="search.php" method="post" name="Search">
                         <div style="text-align:left">
                             <input type="text" name="fsearch" maxlength="100" class="span6  input-large search-query">
-                            <button type="submit" class="btn">Search</button>
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </form><!--End of Search Bar-->
                 </div>
@@ -126,7 +126,7 @@
 			        </div>
 			        <div class="control-group">
 					<div class="controls">
-					        <button type="submit" class="btn">Submit</button>
+					        <button type="submit" class="btn btn-primary">Submit</button>
 					</div>
 			        </div>
 			</form>

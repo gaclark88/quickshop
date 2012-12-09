@@ -120,7 +120,7 @@
 			        </div>
 			        <div class="control-group">
 					<div class="controls">
-					        <button type="submit" class="btn">Submit</button>
+					        <button type="submit" class="btn btn-primary">Submit</button>
 					</div>
 			        </div>
 			</form>

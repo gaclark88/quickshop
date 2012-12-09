@@ -115,7 +115,7 @@
 			        </div>
 			        <div class="control-group">
 					<div class="controls">
-					        <button type="submit" class="btn">Log in</button>
+					        <button type="submit" class="btn btn-primary">Log in</button>
 					</div>
 			        </div>
 				<div class="control-group">
