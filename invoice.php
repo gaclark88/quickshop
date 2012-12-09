@@ -151,21 +151,17 @@
 
 			echo("<font size = 5><u><b>Invoice</u/b><br><br></font>");
 
-			echo("<label>Shipping Address: <br>");		
-			for($i = 0; $i < 5; $i++)
-			{
-				echo($order['shipping'.$labels[$i]] . ", ");
-			}
-			echo("USA, " . $order['shippingPhone']);
-			echo("</label><br>");
+			echo("Stored Address: <br>");
+			
+			$query = ("SELECT shipping_name, shipping_address, shipping_city, shipping_zip, phone, billing_address, billing_city, billing_zip, billing_state, shipping_state FROM `orders` WHERE id =" . $curU );
+			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
+			$row = mysql_fetch_array($result);
 
-			echo("<label>Billing Address: <br>");
-			for($i = 0; $i < 5; $i++)
-			{
-				echo($order['billing'.$labels[$i]] . ", ");
-			}
-			echo("USA, " . $order['billingPhone']);
-			echo("</label><br><br><br>");
+			echo("<b>" . $row[0] . " " . $row[1] . ", " . $row[2] . ", " . $row[3] . ", " . $row[10] . ", " . $row[4]. ", " . $row[5] . "<b><br>" );
+
+
+			echo("<form method = \"post\" action =\"useAddress.php\"><input type=\"submit\" value=\"Use this address\"></form><br><br>");
+
 
 			echo("<font size = 3><b>Order</b><br><br></font>");
 
@@ -174,16 +170,7 @@
 			$size = 0;
 			$total =0;
 
-			$query = ("SELECT id FROM `orders` WHERE account_id='$curU'");
-			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-			$row = mysql_fetch_array($result);
-						
-			while($row = mysql_fetch_array($result))
-			{
-				$order = $row[0];
-			}
-
-			$query = ("SELECT product_id FROM `order_products` WHERE order_id =  '$order'");
+			$query = ("SELECT product_id FROM `order_products` WHERE order_id =  '$order_id'");
 			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
 			
 			while($row = mysql_fetch_array($result))
@@ -192,7 +179,7 @@
 				$size++;
 			}
 			
-			echo("Your order number is : " . $order . "<br><br>");	
+			//echo("Your order number is : " . $order_id . "<br><br>");	
 
 			if($size == 0)
 			{
@@ -202,7 +189,7 @@
 			{
 				for($i = 0; $i < $size; $i++)
 				{
-					$query = ("SELECT amount FROM `order_products` WHERE order_id = " . $order);
+					$query = ("SELECT amount FROM `order_products` WHERE order_id = " . $order_id);
 					$result = mysql_query($query, $con) or die("Could not execute query '$query'");
 					$row = mysql_fetch_array($result);
 
@@ -216,30 +203,18 @@
 					$price = $row[1];
 					$quanityLeft = $row[2];				
 
-					if($quanityLeft == 0 or $quanityLeft < $quanity)
-					{
-						echo("
-							<fieldset>
-						     
-							<label>$name<br>");
-							echo("<font color=\"red\">Quanity No longer available, excluded from checkout</font>");
-					}
-					else
-					{
-						if($quanity <= $quanityLeft)
-						{
-							echo("
-							<fieldset>
-						     
-							<label>$name<br>");
 
-							echo("Price: $" . $price . " <br>");
+					echo("
+					<fieldset>
+						     
+					<label>$name<br>");
 
-							$quanities[$i] = "Quanity: " . $quanity;
-							echo($quanities[$i]);
-							$total = $total + $quanity * $price;
-						}
-					}
+					echo("Price: $" . $price . " <br>");
+
+					$quanities[$i] = "Quanity: " . $quanity;
+					echo($quanities[$i]);
+					$total = $total + $quanity * $price;
+	
 					echo("</fieldset><hr><br>");
 				}
 			}
