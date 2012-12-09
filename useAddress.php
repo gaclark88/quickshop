@@ -1,8 +1,15 @@
 <?php include "session.php"; ?>
 <?php 
 
+/*
+*useAddress.php
+*autofills the address session variables with the ones stored in the DB
+*/
+
+//redirect
 header("location: checkout.php");
 
+//passed in variable
 $curU = $_SESSION['accountId'];
 $_SESSION['progress'] =  0;
 
@@ -27,8 +34,15 @@ $result = mysql_query($query, $con) or die("Could not execute query '$query'");
 $row = mysql_fetch_array($result);
 
 
+/*
+Set shipping and billing info stored into the session varriables
+*/
+
+
+
 $_SESSION["shipping".$labels[0]] = $row[0] . " " . $row[1];
 $_SESSION["billing".$labels[0]] =  $row[0] . " " . $row[1];	
+
 
 for($i = 2; $i < 6; $i++)
 {
