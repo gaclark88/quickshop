@@ -559,7 +559,9 @@
 			$cart[$size] = $row[0];
 			$size++;
       		}
-	
+		
+		echo("Your order number is : " . $order . "<br><br>");	
+
 		if($size == 0)
 		{
 			echo("Cart Is Empty");
