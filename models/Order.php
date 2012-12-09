@@ -15,9 +15,10 @@ class Order extends Model {
 			"billing_state",
 			"billing_zip",
 			"status",
-			"credit_4",
+			"credit_num",
 			"subtotal",
 			"shipping_price",
+			"tracking_num",
 			"total_amount"
 			);
 

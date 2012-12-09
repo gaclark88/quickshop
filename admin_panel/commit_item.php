@@ -1,6 +1,21 @@
+<?php include '../session.php'; ?>
+
+<html>
+<head>
+
+<?php include 'header_template.php' ?>
+
+<title>Add New Item</title>
+
+</head>
+
+<body>
+
+<?php include 'body_template.php'?>
+
 <?php
 
-include 'models/Product.php';
+include '../models/Product.php';
 
 $conn = new DatabaseLink();
 
@@ -20,21 +35,35 @@ $img_fields = array("filename" => $_FILES['img']['name'],
 					"product_id" => $product->id,
 					"file_data" => file_get_contents($_FILES["img"]["tmp_name"]));
 
+echo "<div class = 'row'><div class = 'span8'>";
+					
 if($change_flag != 'true'){
 	//echo "I better not be here";
+
+	
 	$product = new Product($product_fields);
-	$product->dbInsert($conn);
+	$prod_status = $product->dbInsert($conn);
 						
-	$image = new Image($img_fields);
-	$image->fields['product_id'] = $product->id;
-	$image->dbInsert($conn);
-
-	$product->fields['image_id'] = $image->id;
-	$product->dbUpdate($conn);
-	$conn->disconnect();
-
-	echo "<br><p>Product has been successfully added to database!</p>";
-	echo "<br><a href = 'admin_panel.php'>Go Back to Admin Panel</a>";
+	
+	if($prod_status){
+		
+		$image = new Image($img_fields);
+		$image->fields['product_id'] = $product->id;
+		$image_status = $image->dbInsert($conn);
+		
+		if($image_status){
+			
+			$product->fields['image_id'] = $image->id;
+			$product->dbUpdate($conn);
+			
+			echo "<div class='alert alert-success'><h5>Item has been successfully added!<h5></div>";
+		}
+		
+	}
+	
+	else{
+		echo "<div class='alert alert-error'><h5>Item could not be added. Please try again <h5></div>";
+	}
 }
 
 else{
@@ -43,9 +72,10 @@ else{
 	
 	//query returns nothing if image is not there, and you try to edit item with new image
 	$image = $product->dbGetImage($conn);
-	
+
 	//if image is not there, create it
-	if(!$image->id && $img_fields['filename']){
+	if(!$image->id && !$img_fields['filename']){
+
 		$image = new Image($img_fields);
 		$image->fields['product_id'] = $product->id;
 		$image->dbInsert($conn);
@@ -55,6 +85,7 @@ else{
 	}
 	//else edit its fields
 	else{
+		
 		if($img_fields['filename']){
 
 			foreach($img_fields as $field => $value){
@@ -68,12 +99,16 @@ else{
 	}
 
 	$product->dbUpdate($conn);
-	
-	
 	$image->fields['product_id'] = $product->id;
+
 	$image->dbUpdate($conn);
 
-	echo "<br><p>Product has been successfully edited!</p>";
-	echo "<br><a href = 'admin_panel.php'>Go Back to Admin Panel</a>";
+	echo "<div class='alert alert-success'><h5>Item has been successfully edited!<h5></div>";
 }
+	echo "</div></div>";
+	$conn->disconnect();
 ?>
+
+	<?php include 'end_template.php'?>
+	</body>
+</html>

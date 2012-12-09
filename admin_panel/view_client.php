@@ -1,14 +1,21 @@
+<?php include '../session.php'; ?>
+
 <html>
-<header>
+<head>
+
+<?php include 'header_template.php' ?>
+
 <title>Client Info</title>
-</header>
+
+</head>
 
 <body>
 
+<?php include 'body_template.php'?>
 
 <?php>
 
-include 'models/Account.php';
+include '../models/Account.php';
 
 $account_id = $_POST['id'];
 	
@@ -20,8 +27,8 @@ unset($account->fields['password']);
 
 ?>
 
-<table>
-
+<table class = 'table table-bordered'>
+<tbody>
 <?php
  
 foreach($account->fields as $key => $value){
@@ -32,12 +39,14 @@ foreach($account->fields as $key => $value){
 }
 
 ?>
-
+</tbody>
 </table>
 
 <?php
 $conn->disconnect();
 ?>
+
+<?php include 'end_template.php'?>
 
 </body>
 </html>
