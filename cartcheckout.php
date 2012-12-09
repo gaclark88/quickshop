@@ -96,7 +96,7 @@
 
 		echo("Please fill in Shipping and Billing information, if Billing address is the same as Shipping address, click the checkbox above next.<br><br>");
 	
-		if($row[0] != "")
+		if($row[0] != "" and $row[1] != "" and $row[2] != "" and $row[3] != "" and $row[10] != "" and $row[4] != "" and $row[5])
 		{
 			echo("Stored Address: <br>");
 			
