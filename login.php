@@ -55,7 +55,7 @@
 					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->fields['first_name'] . "!</a>");
 				}
 			    ?>	
-                            <a class="brand" href="#">My Cart</a>
+                            <a class="brand" href="mycart.php">My Cart</a>
                         </ul>
                         </p>
                     </div>
@@ -115,7 +115,7 @@
 			        </div>
 			        <div class="control-group">
 					<div class="controls">
-					        <button type="submit" class="btn">Log in</button>
+					        <button type="submit" class="btn btn-primary">Log in</button>
 					</div>
 			        </div>
 				<div class="control-group">

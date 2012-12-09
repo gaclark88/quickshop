@@ -551,7 +551,7 @@
 			$order = $row[0];
 		}
 
-		$query = ("SELECT product_id FROM `order_products` WHERE order_id = " . $order);
+		$query = ("SELECT product_id FROM `order_products` WHERE order_id =  '$order'");
 		$result = mysql_query($query, $con) or die("Could not execute query '$query'");
 		
 		while($row = mysql_fetch_array($result))
