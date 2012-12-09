@@ -14,7 +14,7 @@ $_SESSION['progress'] =  25;
 
 //variables
 $labels = array("name", "number", "date", "code");
-$minimum = array(2, 16, 4, 3); 
+$minimum = array(2, 12, 4, 3); 
 
 /*
 checks if name, number, date, and code are all within their limits.
@@ -28,7 +28,7 @@ if( strlen( $_POST[$labels[0]] ) >= $minimum[0] and count(explode(" ", $_POST[$l
 	$_SESSION['progress'] +=  5;
 }
 
-if(strlen($_POST[$labels[1]]) == $minimum[1] and is_numeric($_POST[$labels[1]]))
+if(strlen($_POST[$labels[1]]) >= $minimum[1] and strlen($_POST[$labels[1]]) <= 16 and is_numeric($_POST[$labels[1]]))
 {
 	
 	$_SESSION["credit".$labels[1]] = $_POST[$labels[1]];

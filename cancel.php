@@ -13,12 +13,11 @@
 	$query = "";
 
 	while($row = mysql_fetch_assoc($orders_rows)) {
+		echo "test";
 		/* Fetch categories to list in the sidebar */
-		$query = ("DELETE FROM `orders` WHERE id=" . $row['id']);
+		$query = ("UPDATE `orders` SET status=4 WHERE id=" . $row['id']);
 		mysql_query($query, $con) or die("Could not execute query '$query'");
-		$query = ("DELETE FROM `client_orders` WHERE id=" . $row['id']);
-		mysql_query($query, $con) or die("Could not execute query '$query'");
-		$query = ("DELETE FROM `order_products` WHERE order_id=" . $row['id']);
+		$query = ("UPDATE `order_products` SET status=4 WHERE order_id=" . $row['id']);
 		mysql_query($query, $con) or die("Could not execute query '$query'");
 	}
 

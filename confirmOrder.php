@@ -196,9 +196,6 @@ for($i = 0; $i < $size; $i++)
 
 		$query = ("DELETE FROM `cart_items` WHERE account_id=   '$curU' AND product_id=" . $cart[$i]  );
 		$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-
-
-
 		
 	}				
 
