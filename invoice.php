@@ -104,7 +104,7 @@
 
 			?>
 
-			<div class = 'row'><div class = 'span8'>
+			<div class = 'row'><div class = 'span10'>
 			<h4>Invoice</h4>
 			<table class = 'table table-bordered'>
 			<?php
@@ -143,120 +143,8 @@
 			<?php
 			$conn->disconnect();
 			?>
+			<h4><a href="vieworders.php">Back</a></h4>
 		
-			<!--
-			<?php include_once './models/Model.php';
-			$row = Model::dbGetAllInList("orders", "id", array($id), $conn);
-			$order = mysql_fetch_assoc($row);
-
-			echo("<font size = 5><u><b>Invoice</u/b><br><br></font>");
-
-			echo("<label>Shipping Address: <br>");		
-			for($i = 0; $i < 5; $i++)
-			{
-				echo($order['shipping'.$labels[$i]] . ", ");
-			}
-			echo("USA, " . $order['shippingPhone']);
-			echo("</label><br>");
-
-			echo("<label>Billing Address: <br>");
-			for($i = 0; $i < 5; $i++)
-			{
-				echo($order['billing'.$labels[$i]] . ", ");
-			}
-			echo("USA, " . $order['billingPhone']);
-			echo("</label><br><br><br>");
-
-			echo("<font size = 3><b>Order</b><br><br></font>");
-
-			$cart = array();
-			$quanities = array();
-			$size = 0;
-			$total =0;
-
-			$query = ("SELECT id FROM `orders` WHERE account_id='$curU'");
-			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-			$row = mysql_fetch_array($result);
-						
-			while($row = mysql_fetch_array($result))
-			{
-				$order = $row[0];
-			}
-
-			$query = ("SELECT product_id FROM `order_products` WHERE order_id =  '$order'");
-			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-			
-			while($row = mysql_fetch_array($result))
-			{
-				$cart[$size] = $row[0];
-				$size++;
-			}
-			
-			echo("Your order number is : " . $order . "<br><br>");	
-
-			if($size == 0)
-			{
-				echo("Cart Is Empty");
-			}
-			else
-			{
-				for($i = 0; $i < $size; $i++)
-				{
-					$query = ("SELECT amount FROM `order_products` WHERE order_id = " . $order);
-					$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-					$row = mysql_fetch_array($result);
-
-					$quanity = $row[0];
-
-					$query = ("SELECT name, price, inventory FROM `products` WHERE id=" . $cart[$i] );
-					$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-					$row = mysql_fetch_array($result);
-					
-					$name = $row[0];
-					$price = $row[1];
-					$quanityLeft = $row[2];				
-
-					if($quanityLeft == 0 or $quanityLeft < $quanity)
-					{
-						echo("
-							<fieldset>
-						     
-							<label>$name<br>");
-							echo("<font color=\"red\">Quanity No longer available, excluded from checkout</font>");
-					}
-					else
-					{
-						if($quanity <= $quanityLeft)
-						{
-							echo("
-							<fieldset>
-						     
-							<label>$name<br>");
-
-							echo("Price: $" . $price . " <br>");
-
-							$quanities[$i] = "Quanity: " . $quanity;
-							echo($quanities[$i]);
-							$total = $total + $quanity * $price;
-						}
-					}
-					echo("</fieldset><hr><br>");
-				}
-			}
-
-			if($total > 0)
-			{
-				$tax = round($total * .06, 2);
-
-				echo("Subtotal: $" . $total ."<br>");
-				echo("Shipping and Handling: $" . $order['shipping'] . "<br>");
-
-				echo("Tax: $" .  $tax . "<br>");
-				$total = $total + $tax + $order['shipping'];
-				echo("Total: " . $total . "<br><br>");
-		
-			}
-			?> -->
                     </div><!--End of Main Section-->
                 </div><!--Span-->
             </div><!--End of row containing sidebar and main section-->
