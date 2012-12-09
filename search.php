@@ -195,7 +195,7 @@
                                     echo("<font size=\"4\" color=\"green\"> In Stock </font>");
                                 }
                                 /* Display a button that links to the product page */
-                                echo("<p style=\"text-align:right\"><a href=\"productPage.php?product_id=" . $row[0] . "\"><button class=\"btn btn-large\" type=\"button\">View Product</button></a></p>");
+                                echo("<p style=\"text-align:right\"><a href=\"productPage.php?product_id=" . $row[0] . "\"><button class=\"btn btn-primary\" type=\"button\">View Product</button></a></p>");
                                 /* Breakline between products */
                                 echo("<hr>");
                             }
