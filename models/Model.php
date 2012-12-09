@@ -51,7 +51,7 @@ class Model {
 
 		//echo $query;
 
-		$dbLink->queryDB($query, $_SERVER["SCRIPT_NAME"]);
+		return $dbLink->queryDB($query, $_SERVER["SCRIPT_NAME"]);
 		
 	}
 
@@ -80,12 +80,16 @@ class Model {
 				)
 			) . "'); ";
 
-		//echo $queryString;
+		// echo $queryString;
 
 		$result =  $dbLink->queryDB($queryString, $_SERVER["SCRIPT_NAME"]);
 		if (!$result) { return $result; }
-
-		$this->id = mysql_insert_id($dbLink->connection);
+		
+		//return true if successfully edited
+		else{
+			$this->id = mysql_insert_id($dbLink->connection);
+			return $result;
+		}
 	}
 	
 	/* delete from db based on some value */

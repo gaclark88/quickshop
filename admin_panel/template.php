@@ -1,4 +1,3 @@
-<?php include "session.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +5,6 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <title>Front Page</title>
 
     <!--Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -55,7 +53,7 @@
 					echo("<a class=\"brand\" href=\"accountmgr.php\">Hello, " . $a->fields['first_name'] . "!</a>");
 				}
 			    ?>	
-                            <a class="brand" href="mycart.php">My Cart</a>
+                            <a class="brand" href="#">My Cart</a>
                         </ul>
                         </p>
                     </div>
@@ -92,38 +90,7 @@
                 <div class="span9">
                     <div class="container-main">
 
-			<?php 
-			if( isset($_GET['error']) ) 
-				echo("<p style=\"color:red\">Invalid password</p>");
-			else if ( isset($_GET['noemail']) )
-				echo("<p style=\"color:red\">Email not found in database</p>");
-			?>
-
-			<h3>Log in</h3>
-			<form class="form-horizontal" action="accounts.php" method="post" name="login">
-				<div class="control-group">
-			      		<label class="control-label" for="inputEmail">Email</label>
-						<div class="controls">
-							<input type="text" name="inputEmail" placeholder="Email">
-						</div>
-			        </div>
-				<div class="control-group">
-			        	<label class="control-label" for="inputPassword">Password</label>
-						<div class="controls">
-						      <input type="password" name="inputPassword" placeholder="Password">
-					        </div>
-			        </div>
-			        <div class="control-group">
-					<div class="controls">
-					        <button type="submit" class="btn btn-primary">Log in</button>
-					</div>
-			        </div>
-				<div class="control-group">
-					<div class="controls">
-						<a href="registerform.php">Don't have an account? Register here</a>
-					</div>
-				<div>
-			</form>
+                        <!--YOUR CODE HERE - YOU CAN ERASE THE FILLER BELOW -->
 
 
                     </div><!--End of Main Section-->
