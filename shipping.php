@@ -92,6 +92,7 @@
                 <div class="span9">
                     <div class="container-main">
 			<h3>Update shipping/billing address</h3>
+			<!-- Shipping information form -->
 			<form class="form-horizontal" action="address.php" method="post" name="register">
 				<div class="control-group">
 			      		<label class="control-label" for="address">Shipping Address</label>

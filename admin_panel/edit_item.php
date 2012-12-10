@@ -1,4 +1,4 @@
-<?php include '../session.php'; ?>
+<?php include 'admin_session.php'; ?>
 
 <html>
 	<head>

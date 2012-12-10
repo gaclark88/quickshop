@@ -1,4 +1,5 @@
-<?php include '../session.php'; ?>
+<?php include 'admin_session.php'; ?>
+
 
 <html>
 	<head>
@@ -30,7 +31,7 @@ $products = Product::dbGetAll("products_details", $conn);
 <th>Product Id #</th>
 <th>Product Name</th>
 <th>Category</th>
-<th>Price per Item</th>
+<th>Price/Each</th>
 <th>Quantity Available</th>
 
 </tr>

@@ -92,17 +92,22 @@
                 <div class="span9">
                     <div class="container-main">
 			<?php include_once './models/Model.php';
+				//connect to database and get all the orders that coorespond
+				//to the account id that is logged in
 				$db = new DatabaseLink();
 				$rows = Model::dbGetBy("account_id", $_SESSION['accountId'], 'orders', $db);
 
+				//make an array of orders linked to the account
 				$account_orders = array();
 				while ($row = mysql_fetch_assoc($rows)) 
 					array_push($account_orders, $row['id']);
 
+				//get those orders
 				$orders_rows = Model::dbGetAllInList("client_orders", "id", $account_orders, $db);
 			?>
 			<h3>Order History</h3>
 			<p>Orders can be cancelled only if they haven't been processed yet</p>
+			<!-- Table with order info -->
 			<table border = 1>
 			<tr>
 			<th width = 75>Order #</th>
@@ -119,22 +124,25 @@
 			
 			<?php
 
+			//loop through each order and output the corerct information to each
+			//cell in the table
 			while($row = mysql_fetch_assoc($orders_rows)){
-					
-				echo "<tr>";
-				echo "<td align = 'center'><a href=\"invoice.php?order_id=$row[id]\">".$row[id]."</a></td>";
-				echo "<td align = 'center'>".$row['status']."</td>";
-				echo "<td align = 'center'>".$row['quantity']."</td>";
-				echo "<td align = 'center'>".$row['shipping_name']."</td>";
-				echo "<td align = 'center'>".$row['shipping_address']."</td>";
-				echo "<td align = 'center'>".$row['shipping_city']."</td>";
-				echo "<td align = 'center'>".$row['shipping_state']."</td>";
-				echo "<td align = 'center'>".$row['shipping_zip']."</td>";
-				if ($row['status'] == "Submitted")
-					echo "<td align = 'center'><input type=\"checkbox\" name=\"orders[]\" value=\"" . $row['id'] . "\" /></td>";
-				else
-					echo "<td />";
-				echo "</tr>";
+				if ($row['status'] != 'Cancelled') {	
+					echo "<tr>";
+					echo "<td align = 'center'><a href=\"invoice.php?order_id=$row[id]\">".$row[id]."</a></td>";
+					echo "<td align = 'center'>".$row['status']."</td>";
+					echo "<td align = 'center'>".$row['quantity']."</td>";
+					echo "<td align = 'center'>".$row['shipping_name']."</td>";
+					echo "<td align = 'center'>".$row['shipping_address']."</td>";
+					echo "<td align = 'center'>".$row['shipping_city']."</td>";
+					echo "<td align = 'center'>".$row['shipping_state']."</td>";
+					echo "<td align = 'center'>".$row['shipping_zip']."</td>";
+					if ($row['status'] == "Submitted")
+						echo "<td align = 'center'><input type=\"radio\" name=\"orders[]\" value=\"" . $row['id'] . "\" /></td>";
+					else
+						echo "<td />";
+					echo "</tr>";
+				}
 			}
 			?>
 

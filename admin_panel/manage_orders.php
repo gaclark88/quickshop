@@ -1,4 +1,4 @@
-<?php include '../session.php'; ?>
+<?php include 'admin_session.php'; ?>
 
 <html>
 	<head>
@@ -18,7 +18,7 @@ $conn = new DatabaseLink();
 
 $rows = Model::dbGetAll("client_orders", $conn);
 ?>
-
+<div class = 'row'><div class = 'span12'>
 <table class = 'table table-bordered table-hover'>
 <thead>
 <tr>
@@ -61,7 +61,8 @@ $conn->disconnect();
 </table>
 <br><button type = "submit"  class = "btn btn-primary">Process Selected Orders</button>
 </form>
-
+</div>
+</div>
 
 	<?php include 'end_template.php'?>
 	</body>

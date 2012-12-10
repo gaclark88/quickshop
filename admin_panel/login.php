@@ -1,7 +1,7 @@
-<?php include '../session.php';
+<?php include 'admin_session.php';
 include '../models/Admin.php';
 $conn = new DatabaseLink();
-$a = Admin::dbGet($_SESSION['accountId'], $conn);
+$a = Admin::dbGet($_SESSION['admin_id'], $conn);
 if($a) {
 	echo "<script>location.href='index.php'</script>";
 }

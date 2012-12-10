@@ -38,7 +38,7 @@
 	//if size is 0, the cart is empty, else display cart
 	if($size == 0)
 	{
-		echo("Cart Is Empty");
+		echo("<h4>Cart Is Empty</h4>");
 	}
 	else
 	{

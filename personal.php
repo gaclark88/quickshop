@@ -93,12 +93,15 @@
                     <div class="container-main">
 
 			<?php
+			//make sure the passwords match
 			if ( isset($_GET['passerr']) )
 				echo("<p style=\"color:red\">Passwords must match</p>");
+			//make sure the email is unique
 			else if ( isset($_GET['emailerr']) )
 				echo("<p style=\"color:red\">Email already exists</p>");
 			?>
 			<h3>Update personal information</h3>
+			<!-- update personal info form -->
 			<form class="form-horizontal" action="info.php" method="post" name="register">
 				<div class="control-group">
 			      		<label class="control-label" for="fname">First Name</label>

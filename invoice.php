@@ -104,11 +104,10 @@
 
 			?>
 
-			<div class = 'row'><div class = 'span8'>
-			<h4>Invoice</h4>
+			<div class = 'row'><div class = 'span10'>
+			<h4><u>Invoice</u></h4>
 			<table class = 'table table-bordered'>
 			<?php
-				
 				echo "<tr><td><strong>Order # :</strong></td><td> $order[id] </td></tr>";
 				echo "<tr><td><strong>Status  :</strong></td><td> $order[status] </td></tr>";
 				echo "</table>";
@@ -134,7 +133,6 @@
 				echo "<tr><td><strong>Shipping State :</strong> </td><td> $order[shipping_state] </td></tr>";
 				echo "<tr><td><strong>Shipping Zip:</strong> </td><td> $order[shipping_zip] </td></tr>";
 				echo "</table></td></tr>";
-				
 			?>
 
 			</div>
@@ -143,95 +141,7 @@
 			<?php
 			$conn->disconnect();
 			?>
-		
-			<!--
-			<?php include_once './models/Model.php';
-			$row = Model::dbGetAllInList("orders", "id", array($id), $conn);
-			$order = mysql_fetch_assoc($row);
-
-			echo("<font size = 5><u><b>Invoice</u/b><br><br></font>");
-
-			echo("Stored Address: <br>");
-			
-			$query = ("SELECT shipping_name, shipping_address, shipping_city, shipping_zip, phone, billing_address, billing_city, billing_zip, billing_state, shipping_state FROM `orders` WHERE id =" . $curU );
-			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-			$row = mysql_fetch_array($result);
-
-			echo("<b>" . $row[0] . " " . $row[1] . ", " . $row[2] . ", " . $row[3] . ", " . $row[10] . ", " . $row[4]. ", " . $row[5] . "<b><br>" );
-
-
-			echo("<form method = \"post\" action =\"useAddress.php\"><input type=\"submit\" value=\"Use this address\"></form><br><br>");
-
-
-			echo("<font size = 3><b>Order</b><br><br></font>");
-
-			$cart = array();
-			$quanities = array();
-			$size = 0;
-			$total =0;
-
-			$query = ("SELECT product_id FROM `order_products` WHERE order_id =  '$order_id'");
-			$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-			
-			while($row = mysql_fetch_array($result))
-			{
-				$cart[$size] = $row[0];
-				$size++;
-			}
-			
-			//echo("Your order number is : " . $order_id . "<br><br>");	
-
-			if($size == 0)
-			{
-				echo("Cart Is Empty");
-			}
-			else
-			{
-				for($i = 0; $i < $size; $i++)
-				{
-					$query = ("SELECT amount FROM `order_products` WHERE order_id = " . $order_id);
-					$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-					$row = mysql_fetch_array($result);
-
-					$quanity = $row[0];
-
-					$query = ("SELECT name, price, inventory FROM `products` WHERE id=" . $cart[$i] );
-					$result = mysql_query($query, $con) or die("Could not execute query '$query'");
-					$row = mysql_fetch_array($result);
-					
-					$name = $row[0];
-					$price = $row[1];
-					$quanityLeft = $row[2];				
-
-
-					echo("
-					<fieldset>
-						     
-					<label>$name<br>");
-
-					echo("Price: $" . $price . " <br>");
-
-					$quanities[$i] = "Quanity: " . $quanity;
-					echo($quanities[$i]);
-					$total = $total + $quanity * $price;
-	
-					echo("</fieldset><hr><br>");
-				}
-			}
-
-			if($total > 0)
-			{
-				$tax = round($total * .06, 2);
-
-				echo("Subtotal: $" . $total ."<br>");
-				echo("Shipping and Handling: $" . $order['shipping'] . "<br>");
-
-				echo("Tax: $" .  $tax . "<br>");
-				$total = $total + $tax + $order['shipping'];
-				echo("Total: " . $total . "<br><br>");
-		
-			}
-			?> -->
+			<h4><a class="btn btn-primary" href="vieworders.php">&lt Back</a></h4>
                     </div><!--End of Main Section-->
                 </div><!--Span-->
             </div><!--End of row containing sidebar and main section-->

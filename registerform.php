@@ -93,12 +93,15 @@
                     <div class="container-main">
 
 			<?php
+			//a get var is set if there is a password or email error
 			if ( isset($_GET['passerr']) )
 				echo("<p style=\"color:red\">Passwords must match</p>");
 			else if ( isset($_GET['emailerr']) )
 				echo("<p style=\"color:red\">Email already exists</p>");
 			?>
 			<h3>Register</h3>
+			
+			<!-- registration form -->
 			<form class="form-horizontal" action="register.php" method="post" name="register">
 				<div class="control-group">
 			      		<label class="control-label" for="fname">First Name</label>

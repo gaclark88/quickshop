@@ -91,13 +91,20 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-			<h3><u>Account Manager</u></h3><br>
-			<h3><a class="btn btn-link" href="shipping.php">Update shipping/billing address</a></h3><br>
-			<h3><a class="btn btn-link" href="vieworders.php">View orders</a></h3><br>
-			<h3><a class="btn btn-link" href="personal.php">Update personal information</a></h3><br>
-			<h3><a class="btn btn-link" href="changepass.php">Change password</a></h3><br>
-			<h3><a class="btn btn-link" href="logout.php">Log out</a></h3><br>
-			<h3><a class="btn btn-link" href="delete.php">Delete account</a></h3>	
+						<div class = 'row offset4'>
+							<div class = 'span8'>
+								<h3><u>Account Manager</u></h3><br>
+							</div>
+						</div>
+			<!-- Links leading to various account functions -->
+			<div class="row offset2"><div class="span8">
+			<p><a class="btn-large btn-block btn-primary" align="center" href="vieworders.php">View orders</a></p>
+			<p><a class="btn-large btn-block btn-primary" align="center" href="shipping.php">Update shipping/billing address</a></p>
+			<p><a class="btn-large btn-block btn-primary" align="center" href="personal.php">Update personal information</a></p>
+			<p><a class="btn-large btn-block btn-primary" align="center" href="changepass.php">Change password</a></p>
+			<p><a class="btn-large btn-block btn-primary" align="center" href="delete.php">Delete account</a></p>
+			<p><a class="btn-large btn-block btn-primary" align="center" href="logout.php">Log out</a></p>
+			</div></div>
 
                     </div><!--End of Main Section-->
                 </div><!--Span-->

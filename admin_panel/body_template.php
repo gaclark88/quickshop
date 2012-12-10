@@ -15,7 +15,7 @@
                         <ul class="nav pull-right">
 			    <?php include '../models/Admin.php';
 				$conn = new DatabaseLink();
-				$a = Admin::dbGet($_SESSION['accountId'], $conn);
+				$a = Admin::dbGet($_SESSION['admin_id'], $conn);
 				if ($a == false) {
 					echo "<script>location.href='login.php'</script>";
 					}

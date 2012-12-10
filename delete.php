@@ -93,10 +93,11 @@
                     <div class="container-main">
 
 		    <h3>Are you sure you want to delete your account?</h3>
-		    <p>This cannot be undone</p>
+		    <p>This cannot be undone</p><br><br>
 		    <p>
-			<a class="btn btn-large" type="btn btn-primary" href="del.php">Yes, delete my account forever</a>
-			<a class="btn btn-large" type="btn btn-primary" href="accountmgr.php">No, I want to keep my account</a>
+			<!-- buttons used to confirm deletion of account -->
+			<a class="btn btn-large btn-danger" href="del.php">Yes, delete my account forever</a>
+			<a class="btn btn-large btn-primary" href="accountmgr.php">No, I want to keep my account</a>
 		    </p>
                     </div><!--End of Main Section-->
                 </div><!--Span-->

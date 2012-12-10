@@ -93,12 +93,15 @@
                     <div class="container-main">
 
 			<?php
+			//make sure the current password is correct
 			if ( isset($_GET['error']) )
 				echo("<p style=\"color:red\">Invalid password</p>");
+			//make sure the paswords match
 			else if ( isset($_GET['passerr']) )
 				echo("<p style=\"color:red\">Passwords must match</p>");
 			?>
 			<h3>Change password</h3>
+			<!-- change password form -->
 			<form class="form-horizontal" action="pass.php" method="post" name="register">
 				<div class="control-group">
 			      		<label class="control-label" for="oldpass">Current password</label>
