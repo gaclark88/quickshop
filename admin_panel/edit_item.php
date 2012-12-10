@@ -21,6 +21,14 @@
 
 $product_id = $_POST['id'];
 
+if(!$product_id){
+	echo "<div class = 'row'><div class = 'span10 offset4'>";
+		echo "<div class='alert alert-error'><h5>Product was not selected. Please select one product from a list.<h5></div>";
+	echo "</div>";
+}
+
+else{
+
 include '../models/Product.php';
 include '../models/Category.php';
 
@@ -83,10 +91,12 @@ echo "<input type = 'hidden' name = 'product_id' value =".$product_id." >";
 	echo "</div>";
 	echo "</div>";
 	
-
+	echo "<button type = 'submit'  class = 'btn btn-primary offset3'>Save changes</button>";
+	echo "</form>";
+	$conn->disconnect();
+}
 ?>
 
-	<button type = "submit"  class = "btn btn-primary offset3">Save changes</button>
-	</form>
+	
 </body>
 </html>

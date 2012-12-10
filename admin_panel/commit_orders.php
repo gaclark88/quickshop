@@ -42,7 +42,9 @@ foreach($data as $key => $row){
 	//$order_status[$order] = $status;
 	$order = new Order(array("status" => $status));
 	$order->id = $order_id;
-	
+	if($tracking_nums[$key] == ''){
+		$tracking_nums[$key] = 'Not available';
+	}
 	$order->fields['tracking_num'] = $tracking_nums[$key];
 	//echo $order->id . "=>" . $order->fields['status_id'] . "<br>";
 	$status = $order->dbUpdate($conn);

@@ -16,7 +16,7 @@
 
 <div class = 'row'><div class = 'span8'>
 
-<form class = 'form-horizontal' method = POST enctype="multipart/form-data" action = 'commit_item.php'  name 'add_product'>
+<form class = 'form-horizontal' method = POST enctype="multipart/form-data" action = 'commit_item.php'  name = 'add_product'>
 	
 	<div class="control-group">
     <label class="control-label" >Product Name</label>
@@ -64,7 +64,7 @@
 	  		<div class="control-group">
     <label class="control-label" >Enter Description Below</label>
     <div class="controls">
-     <textarea cols = 40 rows = 5 name = 'description'  maxLength = 50000></textarea>
+     <textarea cols = 40 rows = 5 name = 'description' maxLength = 50000></textarea>
     </div>
   </div>
 	

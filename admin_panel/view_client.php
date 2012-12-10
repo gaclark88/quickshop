@@ -18,7 +18,13 @@
 include '../models/Account.php';
 
 $account_id = $_POST['id'];
-	
+
+if(!$account_id){
+	echo "<div class = 'row'><div class = 'span6 offset3'>";
+		echo "<div class='alert alert-error'><h5>No client selected. Please select one client from a list.<h5></div>";
+	echo "</div>";
+}
+else{
 $conn = new DatabaseLink();
 
 //find specific client info
@@ -37,7 +43,7 @@ foreach($account->fields as $key => $value){
 	echo "<td>".strtoupper($value)."</td>";
 	echo "</tr>";
 }
-
+}
 ?>
 </tbody>
 </table>

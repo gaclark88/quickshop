@@ -19,6 +19,13 @@ $conn = new DatabaseLink();
 $categories = $_POST['category'];
 $action = $_POST['action'];
 
+if(!$categories){
+	echo "<div class = 'row'><div class = 'span9 offset1'>";
+		echo "<div class='alert alert-error'><h5>No categories were selected. To Edit/Delete please select at least one category from list.<h5></div>";
+	echo "</div>";
+}
+
+else {
 
 //edit categories
 if($action == 'edit'){
@@ -77,6 +84,7 @@ else{
 			echo "</tr>";
 	}
 	echo "</tbody></table>";
+}
 }
 ?>
 

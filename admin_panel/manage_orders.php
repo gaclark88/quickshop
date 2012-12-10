@@ -20,18 +20,18 @@ $rows = Model::dbGetAll("client_orders", $conn);
 ?>
 <div class = 'row'><div class = 'span12'>
 <table class = 'table table-bordered table-hover'>
-<thead>
+
 <tr>
 <th>Process</th>
-<th>Order Id #</th>
+<th>Order #</th>
 <th>Customer</th>
 <th>Cred Card Last 4</th>
 <th>Quantity</th>
-<th>Total Amount</th>
+<th>Total</th>
 <th>Tracking #</th>
 <th>Current Status</th>
 </tr>
-</thead>
+
 <tbody>
 <form name = "process_order" action = "process_orders.php" method = "POST">
 

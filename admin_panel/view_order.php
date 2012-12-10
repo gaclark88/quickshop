@@ -67,7 +67,7 @@ $order = mysql_fetch_assoc($row);
 		echo "</div>";
 	echo "</div>";
 	
-		echo "<div class = 'row'>";
+	echo "<div class = 'row'>";
 		echo "<div class = 'span2'>";
 			echo "<strong>Tracking Number:</strong>";
 		echo "</div>";

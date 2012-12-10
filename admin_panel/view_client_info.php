@@ -35,7 +35,7 @@ $accounts = Account::dbGetBy("", "", $conn);
 <th>Phone #</th>
 </tr>
 </thead>
-<form name = "view_client" action = "view_client.php" method = "POST">
+<form name = "view_client" id = 'view_client' action = "view_client.php" method = "POST">
 <tbody>
 <?php
  

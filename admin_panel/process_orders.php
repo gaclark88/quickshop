@@ -20,6 +20,13 @@ $conn = new DatabaseLink();
 
 $orders = $_POST['order'];
 
+if(!$orders){
+		echo "<div class = 'row'><div class = 'span8 offset2'>";
+		echo "<div class='alert alert-error'><h5>No orders were selected. Please select at least one order to process.<h5></div>";
+		echo "</div>";
+}
+else{
+
 $orders_rows = Model::dbGetAllInList("client_orders", "id", $orders, $conn);
 $status_rows = Model::dbGetAll("order_status", $conn);
 $status_arr = array();
@@ -67,15 +74,15 @@ while($row = mysql_fetch_assoc($orders_rows)){
 	
 	echo "</tr>";
 }
-?>
-</tbody>
-</table>
-<br><button type = "submit"  class = "btn btn-primary">Save changes and update new status</button>
 
-</form>
-</div></div>
 
-<?php
+echo "</tbody>";
+echo "</table>";
+echo "<br><button type = 'submit'  class = 'btn btn-primary'>Save changes and update new status</button>";
+echo "</form>";
+echo "</div></div>";
+
+}
 $conn->disconnect();
 ?>
 

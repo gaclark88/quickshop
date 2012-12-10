@@ -7,6 +7,7 @@
 	<?php include 'header_template.php' ?>
 	
 	<title>Browse Inventory</title>
+	
 	</head>
 	<body>
 	<?php include 'body_template.php'?>
@@ -36,7 +37,7 @@ $products = Product::dbGetAll("products_details", $conn);
 
 </tr>
 
-<form name = "edit_item" action = "edit_item.php" method = "POST">
+<form name = "edit_item" id = 'target' action = "edit_item.php" method = "POST">
 
 <?php
  
