@@ -144,7 +144,7 @@ $order = mysql_fetch_assoc($row);
 		echo "</div>";
 		
 		echo "<div class = 'span1'>";
-			echo "$order[shipping_price]";
+			echo "$$order[shipping_price]";
 		echo "</div>";
 		
 	echo "</div>";

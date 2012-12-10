@@ -91,9 +91,13 @@
                 <!--Start of Main Section-->
                 <div class="span9">
                     <div class="container-main">
-			<h3><u>Account Manager</u></h3><br>
+						<div class = 'row offset4'>
+							<div class = 'span8'>
+								<h3><u>Account Manager</u></h3><br>
+							</div>
+						</div>
 			<!-- Links leading to various account functions -->
-			<div class="row"><div class="span5">
+			<div class="row offset2"><div class="span8">
 			<p><a class="btn-large btn-block btn-primary" align="center" href="vieworders.php">View orders</a></p>
 			<p><a class="btn-large btn-block btn-primary" align="center" href="shipping.php">Update shipping/billing address</a></p>
 			<p><a class="btn-large btn-block btn-primary" align="center" href="personal.php">Update personal information</a></p>

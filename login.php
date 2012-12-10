@@ -94,9 +94,9 @@
 
 			<?php 
 			if( isset($_GET['error']) ) 
-				echo("<p style=\"color:red\">Invalid password</p>");
+				echo("<h4 style=\"color:red\">Invalid password</h4>");
 			else if ( isset($_GET['noemail']) )
-				echo("<p style=\"color:red\">Email not found in database</p>");
+				echo("<h4 style=\"color:red\">Email not found in database</h4>");
 			?>
 
 			<h3>Log in</h3>
