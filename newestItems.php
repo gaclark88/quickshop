@@ -1,4 +1,5 @@
 <?php
+      include_once "./models/DatabaseLink.php";
 /* 
  * newestItems.php is a script that displays the 2 newest items added to the inventory on the front page. 
  *
@@ -9,8 +10,8 @@ $newestId = array();
 $count = 0;
 
 /* Connect to database */
-$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+$db = new DatabaseLink();
+$con = $db->connection;
 $query = "";
 $row = array();
 
@@ -106,6 +107,8 @@ for($i = 0; $i < $count; $i++)
     else{
         echo("<font size=\"3\" color=\"green\"> In Stock </font>");
     }
+
+	$db->disconnect();
 
     ?>
     

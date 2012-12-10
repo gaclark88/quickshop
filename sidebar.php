@@ -1,12 +1,13 @@
 <?php
+	include_once "./models/DatabaseLink.php";
 /* 
  * sidebar.php is a script that generates the category links for the sidebar. The number of links depends on the total number of product categories.
  * 
  */
  
 /* Connect to database */
-$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+$db = new DatabaseLink();
+$con = $db->connection;
 $query = "";
 $row = array();
 

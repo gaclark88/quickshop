@@ -1,4 +1,5 @@
 <?php include "session.php"; ?>
+<?php include_once "./models/DatabaseLink.php"; ?>
 <?php
 
 /*
@@ -6,7 +7,6 @@
 *takes in a product ID and adds it to the users cart
 *
 */
-
 
 /*Redirect*/
 header("location: mycart.php");
@@ -17,8 +17,10 @@ $curU = $_SESSION['accountId'];
 
 
 /* Connect to database */
-$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
+$db = new DatabaseLink();
+$con = $db->connection;
+//$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
+//$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
 $query = "";
 $row = array();
 
@@ -78,7 +80,7 @@ else
 	$result = mysql_query($query, $con) or die("Could not execute query '$query'");
 }
 
-
+$db->disconnect();
 
 
 ?>

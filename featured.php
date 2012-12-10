@@ -1,4 +1,5 @@
 <?php
+      include_once "./models/DatabaseLink.php";
 /* 
  * featured.php is a script that generates a revolving slideshow of 3 random products. The name and price of 
  * each product is also displayed. The image is a link to the corresponding product's product page.
@@ -6,8 +7,8 @@
  */
  
 /* Connect to database */
-$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
+$db = new DatabaseLink();
+$con = $db->connection;
 $query = "";
 $row = array();
 
@@ -65,5 +66,7 @@ for($i = 0; $i <= 2; $i++)
     /* Display the name and price of the product in a caption */
     echo ("<div class=\"carousel-caption\"><p>" . $name .": $" . $price ."</p></div></div>");
 }
+
+$db->disconnect();
 
 ?>

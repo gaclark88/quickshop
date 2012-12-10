@@ -102,8 +102,8 @@
                                 echo("<input type=\"hidden\" name=\"accountId\" value=\"" . $_SESSION['accountId'] . "\"><br>");
                              
                                 /* Connect to database */
-                                $con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-                                $rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+				$db = new DatabaseLink();
+				$con = $db->connection;
                                 $query = "";
                                 $row = array();
                                 
@@ -134,6 +134,8 @@
                                 
                                 /* generates a submit button to submit the review for processing */
                                 echo("<input type=\"submit\" value=\"Submit Review\">");
+				
+				$db->disconnect();
                             }      
                             ?>
 

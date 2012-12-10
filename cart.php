@@ -1,4 +1,5 @@
 <?php include "session.php"; ?>
+<?php include_once "./models/DatabaseLink.php"; ?>
 
 <?php 
 /*
@@ -10,8 +11,8 @@
 /* Connect to database */
 
 	//Connect to the database
-	$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-	$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
+	$db = new DatabaseLink();
+	$con = $db->connection;
 	$query = "";
 	$row = array();
 
@@ -189,6 +190,6 @@
 	
 	}
 
-
+$db->disconnect();
 
 ?>

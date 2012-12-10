@@ -1,5 +1,6 @@
 <?php include "session.php"; ?>
 <?php 
+      include_once "./models/DatabaseLink.php";
 
 /*
 *useAddress.php
@@ -24,8 +25,8 @@ $labels = array(	"Name",
 			"Date", 
 			"Code");
 
-$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
+$db = new DatabaseLink();
+$con = $db->connection;
 $query = "";
 $row = array();
 

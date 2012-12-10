@@ -100,8 +100,8 @@
                         $hitCount = 0;
                         
                         /* Connect to database */
-                        $con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-                        $rs = mysql_select_db("clargr1", $con) or die("Could not connect select $con database");
+                        $db = new DatabaseLink();
+                        $con = $db->connection;
                         $query = "";
                         $row = array();
                         

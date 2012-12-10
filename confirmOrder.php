@@ -1,4 +1,5 @@
 <?php include "session.php"; ?>
+<?php include_once "./models/DatabaseLink.php"; ?>
 <?php 
 /*
 *confirmOrder.php
@@ -8,8 +9,8 @@
 header("location: checkout.php");
 
 //connect to the database
-$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
-$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
+$db = new DatabaseLink();
+$con = $db->connection;
 $query = "";
 $row = array();
 
@@ -200,5 +201,7 @@ for($i = 0; $i < $size; $i++)
 	}				
 
 }
+
+$db->disconnect();
 
 ?>
