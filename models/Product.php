@@ -59,6 +59,9 @@ class Product extends Model {
 		return $products;
 	}	
 	
+	/*
+	 * get the associated image for this product
+	 */
 	function dbGetImage($dbLink) {
 		if ($this->id == NULL || $this->fields['image_id'] == NULL) {
 			

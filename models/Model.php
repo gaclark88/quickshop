@@ -2,6 +2,9 @@
 
 include_once("DatabaseLink.php");
 
+/*
+ * A Class for manipulating models in the db
+ */
 class Model {
 	var $fields = array();
 	var $table;

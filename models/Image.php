@@ -66,6 +66,9 @@ class Image extends Model {
 	}
 	
 	
+	/*
+	 * fetch an image by its product_id
+	 */
 	function dbGetByProductId($product_id, $dbLink) {
 		$rows = parent::dbGetBy("product_id", $product_id, "images", $dbLink);
 		$row = mysql_fetch_assoc($rows);

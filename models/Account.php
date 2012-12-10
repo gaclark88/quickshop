@@ -24,15 +24,24 @@ class Account extends Model {
 		$this->fields["password"] = $this->hashPassword($this->fields["password"]);
 	}
 
+	/*
+	 * hash a password for storage in the db
+	 */
 	function hashPassword($pwd) {
 		return crypt($pwd); 
 	}
 
+	/*
+	 * checks a plain text pwd agaist the hased pwd int he model
+	 */
 	function checkPwd($input) {
 		return crypt($input, $this->fields["password"]) == $this->fields["password"];
 		
 	}
 	
+	/*
+	 * check for a matching email and pwd in the db
+	 */
 	function dbCheckPwd($email, $pwd, $db) {
 		$account = Account::dbGetByEmail($email, $db);
 
@@ -81,6 +90,9 @@ class Account extends Model {
 		return $accounts;
 	}	
 
+	/* 
+	 * fetch an Account by the account email
+	 */
 	function dbGetByEmail($email, $dbLink) {
 		$rows = parent::dbGetBy("email", $email, "accounts", $dbLink);
 
