@@ -1,6 +1,5 @@
 <?php include 'admin_session.php'; ?>
 
-
 <html>
 <head>
 
@@ -15,6 +14,8 @@
 <?php include 'body_template.php'?>
 
 <?php>
+
+//include files and establish db link
 
 include '../models/Category.php';
 
@@ -36,6 +37,7 @@ $rows = Model::dbGetAll("categories", $conn);
 <tbody>
 <?php
 
+//fetch the data from db with category info
 while($row = mysql_fetch_assoc($rows)){
 		
 		$items = Model::dbGetBy("category_id", $row['id'], "products", $conn);
@@ -57,7 +59,7 @@ $conn->disconnect();
 </tbody>
 </table>
 <br>
-
+<!--Specify actions for editing categories-->
 <table class = 'table'>
 <thead>
 <tr><td><h4>Select Actions</h4></td>
@@ -72,7 +74,7 @@ $conn->disconnect();
 </thead>
 </form>
 </table>
-
+<!--Option to create new category-->
 <form name="new_cat" action="new_category.php" method="POST">
 <input type = "hidden" name = "new_category" value = "true">
 <button type = "submit"  class = "btn btn-primary">Add New Category</button>

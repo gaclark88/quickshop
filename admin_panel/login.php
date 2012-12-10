@@ -1,4 +1,6 @@
 <?php include 'admin_session.php';
+//Include files and establish db conn
+//check if admin is logged in and if yes then redirect to admin panel
 include '../models/Admin.php';
 $conn = new DatabaseLink();
 $a = Admin::dbGet($_SESSION['admin_id'], $conn);
@@ -41,6 +43,7 @@ if($a) {
 	<div class = 'row'>	
 		<div class="span6 offset5">
 			<?php 
+			//error checking
 			if( isset($_GET['error']) ) 
 				echo "<div class='alert alert-error'><h5>You entered invalid password<h5></div>";
 			else if ( isset($_GET['noemail']) )

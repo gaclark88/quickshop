@@ -16,7 +16,7 @@
 
 <div class = 'row'><div class = 'span8'>
 
-<form class = 'form-horizontal' method = POST enctype="multipart/form-data" action = 'commit_item.php'  name 'add_product'>
+<form class = 'form-horizontal' method = POST enctype="multipart/form-data" action = 'commit_item.php'  name = 'add_product'>
 	
 	<div class="control-group">
     <label class="control-label" >Product Name</label>
@@ -26,12 +26,15 @@
   </div>
 	
 	<?php
+	
+	//include files and establish db link
 	include '../models/Category.php';
 	
 	$conn = new DatabaseLink();
 	//find all categories 
 	$categories = Category::dbGetAll($conn);
 
+	//create the fields for input
 	echo "<div class='control-group'>";
     echo "<label class='control-label' >Category</label>";
     echo "<div class='controls'>";
@@ -46,7 +49,7 @@
 	
 	$conn->disconnect();
 	?>
-	
+	<!--Create fields-->
 		<div class="control-group">
     <label class="control-label" >Price Per Item</label>
     <div class="controls">
@@ -64,7 +67,7 @@
 	  		<div class="control-group">
     <label class="control-label" >Enter Description Below</label>
     <div class="controls">
-     <textarea cols = 40 rows = 5 name = 'description'  maxLength = 50000></textarea>
+     <textarea cols = 40 rows = 5 name = 'description' maxLength = 50000></textarea>
     </div>
   </div>
 	
