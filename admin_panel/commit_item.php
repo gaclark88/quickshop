@@ -16,20 +16,22 @@
 
 <?php
 
+//include files and establish db link
 include '../models/Product.php';
 
 $conn = new DatabaseLink();
 
+//receive post variables
 $change_flag = $_POST['change_flag'];
 $product_id = $_POST['product_id'];
 
-
+//receive post variables for product data
 $product_fields = array("name" => $_POST['name'],
 			"description" 	=> $_POST['description'],
 			"category_id" 	=> $_POST['category'],
 			"price" 		=> $_POST['price'],
 			"inventory"		=> $_POST['inventory']);
-
+//receive file variables
 $img_fields = array("filename" => $_FILES['img']['name'],
 					"mime_type" => $_FILES['img']['type'],
 					"size" => $_FILES['img']['size'],
@@ -37,13 +39,14 @@ $img_fields = array("filename" => $_FILES['img']['name'],
 					"file_data" => file_get_contents($_FILES["img"]["tmp_name"]));
 
 $prod_err_fields = array();
-					
+
+//error checking			
 foreach($product_fields as $key => $value){
 	if(!$value || (($key == 'price' || $key == 'inventory') && !(is_numeric($value))) || (($key == 'description' || $key == 'name') && (is_numeric($value)))){
 		$prod_err_fields[$key] = $value;
 	}
 }
-
+//error checking
 if((count($prod_err_fields) > 0) || (!$img_fields['file_data'] && !$change_flag)){
 	echo "<div class = 'row'><div class = 'span8 offset1'>";
 	
@@ -61,7 +64,7 @@ if((count($prod_err_fields) > 0) || (!$img_fields['file_data'] && !$change_flag)
 			echo "<td>INVALID FORMAT</td></tr>";
 		}
 	}
-	if(!$img_fields['file_data'] && !change_flag){
+	if(!$img_fields['file_data'] && !$change_flag){
 		echo "<tr><td><strong>FILE:</strong></td><td>MISSING</td></tr>";
 	}
 	echo "</table>";
@@ -72,10 +75,9 @@ if((count($prod_err_fields) > 0) || (!$img_fields['file_data'] && !$change_flag)
 else{
 
 echo "<div class = 'row'><div class = 'span8'>";	
+//create new item
 if($change_flag != 'true'){
-	//echo "I better not be here";
-
-	
+		
 	$product = new Product($product_fields);
 	$prod_status = $product->dbInsert($conn);
 						
@@ -100,7 +102,7 @@ if($change_flag != 'true'){
 		echo "<div class='alert alert-error'><h5>Item could not be added. Please try again <h5></div>";
 	}
 }
-
+//modify existing item
 else{
 	
 	$product = Product::dbGet($product_id, $conn);
@@ -128,7 +130,7 @@ else{
 			}
 		}
 	}
-	
+	//change every product field as needed
 	foreach($product_fields as $field => $value){
 		$product->fields[$field] = $value;
 	}
@@ -142,6 +144,7 @@ else{
 }
 }
 	echo "</div></div>";
+	//close connection to db
 	$conn->disconnect();
 ?>
 

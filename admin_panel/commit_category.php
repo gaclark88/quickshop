@@ -3,20 +3,22 @@
 
 <html>
 	<head>
-	
+	<!--Include template file-->
 	<?php include 'header_template.php' ?>
 	
 	<title>Commit Category</title>
 	</head>
 	<body>
+	<!--Include template file-->
 	<?php include 'body_template.php'?>
 <?php
 
-
+//include files and establish db link
 include '../models/Category.php';
 
 $conn = new DatabaseLink();
 
+//receive post variables
 $categories = $_POST['category'];
 $ids = $_POST['id'];
 $action = $_POST['process'];
@@ -33,7 +35,7 @@ if($categories){
 else{
 	$err = true;;
 }
-
+//error checking
 if(!$new_cat_name && $err){
 	echo "<div class = 'row'><div class = 'span8 offset2'>";
 		echo "<div class='alert alert-error'><h5>Category name cannot be blank. Please check you input and try again<h5></div>";
@@ -42,10 +44,12 @@ if(!$new_cat_name && $err){
 
 else{
 
+//notify user of successful processing
 echo "<div class = 'row'><div class = 'span8'>";
 
 echo "<div class='alert alert-success'><h5>Categories have been processed. Please check their statuses below<h5></div>";
 
+//create table for new category names and status message
 echo "<table class = 'table table-bordered'>";
 echo "<thead>";	
 echo "<tr>";
@@ -55,7 +59,7 @@ echo "<th>Status</th></tr>";
 echo "</thead>";
 if($action == 'new_category'){
 
-	// $new_cat_name = $_POST['new_category'];
+	
 	$new_cat = new Category(array("name" => $new_cat_name));
 	$status = $new_cat->dbSave($conn);
 	echo "<tbody>";
@@ -79,6 +83,7 @@ if($categories){
 	
 	$cat_id = array();
 	
+	//create table for new category names and status message
 	foreach ($categories as $key1 => $value1) {
 		$cat_id[$value1] = $ids[$key1];
 	}
@@ -103,9 +108,10 @@ if($categories){
 echo "</tbody></table></div></div>";
 
 }
+//close connection to db
 $conn->disconnect();
 ?>
-
+	<!--Include template file-->
 	<?php include 'end_template.php'?>
 	</body>
 </html>

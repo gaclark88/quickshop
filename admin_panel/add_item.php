@@ -26,12 +26,15 @@
   </div>
 	
 	<?php
+	
+	//include files and establish db link
 	include '../models/Category.php';
 	
 	$conn = new DatabaseLink();
 	//find all categories 
 	$categories = Category::dbGetAll($conn);
 
+	//create the fields for input
 	echo "<div class='control-group'>";
     echo "<label class='control-label' >Category</label>";
     echo "<div class='controls'>";
@@ -46,7 +49,7 @@
 	
 	$conn->disconnect();
 	?>
-	
+	<!--Create fields-->
 		<div class="control-group">
     <label class="control-label" >Price Per Item</label>
     <div class="controls">

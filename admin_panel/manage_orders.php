@@ -2,22 +2,25 @@
 
 <html>
 	<head>
-	
+		<!--Include template file-->
 	<?php include 'header_template.php' ?>
 	
 	<title>Manage Orders</title>
 	</head>
 	<body>
+		<!--Include template file-->
 	<?php include 'body_template.php'?>
 
 <?php>
 
+//include files and establish db link
 include_once '../models/Model.php';
 
 $conn = new DatabaseLink();
 
 $rows = Model::dbGetAll("client_orders", $conn);
 ?>
+	<!--Create table to list all orders-->
 <div class = 'row'><div class = 'span12'>
 <table class = 'table table-bordered table-hover'>
 
@@ -36,7 +39,7 @@ $rows = Model::dbGetAll("client_orders", $conn);
 <form name = "process_order" action = "process_orders.php" method = "POST">
 
 <?php
-
+//fetch all orders from the db
 while($row = mysql_fetch_assoc($rows)){
 		
 		
@@ -51,7 +54,7 @@ while($row = mysql_fetch_assoc($rows)){
 		echo "<td>".$row['status']."</td>";
 		echo "</tr>";
 }
-
+//close connection to db
 $conn->disconnect();
 
 
@@ -59,11 +62,12 @@ $conn->disconnect();
 ?>
 </tbody>
 </table>
+	<!--Create submit button-->
 <br><button type = "submit"  class = "btn btn-primary">Process Selected Orders</button>
 </form>
 </div>
 </div>
-
+	<!--Include template file-->
 	<?php include 'end_template.php'?>
 	</body>
 </html>

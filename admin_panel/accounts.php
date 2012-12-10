@@ -5,11 +5,13 @@
 	
 	$db = new DatabaseLink();
 	$correctPwd = Admin::dbCheckPwd($email, $pass, $db);
-
+	
+	//if wrong pass or email, send error
 	if ($correctPwd === null)
 		echo("<script>location.href=\"login.php?noemail=1\"</script>");
 	else if (!$correctPwd)
 		echo("<script>location.href=\"login.php?error=1\"</script>");
+	//otherwise establish a session
 	else {
 		$db = new DatabaseLink();
 		$a = Admin::dbGetByEmail($email, $db);

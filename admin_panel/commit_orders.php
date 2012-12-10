@@ -17,17 +17,21 @@
 
 <?php>
 
+//include files and establish db link
 include_once '../models/Order.php';
 
 $conn = new DatabaseLink();
 
+//receive post variables
 $data = $_POST['order_status'];
 $tracking_nums = $_POST['tracking_num'];
 $order_status = array();
 
+//create success message
 echo "<div class = 'row'><div class = 'span8'>";
 echo "<div class='alert alert-success'><h5>Orders have been processed! Please check their status below<h5></div>";
 
+//create table for new order statuses and status messages
 echo "<table class = 'table table-bordered'>";
 echo "<thead>";	
 echo "<tr>";
@@ -38,20 +42,22 @@ echo "<th>Message</th></tr>";
 echo "</thead>";
 echo "<tbody>";
 foreach($data as $key => $row){
+	//create new order
 	list($order_id, $status) = explode(" ", $row);
-	//$order_status[$order] = $status;
 	$order = new Order(array("status" => $status));
 	$order->id = $order_id;
+	
+	//error checking
 	if($tracking_nums[$key] == ''){
 		$tracking_nums[$key] = 'Not available';
 	}
 	$order->fields['tracking_num'] = $tracking_nums[$key];
-	//echo $order->id . "=>" . $order->fields['status_id'] . "<br>";
+	//update order info to db
 	$status = $order->dbUpdate($conn);
 	
 	echo "<tr>";
 	
-
+		//print updated info
 		echo "<td>".$order->id."</td>";
 		echo "<td>".$order->fields['status']."</td>";
 		echo "<td>".$order->fields['tracking_num']."</td>";
@@ -71,6 +77,7 @@ echo "</div></div>";
 ?>
 
 <?php
+//close connection to db
 $conn->disconnect();
 
 

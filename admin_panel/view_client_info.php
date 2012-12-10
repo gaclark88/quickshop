@@ -2,7 +2,7 @@
 
 <html>
 <head>
-
+	<!--Include template file-->
 <?php include 'header_template.php' ?>
 
 <title>Client Info</title>
@@ -10,11 +10,12 @@
 </head>
 
 <body>
-
+	<!--Include template file-->
 <?php include 'body_template.php'?>
 
 <?php>
 
+//include files and establish db link
 include '../models/Account.php';
 	
 $conn = new DatabaseLink();
@@ -24,6 +25,7 @@ $accounts = Account::dbGetBy("", "", $conn);
 
 ?>
 
+	<!--Create table for all existing clients-->
 <table class = "table table-hover table-bordered">
 <thead>
 <tr>
@@ -39,6 +41,7 @@ $accounts = Account::dbGetBy("", "", $conn);
 <tbody>
 <?php
  
+ //populate the table with client info
 foreach($accounts as $account){
 	echo "<tr>";
 	echo "<td><label class='radio offset5'><input type = 'radio' name = 'id' value = ".$account->id."></label></td>";
@@ -57,9 +60,10 @@ foreach($accounts as $account){
 </form>
 
 <?php
+//close connection to db
 $conn->disconnect();
 ?>
-
+	<!--Include template file-->
 <?php include 'end_template.php'?>
 	
 	</body>

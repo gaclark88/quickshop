@@ -2,17 +2,21 @@
 
 <html>
 	<head>
-	
+			<!--Include template file-->
 	<?php include 'header_template.php' ?>
 	
 	<title>View Order</title>
 	</head>
 	<body>
+			<!--Include template file-->
 	<?php include 'body_template.php'?>
 <?php
 
+
+//receive get variables
 $order_id = $_GET['order_id'];
 
+//include files and establish db link
 include_once '../models/Model.php';
 
 $conn = new DatabaseLink();
@@ -22,6 +26,7 @@ $order = mysql_fetch_assoc($row);
 
 ?>
 
+	<!--Create the template for an invoice-->
 <div class = 'row'>
 	<div class = 'span12'>
 		<h3><p class = 'lead'>Order Invoice</p></h3>
@@ -31,7 +36,7 @@ $order = mysql_fetch_assoc($row);
 
 
 <?php
-	
+		//part of the template fields
 	echo "<div class = 'row'>";
 	echo "<div class = 'span2'>";
 	echo "<strong>Order # :</strong>";
@@ -41,6 +46,7 @@ $order = mysql_fetch_assoc($row);
 	echo "</div>";	
 	echo "</div>";	
 	
+	//part of the template fields
 	echo "<div class = 'row'>";
 	echo "<div class = 'span2'>";
 	echo "<strong>Status  :</strong>";
@@ -50,12 +56,14 @@ $order = mysql_fetch_assoc($row);
 	echo "</div>";
 	echo "</div>";
 	
+	//part of the template fields
 	echo "<div class = 'row'>";
 		echo "<div class = 'span6'>";
 			echo "<strong>Ship To:</strong>";
 		echo "</div>";
 	echo "</div>";
 	
+	//part of the template fields
 	echo "<div class = 'row'>";
 		echo "<div class = 'span6'>";
 			echo "<address><strong>$order[shipping_name]</strong><br>
@@ -67,6 +75,7 @@ $order = mysql_fetch_assoc($row);
 		echo "</div>";
 	echo "</div>";
 	
+	//part of the template fields
 	echo "<div class = 'row'>";
 		echo "<div class = 'span2'>";
 			echo "<strong>Tracking Number:</strong>";
@@ -76,8 +85,10 @@ $order = mysql_fetch_assoc($row);
 		echo "</div>";
 	echo "</div>";
 	
+	//get detalied product info
 	$product_details = Model::dbGetAllInList("order_items_details", "order_id", array($order_id), $conn);
 	
+	//part of the template fields
 	echo "<br>";
 	
 	echo "<div class = 'row'>";
@@ -100,6 +111,7 @@ $order = mysql_fetch_assoc($row);
 		
 	echo "</div>";
 	
+	//get every product associate with given order
 	while($row = mysql_fetch_assoc($product_details)){
 		echo "<div class = 'row'>";
 			echo "<div class = 'span7'>";
@@ -116,7 +128,7 @@ $order = mysql_fetch_assoc($row);
 			echo "</div>";
 		echo "</div>";
 	}
-	
+	//part of the template fields
 	echo "<div class = 'row'>";
 		
 		echo "<div class = 'span7'>";
@@ -133,6 +145,7 @@ $order = mysql_fetch_assoc($row);
 		
 	echo "</div>";
 	
+	//part of the template fields
 	echo "<div class = 'row'>";
 		
 		echo "<div class = 'span7'>";
@@ -149,7 +162,7 @@ $order = mysql_fetch_assoc($row);
 		
 	echo "</div>";
 	
-	
+	//part of the template fields
 	echo "<div class = 'row'>";
 		
 		echo "<div class = 'span7'>";
@@ -166,7 +179,7 @@ $order = mysql_fetch_assoc($row);
 		
 	echo "</div>";
 
-	
+	//part of the template fields
 		echo "<div class = 'row'>";
 		
 		echo "<div class = 'span7'>";
@@ -190,9 +203,10 @@ $order = mysql_fetch_assoc($row);
 
 
 <?php
+//close connection to db
 $conn->disconnect();
 ?>
-
+	<!--Include template file-->
 	<?php include 'end_template.php'?>
 	</body>
 </html>

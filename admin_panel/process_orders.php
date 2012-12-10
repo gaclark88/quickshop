@@ -1,7 +1,7 @@
 <?php include 'admin_session.php'; ?>
 <html>
 <head>
-
+		<!--Include template file-->
 <?php include 'header_template.php' ?>
 
 <title>Process Orders</title>
@@ -9,17 +9,20 @@
 </head>
 
 <body>
-
+		<!--Include template file-->
 <?php include 'body_template.php'?>
 
 <?php
 
+//include files and establish db link
 include_once '../models/Model.php';
 
 $conn = new DatabaseLink();
 
+//receive post variables
 $orders = $_POST['order'];
 
+//error checking
 if(!$orders){
 		echo "<div class = 'row'><div class = 'span8 offset2'>";
 		echo "<div class='alert alert-error'><h5>No orders were selected. Please select at least one order to process.<h5></div>";
@@ -27,16 +30,19 @@ if(!$orders){
 }
 else{
 
+//get order info from different views
 $orders_rows = Model::dbGetAllInList("client_orders", "id", $orders, $conn);
 $status_rows = Model::dbGetAll("order_status", $conn);
 $status_arr = array();
 
+//organize the data from db
 while($row = mysql_fetch_assoc($status_rows)){
 	$status_arr[$row['name']] = $row['id'];
 }
 
 ?>
 
+	<!--Create table to process orders-->
 <div class = 'row'><div class = 'span12'>
 <table class = 'table table-bordered'>
 <thead>
@@ -54,9 +60,10 @@ while($row = mysql_fetch_assoc($status_rows)){
 
 <?php
 
+//loop thru all orders selected and provide user with option to edit some fields
 while($row = mysql_fetch_assoc($orders_rows)){
 		
-		
+	//create a form for order status and tracking number
 	echo "<tr>";
 	echo "<td>".$row[id]."</a></td>";
 	echo "<td><select name='order_status[]'><option value='$row[id] $row[status_id]'>".$row['status']."</option>";
@@ -83,9 +90,10 @@ echo "</form>";
 echo "</div></div>";
 
 }
+//close connection to database
 $conn->disconnect();
 ?>
-
+		<!--Include template file-->
 <?php include 'end_template.php'?>
 </body>
 </html>

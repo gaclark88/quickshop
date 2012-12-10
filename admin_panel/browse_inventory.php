@@ -13,12 +13,13 @@
 	<?php include 'body_template.php'?>
 <?php
 
+//include files and establish db link
 
 include '../models/Product.php';
 	
 $conn = new DatabaseLink();
 
-//find all clients info 
+//find all product info 
 $products = Product::dbGetAll("products_details", $conn);
 
 
@@ -40,7 +41,7 @@ $products = Product::dbGetAll("products_details", $conn);
 <form name = "edit_item" id = 'target' action = "edit_item.php" method = "POST">
 
 <?php
- 
+ //print the product information in a table
 foreach($products as $product){
 	echo "<tr>";
 	echo "<td><label class = 'radio offset1'><input type = 'radio' name = 'id' value = ".$product->id."></label></td>";
@@ -61,6 +62,7 @@ foreach($products as $product){
 </div>
 </div>
 <?php
+//close db connection
 $conn->disconnect();
 ?>
 <?php include 'end_template.php'?>
