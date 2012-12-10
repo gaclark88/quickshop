@@ -100,6 +100,7 @@
 			?>
 
 			<h3>Log in</h3>
+			<!-- login form -->
 			<form class="form-horizontal" action="accounts.php" method="post" name="login">
 				<div class="control-group">
 			      		<label class="control-label" for="inputEmail">Email</label>

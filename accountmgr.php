@@ -92,12 +92,15 @@
                 <div class="span9">
                     <div class="container-main">
 			<h3><u>Account Manager</u></h3><br>
-			<h4><a class="btn btn-link" href="shipping.php">Update shipping/billing address</a></h4><br>
-			<h4><a class="btn btn-link" href="vieworders.php">View orders</a></h4><br>
-			<h4><a class="btn btn-link" href="personal.php">Update personal information</a></h4><br>
-			<h4><a class="btn btn-link" href="changepass.php">Change password</a></h4><br>
-			<h4><a class="btn btn-link" href="logout.php">Log out</a></h4><br>
-			<h4><a class="btn btn-link" href="delete.php">Delete account</a></h4>	
+			<!-- Links leading to various account functions -->
+			<div class="row"><div class="span8">
+			<p><a class="btn-large btn-primary" href="shipping.php">Update shipping/billing address</a></p><br>
+			<p><a class="btn-large btn-primary" href="vieworders.php">View orders</a></p><br>
+			<p><a class="btn-large btn-primary" href="personal.php">Update personal information</a></p><br>
+			<p><a class="btn-large btn-primary" href="changepass.php">Change password</a></p><br>
+			<p><a class="btn-large btn-primary" href="logout.php">Log out</a></p><br>
+			<p><a class="btn-large btn-primary" href="delete.php">Delete account</a></p>
+			</div></div>
 
                     </div><!--End of Main Section-->
                 </div><!--Span-->
