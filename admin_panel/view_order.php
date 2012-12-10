@@ -1,4 +1,4 @@
-<?php include '../session.php';?>
+<?php include 'admin_session.php'; ?>
 
 <html>
 	<head>
@@ -22,37 +22,172 @@ $order = mysql_fetch_assoc($row);
 
 ?>
 
-<div class = 'row'><div class = 'span8'>
-<h4>Invoice</h4>
-<table class = 'table table-bordered'>
+<div class = 'row'>
+	<div class = 'span12'>
+		<h3><p class = 'lead'>Order Invoice</p></h3>
+	</div>
+</div>
+
+
+
 <?php
 	
-	echo "<tr><td><strong>Order # :</strong></td><td> $order[id] </td></tr>";
-	echo "<tr><td><strong>Status  :</strong></td><td> $order[status] </td></tr>";
+	echo "<div class = 'row'>";
+	echo "<div class = 'span2'>";
+	echo "<strong>Order # :</strong>";
+	echo "</div>";
+	echo "<div class = 'span7'>";
+	echo "$order[id]";
+	echo "</div>";	
+	echo "</div>";	
+	
+	echo "<div class = 'row'>";
+	echo "<div class = 'span2'>";
+	echo "<strong>Status  :</strong>";
+	echo "</div>";
+	echo "<div class = 'span7'>";
+	echo "$order[status]";
+	echo "</div>";
+	echo "</div>";
+	
+	echo "<div class = 'row'>";
+		echo "<div class = 'span6'>";
+			echo "<strong>Ship To:</strong>";
+		echo "</div>";
+	echo "</div>";
+	
+	echo "<div class = 'row'>";
+		echo "<div class = 'span6'>";
+			echo "<address><strong>$order[shipping_name]</strong><br>
+							$order[shipping_address]<br>
+							$order[shipping_city]<br>
+							$order[shipping_state]<br>
+							$order[shipping_zip]<br>
+			</address>";
+		echo "</div>";
+	echo "</div>";
+	
+		echo "<div class = 'row'>";
+		echo "<div class = 'span2'>";
+			echo "<strong>Tracking Number:</strong>";
+		echo "</div>";
+		echo "<div class = 'span8'>";
+			echo "$order[tracking_num]";
+		echo "</div>";
+	echo "</div>";
+	
 	$product_details = Model::dbGetAllInList("order_items_details", "order_id", array($order_id), $conn);
 	
-	while($row = mysql_fetch_assoc($product_details)){
-		echo "<tr><td><strong>Product Name :</strong></td><td>$row[name]</td>";
-		echo "<tr><td><strong>Quantity :</strong></td><td>$row[quantity]</td></tr>";
-		echo "<tr><td><strong>Price Per Item :</strong></td><td>$row[price]</td></tr>";
-	} 
+	echo "<br>";
 	
-	echo "<tr><td><strong>Quantity :</strong></td><td>$order[quantity]</td></tr>";
-	echo "<tr><td><strong>Subtotal  :</strong></td><td>$ $order[subtotal] </td></tr>";
-	echo "<tr><td><strong>Shipping Price  :</strong></td><td>$ $order[shipping_price] </td></tr>";
-	echo "<tr><td><strong>Total  :</strong></td><td>$ $order[total_amount] </td></tr>";
-	echo "<tr><td><strong>Ship To : </strong></td><td> $order[shipping_name]</td></tr>";
-	echo "<tr><td><strong>Tracking # :</strong> </td><td> $order[tracking_num] </td></tr>";
-	echo "<tr><td><strong>Shipping Address :</strong> </td><td> $order[shipping_address] </td></tr>";
-	echo "<tr><td><strong>Shipping City :</strong> </td><td> $order[shipping_city] </td></tr>";
-	echo "<tr><td><strong>Shipping State :</strong> </td><td> $order[shipping_state] </td></tr>";
-	echo "<tr><td><strong>Shipping Zip:</strong> </td><td> $order[shipping_zip] </td></tr>";
-	echo "</table></td></tr>";
+	echo "<div class = 'row'>";
+		
+		echo "<div class = 'span7'>";
+			echo "<strong>Product Name</strong>";
+		echo "</div>";
+		
+		echo "<div class = 'span1'>";
+			echo "<strong>Qty: </strong>";
+		echo "</div>";
+		
+		echo "<div class = 'span2'>";
+			echo "<strong>Price/Each</strong>";
+		echo "</div>";
+		
+		echo "<div class = 'span1'>";
+			echo "<strong>Total</strong>";
+		echo "</div>";
+		
+	echo "</div>";
+	
+	while($row = mysql_fetch_assoc($product_details)){
+		echo "<div class = 'row'>";
+			echo "<div class = 'span7'>";
+				echo "$row[name]";
+			echo "</div>";
+			echo "<div class = 'span1'>";
+				echo "$row[quantity]";
+			echo "</div>";
+			echo "<div class = 'span2'>";
+				echo "$$row[price]";
+			echo "</div>";
+			echo "<div class = 'span1'>";
+				echo "$".floatval($row['price']) *$row['quantity'];
+			echo "</div>";
+		echo "</div>";
+	}
+	
+	echo "<div class = 'row'>";
+		
+		echo "<div class = 'span7'>";
+			echo "";
+		echo "</div>";
+		 
+		echo "<div class = 'span3'>";
+			echo "<strong>Subtotal:</strong>";
+		echo "</div>";
+		
+		echo "<div class = 'span1'>";
+			echo "$".round(floatval($order['subtotal']), 1);
+		echo "</div>";
+		
+	echo "</div>";
+	
+	echo "<div class = 'row'>";
+		
+		echo "<div class = 'span7'>";
+			echo "";
+		echo "</div>";
+		 
+		echo "<div class = 'span3'>";
+			echo "<strong>Shipping Price:</strong>";
+		echo "</div>";
+		
+		echo "<div class = 'span1'>";
+			echo "$order[shipping_price]";
+		echo "</div>";
+		
+	echo "</div>";
+	
+	
+	echo "<div class = 'row'>";
+		
+		echo "<div class = 'span7'>";
+			echo "";
+		echo "</div>";
+		 
+		echo "<div class = 'span3'>";
+			echo "<strong>Tax:</strong>";
+		echo "</div>";
+		
+		echo "<div class = 'span1'>";
+			echo "$".round(floatval($order['subtotal'])*0.06, 2);
+		echo "</div>";
+		
+	echo "</div>";
+
+	
+		echo "<div class = 'row'>";
+		
+		echo "<div class = 'span7'>";
+			echo "";
+		echo "</div>";
+		 
+		echo "<div class = 'span3'>";
+			echo "<strong>Total:</strong>";
+		echo "</div>";
+		
+		echo "<div class = 'span1'>";
+			echo "$".round(floatval($order['total_amount']), 1);
+		echo "</div>";
+		
+	echo "</div>";
+
+
+
 	
 ?>
 
-</div>
-</div>
 
 <?php
 $conn->disconnect();

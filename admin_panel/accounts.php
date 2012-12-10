@@ -1,5 +1,5 @@
 <?php include '../models/Admin.php';
-      include '../session.php';
+      include 'admin_session.php';
 	$email = $_POST['email'];
 	$pass  = $_POST['pass'];	
 	
@@ -14,7 +14,7 @@
 		$db = new DatabaseLink();
 		$a = Admin::dbGetByEmail($email, $db);
 
-		$_SESSION['accountId'] = $a->id;
+		$_SESSION['admin_id'] = $a->id;
 		
 		echo("<script>location.href=\"index.php\"</script>");
 	}
