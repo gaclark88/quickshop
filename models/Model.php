@@ -161,4 +161,13 @@ class Model {
 		}
 	}
 }
+/*
+$db = new DatabaseLink();
+$m = Model::dbGetBy("category_id", 1, "products",$db);
+
+while ($row = mysql_fetch_assoc($m)) {
+	print_r($row);
+	echo "<br /><br />";
+}
+*/
 ?>

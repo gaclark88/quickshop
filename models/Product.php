@@ -75,8 +75,9 @@ class Product extends Model {
 
 
 
-#$db = new DatabaseLink();
-#$test = Product::dbGet(43, $db);
+//$db = new DatabaseLink();
+//$test = Product::dbGet(43, $db);
+#print_r($test->fields);
 //$a = Product::dbGetBy("category_id", 3, $db);
 
 //echo count($a) . "<br />";
@@ -86,12 +87,10 @@ class Product extends Model {
 //}
 
 //$test->toString();
-#$im = $test->dbGetImage($db);
+//$im = $test->dbGetImage($db);
 
 //$h = array("name" => "Test Name", "id" => "33");
 
 //header("Content-Type: " . $im->fields["mime_type"]);
 //echo $im->fields['file_data'];
-
 ?>
-

@@ -43,5 +43,4 @@ class CartItem extends Model {
 			$this->fields["amount"] . "<br />";
 	}
 }
-
 ?>

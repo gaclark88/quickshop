@@ -54,4 +54,3 @@ $c = Category::dbGetByName("Books", $db);
 $c->toString();
 */
 ?>
-
