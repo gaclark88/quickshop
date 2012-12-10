@@ -5,7 +5,7 @@
 
 	$db = new DatabaseLink();
 
-	$orders_rows = Model::dbGetBy("id", $orders['id'], "client_orders", $db);
+	$orders_rows = Model::dbGetBy("id", $orders[0], "orders", $db);
 
 	/* Connect to database */
 	$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
@@ -13,11 +13,8 @@
 	$query = "";
 
 	while($row = mysql_fetch_assoc($orders_rows)) {
-		echo "test";
 		/* Fetch categories to list in the sidebar */
 		$query = ("UPDATE `orders` SET status=4 WHERE id=" . $row['id']);
-		mysql_query($query, $con) or die("Could not execute query '$query'");
-		$query = ("UPDATE `order_products` SET status=4 WHERE order_id=" . $row['id']);
 		mysql_query($query, $con) or die("Could not execute query '$query'");
 	}
 

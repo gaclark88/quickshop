@@ -105,10 +105,9 @@
 			?>
 
 			<div class = 'row'><div class = 'span10'>
-			<h4>Invoice</h4>
+			<h4><u>Invoice</u></h4>
 			<table class = 'table table-bordered'>
 			<?php
-				
 				echo "<tr><td><strong>Order # :</strong></td><td> $order[id] </td></tr>";
 				echo "<tr><td><strong>Status  :</strong></td><td> $order[status] </td></tr>";
 				echo "</table>";
@@ -134,7 +133,6 @@
 				echo "<tr><td><strong>Shipping State :</strong> </td><td> $order[shipping_state] </td></tr>";
 				echo "<tr><td><strong>Shipping Zip:</strong> </td><td> $order[shipping_zip] </td></tr>";
 				echo "</table></td></tr>";
-				
 			?>
 
 			</div>
@@ -143,8 +141,7 @@
 			<?php
 			$conn->disconnect();
 			?>
-			<h4><a href="vieworders.php">Back</a></h4>
-		
+			<h4><a class="btn btn-primary" href="vieworders.php">&lt Back</a></h4>
                     </div><!--End of Main Section-->
                 </div><!--Span-->
             </div><!--End of row containing sidebar and main section-->
