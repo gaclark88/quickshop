@@ -74,12 +74,20 @@ else{
 			echo "<tr>";
 			echo "<td>".$row['id']."</td>";
 			echo "<td>".$row['name']."</td>";
-			$status = Model::dbDelete("categories", "id", $row['id'], $conn);
-			if($status){
-				echo "<td>Deleted</td>";
+			$items = Model::dbGetBy("category_id", $row['id'], "products", $conn);
+			
+			if(mysql_fetch_assoc($items)){
+				echo "<td>Cannot remove category with products associated with it</td>";
 			}
 			else{
-				echo "<td>Could not delete category. Please try again</td>";
+				$status = Model::dbDelete("categories", "id", $row['id'], $conn);
+				
+				if($status){
+					echo "<td>Deleted</td>";
+				}
+				else{
+					echo "<td>Could not delete category. Please try again</td>";
+				}
 			}
 			echo "</tr>";
 	}
