@@ -563,14 +563,11 @@
 		
 
 
-		$query = ("SELECT id FROM `orders` WHERE account_id='$curU'");
+		$query = ("SELECT MAX(id) FROM `orders` WHERE account_id='$curU'");
 		$result = mysql_query($query, $con) or die("Could not execute query '$query'");
 		$row = mysql_fetch_array($result);
 					
-		while($row = mysql_fetch_array($result))
-		{
-			$order = $row[0];
-		}
+		$order = $row[0];
 
 		$query = ("SELECT product_id FROM `order_products` WHERE order_id =  '$order'");
 		$result = mysql_query($query, $con) or die("Could not execute query '$query'");
@@ -657,7 +654,7 @@
 
 			echo("Tax: $" .  $tax . "<br>");
 			$total = $total + $tax + $_SESSION['shipping'];
-			echo("Total: " . $total . "<br><br>");
+			echo("Total $: " . $total . "<br><br>");
 	
 		}
 
