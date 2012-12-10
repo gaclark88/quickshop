@@ -1,5 +1,4 @@
 <?php include "session.php"; ?>
-<?php include_once "./models/DatabaseLink.php"; ?>
 
 <?php 
 /*
@@ -11,8 +10,8 @@
 /* Connect to database */
 
 	 
-	$db = new DatabaseLink();
-	$con = $db->connection;
+	$con = mysql_connect("studentdb.gl.umbc.edu","clargr1","clargr1") or die("Could not connect to MySQL");
+	$rs = mysql_select_db("clargr1", $con) or die("Could not connect select $db database");
 	$query = "";
 	$row = array();
 
@@ -473,12 +472,12 @@
 
 			
 			
-			echo("Subtotal: $" . $total ."<br>");
+			echo("Subtotal: $" . number_format($total, 2, '.', '') ."<br>");
 			echo("Shipping and Handling: $" . $_SESSION['shipping'] . "<br>");
 
-			echo("Tax: $" .  $tax . "<br>");
+			echo("Tax: $" .  number_format($tax, 2, '.', '') . "<br>");
 			$total = $total + $tax + $_SESSION['shipping'];
-			echo("Total: " . $total . "<br><br>");
+			echo("Total: " . number_format($total, 2, '.', '') . "<br><br>");
 	
 		
 
@@ -650,12 +649,16 @@
 
 			
 			
-			echo("Subtotal: $" . $total ."<br>");
+			echo("Subtotal: $" . number_format($total, 2, '.', '') ."<br>");
 			echo("Shipping and Handling: $" . $_SESSION['shipping'] . "<br>");
 
-			echo("Tax: $" .  $tax . "<br>");
+			echo("Tax: $" .  number_format($tax, 2, '.', '') . "<br>");
 			$total = $total + $tax + $_SESSION['shipping'];
-			echo("Total $: " . $total . "<br><br>");
+			echo("Total: " . number_format($total, 2, '.', '') . "<br><br>");
+
+			
+
+
 	
 		}
 
@@ -778,7 +781,7 @@
 
 	
 
-$db->disconnect();
+
 
 
 

@@ -144,10 +144,9 @@
 			echo("<input type=\"submit\" value=\"Update\" /></form><hr>");
 		else
 			echo("<input type=\"submit\" value=\"Update\" /><span class=\"label label-warning\">will take all invalid items out of cart</span></p></form><hr>");
-		
-		echo("Subtotal: $" . $total);
-		
-
+				
+		echo("Subtotal: $" . number_format($total, 2, '.', '') ."<br>");
+			
 		//clears all the session variables.
 		$_SESSION['progress'] = -1;
 		$_SESSION['checkoutError'] = "";
