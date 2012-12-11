@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- Insert an admin account
-INSERT INTO `admins` (email, password) VALUES("admin1", "$1$RTgw0BFl$rDLq1E25wjwPEnZQTxkL11");
+INSERT INTO `admins` (`email`, `password`) VALUES("admin@quickshop.com", "$1$Li6AxF2v$eyPZlXGmHkNnK54cSyw451");
 
 -- --------------------------------------------------------
 
