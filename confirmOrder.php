@@ -71,7 +71,23 @@ $order = -1;
 /*
 insert a new entry ito the table, and retrieve the new order ID
 */
-if($fail != 0)
+if($fail != 0 and 
+$_SESSION['shippingCity'] != "" and
+	$_SESSION['shippingZip'] != "" and
+	$_SESSION['shippingState'] != "" and
+	$_SESSION['creditnumber']!= "" and
+	$_SESSION['creditcode']!= "" and
+	$_SESSION['creditname']!= "" and
+	$_SESSION['shippingPhone']!= "" and
+	$_SESSION['billingAddress']!= "" and
+	$_SESSION['billingCity']!= "" and
+	$_SESSION['billingZip']!= "" and
+	$_SESSION['billingState']!= "" and
+	$_SESSION['shippingName']!= "" and
+	$_SESSION['billingName']!= "" and
+	$_SESSION['billingPhone']!= "" and
+	$_SESSION['shipping']!= "" and
+	$_SESSION['creditdate']!= "" )
 {
 	$all = $total + $total*.06 + $_SESSION['shipping'];
 	
