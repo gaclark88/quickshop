@@ -1,4 +1,4 @@
-﻿<?php include './models/Account.php';
+<?php include './models/Account.php';
       include 'session.php';
 
 	//get field info
