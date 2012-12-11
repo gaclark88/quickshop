@@ -19,6 +19,7 @@
 	<p>	<a class= "btn btn-large btn-block btn-primary" href = "add_item.php">ADD NEW PRODUCT</a>	</p>
 	<p>	<a class= "btn btn-large btn-block btn-primary" href = "add_category.php">ADD / CHANGE CATEGORY</a>	</p>
 	<p>	<a class= "btn btn-large btn-block btn-primary" href = "view_client_info.php">VIEW CLIENT INFORMATION</a>	</p>
+	<p>	<a class= "btn btn-large btn-block btn-primary" href = "admin_changePass.php">CHANGE ADMIN PASSOWRD</a>	</p>
 	</div></div>
 	
 	<!--Include template file-->

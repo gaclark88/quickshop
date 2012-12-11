@@ -1,3 +1,10 @@
+<html>
+<head>
+<title>Reset Admin Account</title>
+</head>
+
+
+<body>
 <?php
 	
 	include '../models/Admin.php';
@@ -10,7 +17,7 @@
 	$status = $admin->dbSave($conn);
 	
 	if($status){
-		echo "Account Created";
+		echo "Account Reset";
 	}
 	else{
 		echo "Could not create account. Try again";
@@ -18,3 +25,6 @@
 
 
 ?>
+
+</body>
+</html>

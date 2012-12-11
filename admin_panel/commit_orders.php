@@ -55,11 +55,14 @@ foreach($data as $key => $row){
 	//update order info to db
 	$status = $order->dbUpdate($conn);
 	
+	$res = Model::dbGetBy("id", $order->fields['status'], "order_status", $conn);
+	$status_name = mysql_fetch_assoc($res);
+	
 	echo "<tr>";
 	
 		//print updated info
 		echo "<td>".$order->id."</td>";
-		echo "<td>".$order->fields['status']."</td>";
+		echo "<td>".$status_name['name']."</td>";
 		echo "<td>".$order->fields['tracking_num']."</td>";
 	if($status){
 		echo "<td>Successfully updated</td>";
